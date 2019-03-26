@@ -12,7 +12,6 @@ import (
 type StatusStep struct{}
 
 func (s *StatusStep) Execute(c *Context) bool {
-	c.EnterStep()
 	var (
 		cmdOut []byte
 		err    error

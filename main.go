@@ -1,7 +1,8 @@
 package main
 
 func main() {
-	t := Context{CurrentStep: &InputReadingStep{}}
-	for t.CurrentStep.Execute(&t) {
+	context := Context{CurrentStep: &InputReadingStep{}}
+	context.EnterStep()
+	for context.CurrentStep.Execute(&context) {
 	}
 }
