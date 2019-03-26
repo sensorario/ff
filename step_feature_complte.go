@@ -48,6 +48,15 @@ func (s *CompleteFeatureStep) Execute(c *Context) bool {
 		os.Exit(1)
 	}
 
+	cmdArgs = []string{"branch", "-D", branchName}
+	if _, err := exec.Command(cmdName, cmdArgs...).Output(); err != nil {
+		if err.Error() == "exit status 128" {
+			fmt.Println(color.RedString("something went wrong during deletion"))
+		}
+		os.Exit(1)
+	}
+	fmt.Println(color.GreenString("source branch deleted"))
+
 	c.CurrentStep = &FinalStep{}
 
 	return true
