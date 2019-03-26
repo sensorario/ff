@@ -9,9 +9,14 @@ type InputReadingStep struct{}
 
 func (s *InputReadingStep) Execute(c *Context) bool {
 	command := "status"
+	specification := "default"
 
 	if len(os.Args) > 1 {
 		command = os.Args[1]
+	}
+
+	if len(os.Args) > 2 {
+		specification = os.Args[2]
 	}
 
 	fmt.Println("command: " + command)
@@ -32,7 +37,12 @@ func (s *InputReadingStep) Execute(c *Context) bool {
 	}
 
 	if command == "feature" {
-		c.CurrentStep = &FeatureStep{}
+		if specification == "default" {
+			c.CurrentStep = &FeatureStep{}
+		}
+		if specification == "complete" {
+			c.CurrentStep = &CompleteFeatureStep{}
+		}
 		return true
 	}
 
