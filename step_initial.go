@@ -27,7 +27,7 @@ func (s *InputReadingStep) Execute(c *Context) bool {
 	}
 
 	if command == "commit" {
-		c.CurrentStep = &CommitStep{}
+		c.CurrentStep = &WorkingDirStep{}
 		return true
 	}
 
