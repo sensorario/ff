@@ -1,17 +1,17 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"github.com/fatih/color"
 	"os"
 	"os/exec"
+	"regexp"
 	"strings"
 )
 
-type CompleteFeature struct{}
+type CompleteFeatureStep struct{}
 
-func (s *CompleteFeature) Execute(c *Context) bool {
+func (s *CompleteFeatureStep) Execute(c *Context) bool {
 	var (
 		cmdOut []byte
 		err    error
@@ -25,9 +25,12 @@ func (s *CompleteFeature) Execute(c *Context) bool {
 		os.Exit(1)
 	}
 	re := regexp.MustCompile(`On branch [\w\/\#\-]{0,}`)
+	branchName := ""
 	for _, match := range re.FindAllString(string(cmdOut), -1) {
-		branchName := strings.ReplaceAll(match, "On branch ", "")
+		branchName = strings.ReplaceAll(match, "On branch ", "")
 	}
+
+	fmt.Println(color.RedString("leaving", branchName))
 
 	cmdArgs = []string{"checkout", "master"}
 	if _, err := exec.Command(cmdName, cmdArgs...).Output(); err != nil {
@@ -50,6 +53,6 @@ func (s *CompleteFeature) Execute(c *Context) bool {
 	return true
 }
 
-func (s *CompleteFeature) Stepname() string {
+func (s *CompleteFeatureStep) Stepname() string {
 	return "checkout master"
 }
