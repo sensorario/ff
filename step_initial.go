@@ -36,6 +36,11 @@ func (s *InputReadingStep) Execute(c *Context) bool {
 		return true
 	}
 
+	if command == "hotfix" {
+		c.CurrentStep = &HotfixStep{}
+		return true
+	}
+
 	c.CurrentStep = &FinalStep{}
 
 	return true
