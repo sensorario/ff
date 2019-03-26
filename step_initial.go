@@ -21,11 +21,6 @@ func (s *InputReadingStep) Execute(c *Context) bool {
 
 	fmt.Println("command: " + command)
 
-	if command == "prune" {
-		c.CurrentStep = &PruneStep{}
-		return true
-	}
-
 	if command == "status" {
 		c.CurrentStep = &StatusStep{}
 		return true
