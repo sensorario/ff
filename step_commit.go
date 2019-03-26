@@ -29,7 +29,11 @@ func (s *CommitStep) Execute(c *Context) bool {
 		os.Exit(1)
 	}
 
-	cmdArgs = []string{"commit", "-m", text}
+	if s.interactive {
+		cmdArgs = []string{"commit", "-m", text}
+	} else {
+		cmdArgs = []string{"commit", "-m", "default-commit-message"}
+	}
 	if _, err = exec.Command(cmdName, cmdArgs...).Output(); err != nil {
 		fmt.Println(color.RedString("something went wrong"))
 		os.Exit(1)
