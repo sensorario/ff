@@ -28,6 +28,11 @@ func (s *InputReadingStep) Execute(c *Context) bool {
 		return true
 	}
 
+	if command == "feature" {
+		c.CurrentStep = &FeatureStep{}
+		return true
+	}
+
 	c.CurrentStep = &FinalStep{}
 
 	return true
