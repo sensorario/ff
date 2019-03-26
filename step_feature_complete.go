@@ -30,7 +30,7 @@ func (s *CompleteFeatureStep) Execute(c *Context) bool {
 		branchName = strings.ReplaceAll(match, "On branch ", "")
 	}
 
-	fmt.Println(color.RedString("leaving", branchName))
+	fmt.Println(color.RedString("leaving" + branchName))
 
 	cmdArgs = []string{"checkout", "master"}
 	if _, err := exec.Command(cmdName, cmdArgs...).Output(); err != nil {
