@@ -8,13 +8,16 @@ import (
 	"os/exec"
 )
 
-type CommitStep struct{}
+type CommitStep struct{ interactive bool }
 
 func (s *CommitStep) Execute(c *Context) bool {
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("What is the commit message: ")
-	text, _ := reader.ReadString('\n')
-	fmt.Println(text)
+	text := "default commit message"
+	if s.interactive {
+		reader := bufio.NewReader(os.Stdin)
+		fmt.Print("What is the commit message: ")
+		text, _ = reader.ReadString('\n')
+		fmt.Println(text)
+	}
 
 	var err error
 
