@@ -11,7 +11,6 @@ import (
 type CommitStep struct{}
 
 func (s *CommitStep) Execute(c *Context) bool {
-	c.EnterStep()
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("What is the commit message: ")
 	text, _ := reader.ReadString('\n')

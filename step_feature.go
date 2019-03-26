@@ -12,8 +12,6 @@ import (
 type FeatureStep struct{}
 
 func (s *FeatureStep) Execute(c *Context) bool {
-	c.EnterStep()
-
 	cmdName := "git"
 	cmdArgs := []string{"checkout", "master"}
 	if _, err := exec.Command(cmdName, cmdArgs...).Output(); err != nil {
