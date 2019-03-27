@@ -47,7 +47,7 @@ func (s *CompleteFeatureStep) Execute(c *Context) bool {
 	isFeature := strings.HasPrefix(branchName, "feature/")
 
 	if isHotfix {
-		meta := Meta{string(cmdOut), branchName}
+		meta := &Meta{string(cmdOut), branchName}
 		fmt.Println("next tag: ", color.RedString(meta.NextPatchTag()))
 	}
 
