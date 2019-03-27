@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/fatih/color"
 	"os"
 	"os/exec"
 	"regexp"
 	"strings"
+
+	"github.com/fatih/color"
 )
 
 type CompleteFeatureStep struct{}
@@ -38,6 +39,21 @@ func (s *CompleteFeatureStep) Execute(c *Context) bool {
 			fmt.Println(color.RedString("git repository not found"))
 		}
 		os.Exit(1)
+	}
+
+	cmdArgs = []string{"describe", "--tags"}
+	cmdOut, _ = exec.Command(cmdName, cmdArgs...).Output()
+	isHotfix := strings.HasPrefix(branchName, "hotfix/")
+	isFeature := strings.HasPrefix(branchName, "feature/")
+
+	if isHotfix {
+		meta := Meta{string(cmdOut), branchName}
+		fmt.Println("next tag: ", color.RedString(meta.NextPatchTag()))
+	}
+
+	if isFeature {
+		meta := Meta{string(cmdOut), branchName}
+		fmt.Println("next tag: ", color.RedString(meta.NextMinorTag()))
 	}
 
 	cmdArgs = []string{"merge", "--no-ff", branchName}
