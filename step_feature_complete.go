@@ -46,14 +46,18 @@ func (s *CompleteFeatureStep) Execute(c *Context) bool {
 	isHotfix := strings.HasPrefix(branchName, "hotfix/")
 	isFeature := strings.HasPrefix(branchName, "feature/")
 
+	tagName := ""
+
 	if isHotfix {
 		meta := &Meta{string(cmdOut), branchName}
 		fmt.Println("next tag: ", color.RedString(meta.NextPatchTag()))
+		tagName = meta.NextPatchTag()
 	}
 
 	if isFeature {
 		meta := Meta{string(cmdOut), branchName}
 		fmt.Println("next tag: ", color.RedString(meta.NextMinorTag()))
+		tagName = meta.NextMinorTag()
 	}
 
 	cmdArgs = []string{"merge", "--no-ff", branchName}
@@ -72,6 +76,14 @@ func (s *CompleteFeatureStep) Execute(c *Context) bool {
 		os.Exit(1)
 	}
 	fmt.Println(color.GreenString("branch " + branchName + " deleted"))
+
+	cmdArgs = []string{"tag", tagName}
+	if _, err := exec.Command(cmdName, cmdArgs...).Output(); err != nil {
+		if err.Error() == "exit status 128" {
+			fmt.Println(color.RedString("git repository not found"))
+		}
+		os.Exit(1)
+	}
 
 	c.CurrentStep = &FinalStep{}
 
