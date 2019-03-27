@@ -1,4 +1,4 @@
-# Fussy alfa
+# Fussy 1.0
 
 # Open and close feature branch
 
