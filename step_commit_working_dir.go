@@ -45,5 +45,5 @@ func (s *WorkingDirStep) Execute(c *Context) bool {
 }
 
 func (s *WorkingDirStep) Stepname() string {
-	return "commit"
+	return "check-working-directory"
 }
