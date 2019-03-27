@@ -3,11 +3,13 @@
 # Open and close feature branch
 
  - fussy feature
- - fussy feature complete
 
 # Open and close hotfix branch
 
  - fussy hotfix
+
+# Complete and tag an hotfix or a feature branch
+
  - fussy feature complete
 
 # Commit
