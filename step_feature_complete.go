@@ -80,7 +80,7 @@ func (s *CompleteFeatureStep) Execute(c *Context) bool {
 	cmdArgs = []string{"tag", tagName}
 	if _, err := exec.Command(cmdName, cmdArgs...).Output(); err != nil {
 		if err.Error() == "exit status 128" {
-			fmt.Println(color.RedString("git repository not found"))
+			fmt.Println(color.RedString("cant tag repository with"), tagName)
 		}
 		os.Exit(1)
 	}
