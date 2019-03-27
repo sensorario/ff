@@ -48,5 +48,5 @@ func (s *FeatureStep) Execute(c *Context) bool {
 }
 
 func (s *FeatureStep) Stepname() string {
-	return "checkout master"
+	return "create-feature-branch"
 }
