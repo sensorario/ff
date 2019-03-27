@@ -48,5 +48,5 @@ func (s *HotfixStep) Execute(c *Context) bool {
 }
 
 func (s *HotfixStep) Stepname() string {
-	return "checkout master"
+	return "create-hotfix-branch"
 }
