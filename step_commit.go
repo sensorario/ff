@@ -3,9 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/fatih/color"
 	"os"
-	"os/exec"
 )
 
 type CommitStep struct{}
@@ -16,21 +14,19 @@ func (s *CommitStep) Execute(c *Context) bool {
 	text, _ := reader.ReadString('\n')
 	fmt.Println(text)
 
-	var err error
-
-	cmdName := "git"
-
-	cmdArgs := []string{"add", "."}
-	if _, err := exec.Command(cmdName, cmdArgs...).Output(); err != nil {
-		fmt.Println(color.RedString("cant add working directory"))
-		os.Exit(1)
+	gitAddAll := &GitCommand{
+		[]string{"add", "."},
+		"Cant add files",
 	}
 
-	cmdArgs = []string{"commit", "-m", text}
-	if _, err = exec.Command(cmdName, cmdArgs...).Output(); err != nil {
-		fmt.Println(color.RedString("something went wrong"))
-		os.Exit(1)
+	_ = gitAddAll.Execute()
+
+	gitCommit := &GitCommand{
+		[]string{"commit", "-m", text},
+		"Cant add files",
 	}
+
+	_ = gitCommit.Execute()
 
 	c.CurrentStep = &FinalStep{}
 
