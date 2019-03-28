@@ -35,18 +35,18 @@ func (s *CompleteBranchStep) Execute(c *Context) bool {
 	isHotfix := strings.HasPrefix(branchName, "hotfix/")
 	isFeature := strings.HasPrefix(branchName, "feature/")
 
+	fmt.Print("current tag: ", color.GreenString(string(cmdOut)))
+
 	tagName := ""
 
+	meta := Meta{string(cmdOut), branchName}
+
 	if isHotfix {
-		fmt.Print("current tag:", color.GreenString(string(cmdOut)))
-		meta := Meta{string(cmdOut), branchName}
 		fmt.Println("next tag: ", color.RedString(meta.NextPatchTag()))
 		tagName = meta.NextPatchTag()
 	}
 
 	if isFeature {
-		fmt.Print("current tag:", color.GreenString(string(cmdOut)))
-		meta := Meta{string(cmdOut), branchName}
 		fmt.Println("next tag: ", color.RedString(meta.NextMinorTag()))
 		tagName = meta.NextMinorTag()
 	}
