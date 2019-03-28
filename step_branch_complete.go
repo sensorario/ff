@@ -29,9 +29,6 @@ func (s *CompleteBranchStep) Execute(c *Context) bool {
 	gitDescribeTags := &GitCommand{[]string{"describe", "--tags"}, "cant get tag description"}
 	cmdOut = gitDescribeTags.Execute()
 
-	gitMergeNoFF := &GitCommand{[]string{"merge", "--no-ff", branchName}, "cant merge"}
-	_ = gitMergeNoFF.Execute()
-
 	isHotfix := strings.HasPrefix(branchName, "hotfix/")
 	isFeature := strings.HasPrefix(branchName, "feature/")
 
@@ -51,13 +48,16 @@ func (s *CompleteBranchStep) Execute(c *Context) bool {
 
 	fmt.Println("next tag:   ", color.RedString(tagName))
 
+	gitMergeNoFF := &GitCommand{[]string{"merge", "--no-ff", branchName}, "cant merge"}
+	_ = gitMergeNoFF.Execute()
+
+	gitTag := &GitCommand{[]string{"tag", tagName}, "cant tag"}
+	_ = gitTag.Execute()
+
 	gitDeleteOldBranch := &GitCommand{[]string{"branch", "-D", branchName}, "cant merge"}
 	_ = gitDeleteOldBranch.Execute()
 
 	fmt.Println(color.GreenString("branch " + branchName + " deleted"))
-
-	gitTag := &GitCommand{[]string{"tag", tagName}, "cant tag"}
-	_ = gitTag.Execute()
 
 	c.CurrentStep = &FinalStep{}
 
