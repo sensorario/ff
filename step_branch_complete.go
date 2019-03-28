@@ -37,17 +37,17 @@ func (s *CompleteBranchStep) Execute(c *Context) bool {
 
 	tagName := ""
 
-	fmt.Println("current tag:", color.GreenString(string(cmdOut)))
+	fmt.Print("current tag:", color.GreenString(string(cmdOut)))
 
 	if isHotfix {
 		meta := Meta{string(cmdOut), branchName}
-		fmt.Print("next tag: ", color.RedString(meta.NextPatchTag()))
+		fmt.Println("next tag: ", color.RedString(meta.NextPatchTag()))
 		tagName = meta.NextPatchTag()
 	}
 
 	if isFeature {
 		meta := Meta{string(cmdOut), branchName}
-		fmt.Print("next tag: ", color.RedString(meta.NextMinorTag()))
+		fmt.Println("next tag: ", color.RedString(meta.NextMinorTag()))
 		tagName = meta.NextMinorTag()
 	}
 
