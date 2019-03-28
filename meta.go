@@ -56,6 +56,10 @@ func (m *Meta) NextPatchTag() string {
 	defer file.Close()
 	log.SetOutput(file)
 
+	logger := log.New(file, "prefix", log.LstdFlags)
+	logger.Println("text to append")
+	logger.Println("more text to append")
+
 	patch := m.PatchVersion()
 	minor := m.MinorVersion()
 	major := m.MajorVersion()
@@ -94,6 +98,10 @@ func (m *Meta) NextMinorTag() string {
 	}
 	defer file.Close()
 	log.SetOutput(file)
+
+	logger := log.New(file, "prefix", log.LstdFlags)
+	logger.Println("text to append")
+	logger.Println("more text to append")
 
 	patch := m.PatchVersion()
 	minor := m.MinorVersion()
