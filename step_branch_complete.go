@@ -8,9 +8,9 @@ import (
 	"github.com/fatih/color"
 )
 
-type CompleteFeatureStep struct{}
+type CompleteBranchStep struct{}
 
-func (s *CompleteFeatureStep) Execute(c *Context) bool {
+func (s *CompleteBranchStep) Execute(c *Context) bool {
 	gitStatus := &GitCommand{[]string{"status"}, "Cant get status"}
 	cmdOut := gitStatus.Execute()
 
@@ -62,6 +62,6 @@ func (s *CompleteFeatureStep) Execute(c *Context) bool {
 	return true
 }
 
-func (s *CompleteFeatureStep) Stepname() string {
+func (s *CompleteBranchStep) Stepname() string {
 	return "checkout master"
 }
