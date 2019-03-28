@@ -29,6 +29,9 @@ func (s *CompleteFeatureStep) Execute(c *Context) bool {
 	gitDescribeTags := &GitCommand{[]string{"describe", "--tags"}, "cant get tag description"}
 	cmdOut = gitDescribeTags.Execute()
 
+	gitMergeNoFF := &GitCommand{[]string{"merge", "--no-ff", branchName}, "cant merge"}
+	_ = gitMergeNoFF.Execute()
+
 	isHotfix := strings.HasPrefix(branchName, "hotfix/")
 	isFeature := strings.HasPrefix(branchName, "feature/")
 
@@ -45,9 +48,6 @@ func (s *CompleteFeatureStep) Execute(c *Context) bool {
 		fmt.Println("next tag: ", color.RedString(meta.NextMinorTag()))
 		tagName = meta.NextMinorTag()
 	}
-
-	gitMergeNoFF := &GitCommand{[]string{"merge", "--no-ff", branchName}, "cant merge"}
-	_ = gitMergeNoFF.Execute()
 
 	gitDeleteOldBranch := &GitCommand{[]string{"branch", "-D", branchName}, "cant merge"}
 	_ = gitDeleteOldBranch.Execute()
