@@ -3,44 +3,33 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/fatih/color"
 	"os"
-	"os/exec"
 	"strings"
+
+	"github.com/fatih/color"
 )
 
 type HotfixStep struct{}
 
 func (s *HotfixStep) Execute(c *Context) bool {
-	cmdName := "git"
-	cmdArgs := []string{"checkout", "master"}
-	if _, err := exec.Command(cmdName, cmdArgs...).Output(); err != nil {
-		if err.Error() == "exit status 128" {
-			fmt.Println(color.RedString("git repository not found"))
-		}
-		os.Exit(1)
-	}
+	gitCheckoutMaster := &GitCommand{[]string{"checkout", "master"}, "Cant checkout master"}
+	_ = gitCheckoutMaster.Execute()
 
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(color.RedString("Hotfix description: "))
-	featureName, _ := reader.ReadString('\n')
-	featureName = strings.ReplaceAll(featureName, " ", "-")
-	featureName = strings.ReplaceAll(featureName, "\n", "")
+	hotfixDescription, _ := reader.ReadString('\n')
+	hotfixDescription = strings.ReplaceAll(hotfixDescription, " ", "-")
+	hotfixDescription = strings.ReplaceAll(hotfixDescription, "\n", "")
 
 	fmt.Print(
 		"Hotfix: ",
 	)
 
-	featureBranchName := "hotfix/" + featureName
-	fmt.Println(color.YellowString(featureBranchName))
+	hotfixBranch := "hotfix/" + hotfixDescription
+	fmt.Println(color.YellowString(hotfixBranch))
 
-	cmdStartBranch := "git"
-	arguments := []string{"checkout", "-b", featureBranchName}
-	fmt.Println(arguments)
-	if _, err := exec.Command(cmdStartBranch, arguments...).Output(); err != nil {
-		fmt.Println(color.RedString(err.Error()))
-		os.Exit(1)
-	}
+	gitCheckoutNewBranch := &GitCommand{[]string{"checkout", "-b", hotfixBranch}, "Cant create new branch"}
+	_ = gitCheckoutNewBranch.Execute()
 
 	c.CurrentStep = &FinalStep{}
 

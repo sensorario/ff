@@ -2,30 +2,17 @@ package main
 
 import (
 	"fmt"
-	"github.com/fatih/color"
-	"os"
-	"os/exec"
 	"regexp"
 	"strings"
+
+	"github.com/fatih/color"
 )
 
 type StatusStep struct{}
 
 func (s *StatusStep) Execute(c *Context) bool {
-	var (
-		cmdOut []byte
-		err    error
-	)
-
-	cmdName := "git"
-	cmdArgs := []string{"status"}
-
-	if cmdOut, err = exec.Command(cmdName, cmdArgs...).Output(); err != nil {
-		if err.Error() == "exit status 128" {
-			fmt.Println("\033[1;31mgit repository not found\033[0m")
-		}
-		os.Exit(1)
-	}
+	gitStatus := &GitCommand{[]string{"status"}, "Cant get status"}
+	cmdOut := gitStatus.Execute()
 
 	re := regexp.MustCompile(`On branch [\w\/\#\-]{0,}`)
 
