@@ -95,9 +95,11 @@ func (m *Meta) NextMinorTag() string {
 	defer file.Close()
 	log.SetOutput(file)
 
+	patch := m.PatchVersion()
 	minor := m.MinorVersion()
 	major := m.MajorVersion()
 
+	patchString, _ := strconv.Atoi(patch)
 	minorString, _ := strconv.Atoi(minor)
 	majorString, _ := strconv.Atoi(major)
 
