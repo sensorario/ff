@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -47,6 +49,13 @@ func (m *Meta) CommitsFromLastTag() string {
 }
 
 func (m *Meta) NextPatchTag() string {
+	file, err := os.OpenFile("info.log", os.O_CREATE|os.O_APPEND, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	log.SetOutput(file)
+
 	patch := m.PatchVersion()
 	minor := m.MinorVersion()
 	major := m.MajorVersion()
@@ -55,15 +64,26 @@ func (m *Meta) NextPatchTag() string {
 	minorString, _ := strconv.Atoi(minor)
 	majorString, _ := strconv.Atoi(major)
 
-	patchString++
-
-	foo := []string{
+	before := []string{
 		strconv.Itoa(majorString),
 		strconv.Itoa(minorString),
 		strconv.Itoa(patchString),
 	}
 
-	version := []string{"v", strings.Join(foo, ".")}
+	log.Print(strings.Join([]string{"v", strings.Join(before, ".")}, ""))
+
+	patchString++
+
+	after := []string{
+		strconv.Itoa(majorString),
+		strconv.Itoa(minorString),
+		strconv.Itoa(patchString),
+	}
+
+	log.Print(strings.Join([]string{"v", strings.Join(after, ".")}, ""))
+
+	version := []string{"v", strings.Join(after, ".")}
+
 	return strings.Join(version, "")
 }
 
