@@ -88,20 +88,38 @@ func (m *Meta) NextPatchTag() string {
 }
 
 func (m *Meta) NextMinorTag() string {
+	file, err := os.OpenFile("info.log", os.O_CREATE|os.O_APPEND, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	log.SetOutput(file)
+
 	minor := m.MinorVersion()
 	major := m.MajorVersion()
 
 	minorString, _ := strconv.Atoi(minor)
 	majorString, _ := strconv.Atoi(major)
 
+	before := []string{
+		strconv.Itoa(majorString),
+		strconv.Itoa(minorString),
+		strconv.Itoa(patchString),
+	}
+
+	log.Print(strings.Join([]string{"v", strings.Join(before, ".")}, ""))
+
 	minorString++
 
-	foo := []string{
+	after := []string{
 		strconv.Itoa(majorString),
 		strconv.Itoa(minorString),
 		"0",
 	}
 
-	version := []string{"v", strings.Join(foo, ".")}
+	log.Print(strings.Join([]string{"v", strings.Join(after, ".")}, ""))
+
+	version := []string{"v", strings.Join(after, ".")}
+
 	return strings.Join(version, "")
 }
