@@ -37,6 +37,8 @@ func (s *CompleteBranchStep) Execute(c *Context) bool {
 
 	tagName := ""
 
+	fmt.Println("current tag:", color.GreenString(string(cmdOut)))
+
 	if isHotfix {
 		meta := Meta{string(cmdOut), branchName}
 		fmt.Println("next tag: ", color.RedString(meta.NextPatchTag()))
