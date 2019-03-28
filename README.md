@@ -8,7 +8,7 @@
 # Open and close hotfix branch
 
  - fussy hotfix
- - fussy feature complete
+ - fussy hotfix complete
 
 # Commit
 

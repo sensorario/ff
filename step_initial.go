@@ -36,13 +36,18 @@ func (s *InputReadingStep) Execute(c *Context) bool {
 			c.CurrentStep = &FeatureStep{}
 		}
 		if specification == "complete" {
-			c.CurrentStep = &CompleteFeatureStep{}
+			c.CurrentStep = &CompleteBranchStep{}
 		}
 		return true
 	}
 
 	if command == "hotfix" {
-		c.CurrentStep = &HotfixStep{}
+		if specification == "default" {
+			c.CurrentStep = &HotfixStep{}
+		}
+		if specification == "complete" {
+			c.CurrentStep = &CompleteBranchStep{}
+		}
 		return true
 	}
 
