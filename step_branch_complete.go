@@ -42,14 +42,14 @@ func (s *CompleteBranchStep) Execute(c *Context) bool {
 	meta := Meta{string(cmdOut), branchName}
 
 	if isHotfix {
-		fmt.Println("next tag: ", color.RedString(meta.NextPatchTag()))
 		tagName = meta.NextPatchTag()
 	}
 
 	if isFeature {
-		fmt.Println("next tag: ", color.RedString(meta.NextMinorTag()))
 		tagName = meta.NextMinorTag()
 	}
+
+	fmt.Println("next tag:   ", color.RedString(tagName))
 
 	gitDeleteOldBranch := &GitCommand{[]string{"branch", "-D", branchName}, "cant merge"}
 	_ = gitDeleteOldBranch.Execute()
