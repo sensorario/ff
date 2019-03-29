@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
-
-	"github.com/fatih/color"
 )
 
 type PublishStep struct{}
