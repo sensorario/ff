@@ -12,7 +12,9 @@ import (
 type FeatureStep struct{}
 
 func (s *FeatureStep) Execute(c *Context) bool {
-	gitCheckoutMaster := &GitCommand{[]string{"checkout", "master"}, "Cant checkout master"}
+	developmentBranch := "master"
+
+	gitCheckoutMaster := &GitCommand{[]string{"checkout", developmentBranch}, "Cant checkout master"}
 	_ = gitCheckoutMaster.Execute()
 
 	reader := bufio.NewReader(os.Stdin)
@@ -25,7 +27,7 @@ func (s *FeatureStep) Execute(c *Context) bool {
 		"Feature: ",
 	)
 
-	featureBranchName := "feature/" + featureName
+	featureBranchName := "feature/" + featureName + "/" + developmentBranch
 	fmt.Println(color.YellowString(featureBranchName))
 
 	gitCheckoutNewBranch := &GitCommand{[]string{"checkout", "-b", featureBranchName}, "Cant create new branch"}

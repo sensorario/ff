@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"regexp"
 	"strings"
 
@@ -23,7 +24,13 @@ func (s *CompleteBranchStep) Execute(c *Context) bool {
 
 	fmt.Println(color.RedString("leaving: " + branchName))
 
-	gitCheckoutMaster := &GitCommand{[]string{"checkout", "master"}, "Cant checkout master"}
+	branch := SemBranch{"feature/branch-semantico/master"}
+	fmt.Println(color.RedString("destination: " + branch.Destination()))
+
+	gitCheckoutMaster := &GitCommand{[]string{
+		"checkout",
+		branch.Destination(),
+	}, "Cant checkout destination branch"}
 	_ = gitCheckoutMaster.Execute()
 
 	gitDescribeTags := &GitCommand{[]string{"describe", "--tags"}, "cant get tag description"}
