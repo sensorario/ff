@@ -28,6 +28,7 @@ func (gc *GitCommand) Execute() string {
 	cmdArgs := gc.Arguments()
 	if cmdOut, err = exec.Command(cmdName, cmdArgs...).Output(); err != nil {
 		if err.Error() == "exit status 128" {
+			fmt.Println(color.RedString(err.Error()))
 			fmt.Println(color.RedString(gc.ErrorMessage()))
 		}
 		os.Exit(1)
