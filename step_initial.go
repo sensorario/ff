@@ -41,6 +41,11 @@ func (s *InputReadingStep) Execute(c *Context) bool {
 		return true
 	}
 
+	if command == "complete" {
+		c.CurrentStep = &CompleteBranchStep{}
+		return true
+	}
+
 	if command == "hotfix" {
 		if specification == "default" {
 			c.CurrentStep = &HotfixStep{}
