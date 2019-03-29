@@ -1,5 +1,7 @@
 # Fussy 1.0
 
+A git wrapper.
+
 # Open and close feature branch
 
  - fussy feature
