@@ -21,7 +21,7 @@ func (s *PublishStep) Execute(c *Context) bool {
 	}
 
 	gitPush := &GitCommand{[]string{"push", "origin", branchName}, "cant push"}
-	cmdOut := gitPush.Execute()
+	_ = gitPush.Execute()
 
 	return false
 }
