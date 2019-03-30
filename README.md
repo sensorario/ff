@@ -2,6 +2,10 @@
 
 A git wrapper.
 
+# Clean working directory and stage
+
+ - ff reset
+
 # Open and close feature branch
 
  - ff feature
