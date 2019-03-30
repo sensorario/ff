@@ -8,7 +8,7 @@ import (
 type InputReadingStep struct{}
 
 func (s *InputReadingStep) Execute(c *Context) bool {
-	command := "status"
+	command := "help"
 	specification := "default"
 
 	if len(os.Args) > 1 {
