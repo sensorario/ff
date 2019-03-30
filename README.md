@@ -2,6 +2,10 @@
 
 A git wrapper.
 
+# Help command
+
+ - ff help
+
 # Clean working directory and stage
 
  - ff reset

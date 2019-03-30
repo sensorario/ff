@@ -21,6 +21,11 @@ func (s *InputReadingStep) Execute(c *Context) bool {
 
 	fmt.Println("command: " + command)
 
+	if command == "help" {
+		c.CurrentStep = &HelpStep{}
+		return true
+	}
+
 	if command == "publish" {
 		c.CurrentStep = &PublishStep{}
 		return true
