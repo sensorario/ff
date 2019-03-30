@@ -1,14 +1,5 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-	"strings"
-
-	"github.com/fatih/color"
-)
-
 type ResetStep struct{}
 
 func (s *ResetStep) Execute(c *Context) bool {
