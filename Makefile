@@ -1,3 +1,3 @@
 default:
-	go build -o fussy
-	mv -f fussy /usr/local/bin/fussy
+	go build -o ff
+	mv -f ff /usr/local/bin/ff
