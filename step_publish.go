@@ -20,7 +20,7 @@ func (s *PublishStep) Execute(c *Context) bool {
 		fmt.Println("Current branch: ", branchName)
 	}
 
-	gitPush := &GitCommand{[]string{"push", "origin", branchName}, "cant push"}
+	gitPush := &GitCommand{[]string{"push", "origin", branchName, "--tags"}, "cant push"}
 	_ = gitPush.Execute()
 
 	return false
