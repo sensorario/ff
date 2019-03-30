@@ -26,6 +26,11 @@ func (s *InputReadingStep) Execute(c *Context) bool {
 		return true
 	}
 
+	if command == "reset" {
+		c.CurrentStep = &ResetStep{}
+		return true
+	}
+
 	if command == "status" {
 		c.CurrentStep = &StatusStep{}
 		return true
