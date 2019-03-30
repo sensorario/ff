@@ -4,26 +4,26 @@ A git wrapper.
 
 # Open and close feature branch
 
- - fussy feature
- - fussy feature complete
+ - ff feature
+ - ff feature complete
 
 # Open and close hotfix branch
 
- - fussy hotfix
- - fussy hotfix complete
+ - ff hotfix
+ - ff hotfix complete
 
 # Complete branch
 
- - fussy complete
+ - ff complete
 
 # Commit
 
- - fussy commit
+ - ff commit
 
 # Status
 
- - fussy status
+ - ff status
 
 # Publish
 
- - fussy publish
+ - ff publish
