@@ -11,6 +11,7 @@ type WorkingDirStep struct{}
 
 func (s *WorkingDirStep) Execute(c *Context) bool {
 	gitStatus := &GitCommand{
+		c.Logger,
 		[]string{"status"},
 		"Cant get status",
 	}

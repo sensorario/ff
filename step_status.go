@@ -11,7 +11,7 @@ import (
 type StatusStep struct{}
 
 func (s *StatusStep) Execute(c *Context) bool {
-	gitStatus := &GitCommand{[]string{"status"}, "Cant get status"}
+	gitStatus := &GitCommand{c.Logger, []string{"status"}, "Cant get status"}
 	cmdOut := gitStatus.Execute()
 
 	re := regexp.MustCompile(`On branch [\w\/\#\-]{0,}`)

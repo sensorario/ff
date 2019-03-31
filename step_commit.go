@@ -15,6 +15,7 @@ func (s *CommitStep) Execute(c *Context) bool {
 	fmt.Println(text)
 
 	gitAddAll := &GitCommand{
+		c.Logger,
 		[]string{"add", "."},
 		"Cant add files",
 	}
@@ -22,6 +23,7 @@ func (s *CommitStep) Execute(c *Context) bool {
 	_ = gitAddAll.Execute()
 
 	gitCommit := &GitCommand{
+		c.Logger,
 		[]string{"commit", "-m", text},
 		"Cant add files",
 	}

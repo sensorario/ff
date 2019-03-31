@@ -3,10 +3,10 @@ package main
 type ResetStep struct{}
 
 func (s *ResetStep) Execute(c *Context) bool {
-	gitAddEverything := &GitCommand{[]string{"add", "."}, "Cant add working directory to stage"}
+	gitAddEverything := &GitCommand{c.Logger, []string{"add", "."}, "Cant add working directory to stage"}
 	_ = gitAddEverything.Execute()
 
-	gitResetHard := &GitCommand{[]string{"reset", "--hard"}, "Cant reset"}
+	gitResetHard := &GitCommand{c.Logger, []string{"reset", "--hard"}, "Cant reset"}
 	_ = gitResetHard.Execute()
 
 	c.CurrentStep = &FinalStep{}
