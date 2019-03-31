@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"github.com/fatih/color"
+	"github.com/sensorario/gol"
 )
 
 type FussyStepInterface interface {
@@ -13,8 +13,9 @@ type FussyStepInterface interface {
 type Context struct {
 	CurrentStep FussyStepInterface
 	Exit        bool
+	Logger      gol.Logger
 }
 
 func (c *Context) EnterStep() {
-	fmt.Println(color.RedString("[step/" + c.CurrentStep.Stepname() + "]"))
+	c.Logger.Info(color.RedString("[step/" + c.CurrentStep.Stepname() + "]"))
 }

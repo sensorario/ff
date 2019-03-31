@@ -9,7 +9,7 @@ import (
 type PublishStep struct{}
 
 func (s *PublishStep) Execute(c *Context) bool {
-	gitStatus := &GitCommand{[]string{"status"}, "Cant get status"}
+	gitStatus := &GitCommand{c.Logger, []string{"status"}, "Cant get status"}
 	cmdOut := gitStatus.Execute()
 
 	re := regexp.MustCompile(`On branch [\w\/\#\-]{0,}`)
@@ -20,7 +20,7 @@ func (s *PublishStep) Execute(c *Context) bool {
 		fmt.Println("Current branch: ", branchName)
 	}
 
-	gitPush := &GitCommand{[]string{"push", "origin", branchName, "--tags"}, "cant push"}
+	gitPush := &GitCommand{c.Logger, []string{"push", "origin", branchName, "--tags"}, "cant push"}
 	_ = gitPush.Execute()
 
 	return false
