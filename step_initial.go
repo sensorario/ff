@@ -7,7 +7,7 @@ import (
 
 type InputReadingStep struct{}
 
-func (s *InputReadingStep) Execute(c *Context) bool {
+func (s InputReadingStep) Execute(c *Context) bool {
 	command := "help"
 	specification := "default"
 
@@ -76,6 +76,6 @@ func (s *InputReadingStep) Execute(c *Context) bool {
 	return true
 }
 
-func (s *InputReadingStep) Stepname() string {
+func (s InputReadingStep) Stepname() string {
 	return "command-detection"
 }

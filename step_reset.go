@@ -2,7 +2,7 @@ package main
 
 type ResetStep struct{}
 
-func (s *ResetStep) Execute(c *Context) bool {
+func (s ResetStep) Execute(c *Context) bool {
 	gitAddEverything := &GitCommand{c.Logger, []string{"add", "."}, "Cant add working directory to stage"}
 	_ = gitAddEverything.Execute()
 
@@ -14,6 +14,6 @@ func (s *ResetStep) Execute(c *Context) bool {
 	return true
 }
 
-func (s *ResetStep) Stepname() string {
+func (s ResetStep) Stepname() string {
 	return "reset-everything"
 }

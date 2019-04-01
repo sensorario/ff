@@ -11,7 +11,7 @@ import (
 
 type HotfixStep struct{}
 
-func (s *HotfixStep) Execute(c *Context) bool {
+func (s HotfixStep) Execute(c *Context) bool {
 	gitCheckoutMaster := &GitCommand{
 		c.Logger,
 		[]string{"checkout", "master"},
@@ -40,6 +40,6 @@ func (s *HotfixStep) Execute(c *Context) bool {
 	return true
 }
 
-func (s *HotfixStep) Stepname() string {
+func (s HotfixStep) Stepname() string {
 	return "create-hotfix-branch"
 }

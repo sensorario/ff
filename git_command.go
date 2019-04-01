@@ -14,11 +14,11 @@ type GitCommand struct {
 	message string
 }
 
-func (gc *GitCommand) ErrorMessage() string {
+func (gc GitCommand) ErrorMessage() string {
 	return gc.message
 }
 
-func (gc *GitCommand) Arguments() []string {
+func (gc GitCommand) Arguments() []string {
 	return gc.args
 }
 

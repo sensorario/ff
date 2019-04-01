@@ -8,7 +8,7 @@ import (
 
 type PublishStep struct{}
 
-func (s *PublishStep) Execute(c *Context) bool {
+func (s PublishStep) Execute(c *Context) bool {
 	gitStatus := &GitCommand{c.Logger, []string{"status"}, "Cant get status"}
 	cmdOut := gitStatus.Execute()
 
@@ -26,6 +26,6 @@ func (s *PublishStep) Execute(c *Context) bool {
 	return false
 }
 
-func (s *PublishStep) Stepname() string {
+func (s PublishStep) Stepname() string {
 	return "publish"
 }
