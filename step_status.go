@@ -10,7 +10,7 @@ import (
 
 type StatusStep struct{}
 
-func (s *StatusStep) Execute(c *Context) bool {
+func (s StatusStep) Execute(c *Context) bool {
 	gitStatus := &GitCommand{c.Logger, []string{"status"}, "Cant get status"}
 	cmdOut := gitStatus.Execute()
 
@@ -32,6 +32,6 @@ func (s *StatusStep) Execute(c *Context) bool {
 	return false
 }
 
-func (s *StatusStep) Stepname() string {
+func (s StatusStep) Stepname() string {
 	return "status"
 }

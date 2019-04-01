@@ -11,7 +11,7 @@ import (
 
 type FeatureStep struct{}
 
-func (s *FeatureStep) Execute(c *Context) bool {
+func (s FeatureStep) Execute(c *Context) bool {
 	developmentBranch := "master"
 
 	gitCheckoutMaster := &GitCommand{c.Logger, []string{"checkout", developmentBranch}, "Cant checkout master"}
@@ -38,6 +38,6 @@ func (s *FeatureStep) Execute(c *Context) bool {
 	return true
 }
 
-func (s *FeatureStep) Stepname() string {
+func (s FeatureStep) Stepname() string {
 	return "create-feature-branch"
 }

@@ -10,7 +10,7 @@ import (
 
 type CompleteBranchStep struct{}
 
-func (s *CompleteBranchStep) Execute(c *Context) bool {
+func (s CompleteBranchStep) Execute(c *Context) bool {
 	gitStatus := &GitCommand{
 		args:    []string{"status"},
 		message: "Cant get status",
@@ -78,6 +78,6 @@ func (s *CompleteBranchStep) Execute(c *Context) bool {
 	return true
 }
 
-func (s *CompleteBranchStep) Stepname() string {
+func (s CompleteBranchStep) Stepname() string {
 	return "checkout master"
 }

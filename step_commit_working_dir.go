@@ -9,7 +9,7 @@ import (
 
 type WorkingDirStep struct{}
 
-func (s *WorkingDirStep) Execute(c *Context) bool {
+func (s WorkingDirStep) Execute(c *Context) bool {
 	gitStatus := &GitCommand{
 		c.Logger,
 		[]string{"status"},
@@ -35,6 +35,6 @@ func (s *WorkingDirStep) Execute(c *Context) bool {
 	return true
 }
 
-func (s *WorkingDirStep) Stepname() string {
+func (s WorkingDirStep) Stepname() string {
 	return "check-working-directory"
 }

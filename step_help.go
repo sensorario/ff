@@ -17,7 +17,7 @@ func printHelp(h Help) {
 
 type HelpStep struct{}
 
-func (s *HelpStep) Execute(c *Context) bool {
+func (s HelpStep) Execute(c *Context) bool {
 
 	printHelp(Help{"help:", "this help"})
 
@@ -35,6 +35,6 @@ func (s *HelpStep) Execute(c *Context) bool {
 	return true
 }
 
-func (s *HelpStep) Stepname() string {
+func (s HelpStep) Stepname() string {
 	return "help"
 }
