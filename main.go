@@ -6,7 +6,7 @@ func main() {
 
 	context := Context{
 		CurrentStep: &InputReadingStep{},
-		Logger:      gol.Logger{Application: "fussy", LogFile: "info"},
+		Logger:      gol.Logger{Application: "ff", LogFile: "info"},
 	}
 
 	context.EnterStep()
