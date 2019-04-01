@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/fatih/color"
@@ -64,7 +65,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 		tagName = meta.NextPatchTag()
 		c.Logger.Info("NextPatchTag")
 		c.Logger.Info("tagName: " + tagName)
-		c.Logger.Info(meta.IncPatchVersion())
+		c.Logger.Info(strconv.Itoa(meta.IncPatchVersion()))
 	}
 
 	if isFeature {
