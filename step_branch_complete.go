@@ -64,6 +64,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 		tagName = meta.NextPatchTag()
 		c.Logger.Info("NextPatchTag")
 		c.Logger.Info("tagName: " + tagName)
+		c.Logger.Info(meta.IncPatchVersion())
 	}
 
 	if isFeature {
