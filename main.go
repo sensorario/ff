@@ -1,12 +1,24 @@
 package main
 
-import "github.com/sensorario/gol"
+import (
+	"os"
+
+	"github.com/sensorario/gol"
+)
+
+func genLog() gol.Logger {
+	if envLogPath := os.Getenv("FF_LOG_PATH"); envLogPath != "" {
+		return gol.NewCustomLogger(envLogPath)
+	}
+
+	return gol.NewLogger("ff")
+}
 
 func main() {
 
 	context := Context{
 		CurrentStep: &InputReadingStep{},
-		Logger:      gol.NewLogger("ff"),
+		Logger:      genLog(),
 	}
 
 	context.EnterStep()
