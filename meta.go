@@ -27,6 +27,14 @@ func (m *Meta) MinorVersion() string {
 	return tokens[1]
 }
 
+func (m *Meta) IncPatchVersion() int {
+	tokens := strings.Split(m.describe, "-")
+	tokens = strings.Split(tokens[0], ".")
+	number := strconv.Atoi(tokens[2])
+	nextNumber:= number++
+	return nextNumber
+}
+
 func (m *Meta) PatchVersion() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
