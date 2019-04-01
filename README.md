@@ -9,12 +9,16 @@ And then make it executable:
 
 Move it into `/usr/local/bin/` folder to execute it from everywhere.
 
-## Configuration
+## Personalization
+
+By default log folder is `/var/log/ff` and file is `logger.log`.
+To change log destination path you  should define environment variable `FF_LOG_PATH`.
+Remember that the program MUST HAVE write permission in the selected folder.
 
     sudo mkdir /var/log/ff/
     sudo chmod 777 /var/log/ff/
 
-## Description
+## Commands
 
 A git wrapper.
 
