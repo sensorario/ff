@@ -1,4 +1,4 @@
-# Fussy 1.0
+# FF 1.*
 
 A git wrapper.
 
