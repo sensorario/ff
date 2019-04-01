@@ -12,6 +12,8 @@ import (
 type HotfixStep struct{}
 
 func (s HotfixStep) Execute(c *Context) bool {
+	developmentBranch := "master"
+
 	gitCheckoutMaster := &GitCommand{
 		c.Logger,
 		[]string{"checkout", "master"},
@@ -29,7 +31,7 @@ func (s HotfixStep) Execute(c *Context) bool {
 		"Hotfix: ",
 	)
 
-	hotfixBranch := "hotfix/" + hotfixDescription
+	hotfixBranch := "hotfix/" + hotfixDescription + "/" + developmentBranch
 	fmt.Println(color.YellowString(hotfixBranch))
 
 	gitCheckoutNewBranch := &GitCommand{c.Logger, []string{"checkout", "-b", hotfixBranch}, "Cant create new branch"}

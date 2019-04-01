@@ -14,7 +14,11 @@ type FeatureStep struct{}
 func (s FeatureStep) Execute(c *Context) bool {
 	developmentBranch := "master"
 
-	gitCheckoutMaster := &GitCommand{c.Logger, []string{"checkout", developmentBranch}, "Cant checkout master"}
+	gitCheckoutMaster := &GitCommand{
+		c.Logger,
+		[]string{"checkout", developmentBranch},
+		"Cant checkout master",
+	}
 	_ = gitCheckoutMaster.Execute()
 
 	reader := bufio.NewReader(os.Stdin)
