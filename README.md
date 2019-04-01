@@ -1,5 +1,14 @@
 # FF 1.*
 
+## Install Binaries
+
+Download binaries from: https://github.com/sensorario/ff/raw/master/dist/ff
+And then make it executable:
+
+    sudo chmod +x ff
+
+Move it into `/usr/local/bin/` folder to execute it from everywhere.
+
 ## Configuration
 
     sudo mkdir /var/log/ff/
