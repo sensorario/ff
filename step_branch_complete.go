@@ -27,7 +27,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 
 	fmt.Println(color.RedString("leaving: " + branchName))
 
-	branch := SemBranch{"feature/branch-semantico/master"}
+	branch := SemBranch{branchName}
 	fmt.Println(color.RedString("destination: " + branch.Destination()))
 
 	gitCheckoutMaster := &GitCommand{
@@ -40,7 +40,11 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 	}
 	_ = gitCheckoutMaster.Execute()
 
-	gitDescribeTags := &GitCommand{c.Logger, []string{"describe", "--tags"}, "cant get tag description"}
+	gitDescribeTags := &GitCommand{
+		c.Logger,
+		[]string{"describe", "--tags"},
+		"cant get tag description",
+	}
 	cmdOut = gitDescribeTags.Execute()
 
 	isHotfix := strings.HasPrefix(branchName, "hotfix/")
@@ -62,13 +66,25 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 
 	fmt.Println("next tag:   ", color.RedString(tagName))
 
-	gitMergeNoFF := &GitCommand{c.Logger, []string{"merge", "--no-ff", branchName}, "cant merge"}
+	gitMergeNoFF := &GitCommand{
+		c.Logger,
+		[]string{"merge", "--no-ff", branchName},
+		"cant merge",
+	}
 	_ = gitMergeNoFF.Execute()
 
-	gitTag := &GitCommand{c.Logger, []string{"tag", tagName}, "cant tag"}
+	gitTag := &GitCommand{
+		c.Logger,
+		[]string{"tag", tagName},
+		"cant tag",
+	}
 	_ = gitTag.Execute()
 
-	gitDeleteOldBranch := &GitCommand{c.Logger, []string{"branch", "-D", branchName}, "cant merge"}
+	gitDeleteOldBranch := &GitCommand{
+		c.Logger,
+		string{"branch", "-D", branchName},
+		"cant merge",
+	}
 	_ = gitDeleteOldBranch.Execute()
 
 	fmt.Println(color.GreenString("branch " + branchName + " deleted"))
@@ -79,5 +95,5 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 }
 
 func (s CompleteBranchStep) Stepname() string {
-	return "checkout master"
+	return "checkout-master"
 }
