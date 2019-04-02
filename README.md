@@ -9,6 +9,11 @@ And then make it executable:
 
 Move it into `/usr/local/bin/` folder to execute it from everywhere.
 
+Remember to load `gol` and `color`:
+
+    go get github.com/sensorario/gol
+    go get github.com/fatih/color
+
 ## Personalization
 
 By default log folder is `/var/log/ff` and file is `logger.log`.  To change log destination path you  should define environment variable `FF_LOG_PATH`.  Remember that the program MUST HAVE write permission in the selected folder. Actually is not possible to change file name.
