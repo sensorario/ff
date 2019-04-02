@@ -16,17 +16,9 @@ func (s StatusStep) Execute(c *Context) bool {
 
 	re := regexp.MustCompile(`On branch [\w\/\#\-]{0,}`)
 
-	isDevelopmentBranch := false
-
 	for _, match := range re.FindAllString(string(cmdOut), -1) {
 		branchName := strings.ReplaceAll(match, "On branch ", "")
-		fmt.Println("Current branch: ", branchName)
-		isDevelopmentBranch = branchName == "master"
-	}
-
-	if isDevelopmentBranch {
-		fmt.Println(color.GreenString("Development branch"))
-		fmt.Println("you can create feature branch from here")
+		fmt.Println("Current branch is ", color.GreenString(branchName))
 	}
 
 	return false

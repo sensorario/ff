@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 )
 
@@ -18,8 +17,6 @@ func (s InputReadingStep) Execute(c *Context) bool {
 	if len(os.Args) > 2 {
 		specification = os.Args[2]
 	}
-
-	fmt.Println("command: " + command)
 
 	if command == "help" {
 		c.CurrentStep = &HelpStep{}
