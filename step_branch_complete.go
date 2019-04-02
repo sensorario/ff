@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"regexp"
-	"strconv"
 	"strings"
 
 	"github.com/fatih/color"
@@ -71,7 +70,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 		tagName = meta.NextMinorTag()
 	}
 
-	fmt.Println("next tag:   ", color.RedString(tagName))
+	fmt.Println("next tag:   ", color.GreenString(tagName))
 
 	gitTag := &GitCommand{
 		c.Logger,
