@@ -16,26 +16,16 @@ func (s InputReadingStep) Execute(c *Context) bool {
 		command = os.Args[1]
 	}
 
-	container := map[string]FussyStepInterface{}
+	ss := c.Container()
 
-	container["help"] = &HelpStep{}
-	container["publish"] = &PublishStep{}
-	container["reset"] = &ResetStep{}
-	container["status"] = &StatusStep{}
-	container["commit"] = &WorkingDirStep{}
-	container["complete"] = &CompleteBranchStep{}
-	container["feature"] = &FeatureStep{}
-	container["hotfix"] = &HotfixStep{}
-	container["refactor"] = &RefactoringStep{}
-
-	step, ok := container[command]
+	item, ok := ss[command]
 
 	if !ok {
 		fmt.Println(color.RedString(command + " is not in the map"))
 		os.Exit(1)
 	}
 
-	c.CurrentStep = step
+	c.CurrentStep = item.Step
 
 	return true
 }

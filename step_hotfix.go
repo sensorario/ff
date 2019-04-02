@@ -24,8 +24,16 @@ func (s HotfixStep) Execute(c *Context) bool {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(color.RedString("Hotfix description: "))
 	hotfixDescription, _ := reader.ReadString('\n')
-	hotfixDescription = strings.ReplaceAll(hotfixDescription, " ", "-")
-	hotfixDescription = strings.ReplaceAll(hotfixDescription, "\n", "")
+	hotfixDescription = strings.ReplaceAll(
+		hotfixDescription,
+		" ",
+		"-",
+	)
+	hotfixDescription = strings.ReplaceAll(
+		hotfixDescription,
+		"\n",
+		"",
+	)
 
 	fmt.Print(
 		"Hotfix: ",
@@ -34,7 +42,12 @@ func (s HotfixStep) Execute(c *Context) bool {
 	hotfixBranch := "hotfix/" + hotfixDescription + "/" + developmentBranch
 	fmt.Println(color.YellowString(hotfixBranch))
 
-	gitCheckoutNewBranch := &GitCommand{c.Logger, []string{"checkout", "-b", hotfixBranch}, "Cant create new branch"}
+	gitCheckoutNewBranch := &GitCommand{
+		c.Logger,
+		[]string{"checkout", "-b", hotfixBranch},
+		"Cant create new branch",
+	}
+
 	_ = gitCheckoutNewBranch.Execute()
 
 	c.CurrentStep = &FinalStep{}

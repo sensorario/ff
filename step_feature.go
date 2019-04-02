@@ -19,6 +19,7 @@ func (s FeatureStep) Execute(c *Context) bool {
 		[]string{"checkout", developmentBranch},
 		"Cant checkout master",
 	}
+
 	_ = gitCheckoutMaster.Execute()
 
 	reader := bufio.NewReader(os.Stdin)
@@ -34,7 +35,12 @@ func (s FeatureStep) Execute(c *Context) bool {
 	featureBranchName := "feature/" + featureName + "/" + developmentBranch
 	fmt.Println(color.YellowString(featureBranchName))
 
-	gitCheckoutNewBranch := &GitCommand{c.Logger, []string{"checkout", "-b", featureBranchName}, "Cant create new branch"}
+	gitCheckoutNewBranch := &GitCommand{
+		c.Logger,
+		[]string{"checkout", "-b", featureBranchName},
+		"Cant create new branch",
+	}
+
 	_ = gitCheckoutNewBranch.Execute()
 
 	c.CurrentStep = &FinalStep{}
