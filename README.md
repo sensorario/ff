@@ -14,6 +14,12 @@ Remember to load `gol` and `color`:
     go get github.com/sensorario/gol
     go get github.com/fatih/color
 
+## Features
+
+The `ff` does not allow command if not allowed according to the git flow. For example, no hotfix/feature branches can be created if current branch is an hotfix/feature branch in turn.
+
+An hotfix/feature branch can be created only from master.
+
 ## Personalization
 
 By default log folder is `/var/log/ff` and file is `logger.log`.  To change log destination path you  should define environment variable `FF_LOG_PATH`.  Remember that the program MUST HAVE write permission in the selected folder. Actually is not possible to change file name.
