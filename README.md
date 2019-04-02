@@ -23,13 +23,12 @@ By default log folder is `/var/log/ff` and file is `logger.log`.  To change log 
 
 ## Available commands
 
- - ff help
- - ff reset
- - ff feature
- - ff feature complete
- - ff hotfix
- - ff hotfix complete
- - ff complete
  - ff commit
- - ff status
+ - ff complete
+ - ff feature
+ - ff help
+ - ff hotfix
  - ff publish
+ - ff refactor
+ - ff reset
+ - ff status
