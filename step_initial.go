@@ -16,16 +16,16 @@ func (s InputReadingStep) Execute(c *Context) bool {
 		command = os.Args[1]
 	}
 
-	container := c.Container()
+	ss := c.Container()
 
-	comlpesso, ok := container[command]
+	item, ok := ss[command]
 
 	if !ok {
 		fmt.Println(color.RedString(command + " is not in the map"))
 		os.Exit(1)
 	}
 
-	c.CurrentStep = comlpesso.Step
+	c.CurrentStep = item.Step
 
 	return true
 }
