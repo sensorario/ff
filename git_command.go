@@ -28,7 +28,7 @@ func (gc *GitCommand) Execute() string {
 	cmdName := "git"
 	cmdArgs := gc.Arguments()
 
-	if cmdOut, _ = exec.Command(cmdName, cmdArgs...).Output(); err != nil {
+	if cmdOut, err = exec.Command(cmdName, cmdArgs...).Output(); err != nil {
 		if err.Error() == "exit status 128" {
 			gc.Logger.Error(color.RedString(err.Error()))
 			gc.Logger.Error(color.RedString(gc.ErrorMessage()))
