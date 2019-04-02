@@ -9,9 +9,10 @@ And then make it executable:
 
 Move it into `/usr/local/bin/` folder to execute it from everywhere.
 
-Remember to load `gol`:
+Remember to load `gol` and `color`:
 
     go get github.com/sensorario/gol
+    go get github.com/fatih/color
 
 ## Personalization
 
