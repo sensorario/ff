@@ -23,17 +23,14 @@ func (s HelpStep) Execute(c *Context) bool {
 
 	fmt.Println("")
 
-	printHelp(Help{"commit:", "commit everything"})
-	printHelp(Help{"feature:", "create new feature branch"})
-	printHelp(Help{"hotfix:", "ceate new hotfix branch"})
-	printHelp(Help{"refactor:", "ceate new refactoring branch"})
-	printHelp(Help{"complete:", "merge hotfix or feature branch"})
+	container := c.Container()
 
-	fmt.Println("")
-
-	printHelp(Help{"publish:", "push current branch into remote"})
-	printHelp(Help{"reset:", "reset working directory and stage"})
-	printHelp(Help{"status:", "check status of current branch"})
+	for command, _ := range container {
+		printHelp(Help{
+			command,
+			container[command].Description,
+		})
+	}
 
 	c.CurrentStep = &FinalStep{}
 

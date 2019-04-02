@@ -32,3 +32,68 @@ func (c Context) CurrentBranch() string {
 
 	return branchName
 }
+
+type Complesso struct {
+	Step        FussyStepInterface
+	Description string
+}
+
+func (c Context) Container() map[string]Complesso {
+	container := map[string]Complesso{}
+
+	// always
+	container["help"] = Complesso{
+		HelpStep{},
+		"this help",
+	}
+
+	container["status"] = Complesso{
+		&StatusStep{},
+		"status",
+	}
+
+	// only if working dir is dirty
+	container["commit"] = Complesso{
+		WorkingDirStep{},
+		"commit everything",
+	}
+
+	container["reset"] = Complesso{
+		ResetStep{},
+		"reset working directory and stage",
+	}
+
+	branch := c.CurrentBranch()
+	sem := Branch{branch}
+
+	if sem.IsMaster() == true {
+		container["publish"] = Complesso{
+			PublishStep{},
+			"push current branch into remote",
+		}
+
+		container["hotfix"] = Complesso{
+			HotfixStep{},
+			"create new hotfix branch",
+		}
+
+		container["feature"] = Complesso{
+			FeatureStep{},
+			"create new feature branch",
+		}
+
+		container["refactor"] = Complesso{
+			RefactoringStep{},
+			"create new refactor branch",
+		}
+	}
+
+	if sem.IsFeature() || sem.IsHotfix() {
+		container["complete"] = Complesso{
+			CompleteBranchStep{},
+			"merge current branch into master",
+		}
+	}
+
+	return container
+}
