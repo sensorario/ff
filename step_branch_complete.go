@@ -67,7 +67,6 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 		patch, _ := strconv.Atoi(meta.PatchVersion())
 		patch = patch + 1
 		tagName = meta.NextPatchTag()
-		c.Logger.Info("NextPatchTag")
 		c.Logger.Info("tagName: " + tagName)
 		c.Logger.Info(patch)
 		c.Logger.Info(strconv.Itoa(meta.IncPatchVersion()))
