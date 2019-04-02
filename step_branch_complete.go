@@ -16,6 +16,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 		message: "Cant get status",
 		Logger:  c.Logger,
 	}
+
 	cmdOut := gitStatus.Execute()
 
 	re := regexp.MustCompile(`On branch [\w\/\#\-]{0,}`)
@@ -35,6 +36,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 		[]string{"checkout", branch.Destination()},
 		"Cant checkout destination branch",
 	}
+
 	_ = gitCheckoutMaster.Execute()
 
 	gitMergeNoFF := &GitCommand{
@@ -42,6 +44,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 		[]string{"merge", "--no-ff", branchName},
 		"cant merge",
 	}
+
 	_ = gitMergeNoFF.Execute()
 
 	gitDescribeTags := &GitCommand{
@@ -49,6 +52,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 		[]string{"describe", "--tags"},
 		"cant get tag description",
 	}
+
 	cmdOut = gitDescribeTags.Execute()
 
 	isHotfix := strings.HasPrefix(branchName, "hotfix/")
