@@ -18,15 +18,27 @@ func (s InputReadingStep) Execute(c *Context) bool {
 
 	container := map[string]FussyStepInterface{}
 
+	// always
 	container["help"] = &HelpStep{}
-	container["publish"] = &PublishStep{}
-	container["reset"] = &ResetStep{}
 	container["status"] = &StatusStep{}
+
+	// only if working dir is dirty
 	container["commit"] = &WorkingDirStep{}
-	container["complete"] = &CompleteBranchStep{}
-	container["feature"] = &FeatureStep{}
-	container["hotfix"] = &HotfixStep{}
-	container["refactor"] = &RefactoringStep{}
+	container["reset"] = &ResetStep{}
+
+	branch := c.CurrentBranch()
+	sem := Branch{branch}
+
+	if sem.IsMaster() == true {
+		container["publish"] = &PublishStep{}
+		container["hotfix"] = &HotfixStep{}
+		container["feature"] = &FeatureStep{}
+		container["refactor"] = &RefactoringStep{}
+	}
+
+	if sem.IsFeature() || sem.IsHotfix() {
+		container["complete"] = &CompleteBranchStep{}
+	}
 
 	step, ok := container[command]
 

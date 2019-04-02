@@ -28,7 +28,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 
 	fmt.Println(color.RedString("leaving: " + branchName))
 
-	branch := SemBranch{branchName}
+	branch := Branch{branchName}
 	fmt.Println(color.RedString("destination: " + branch.Destination()))
 
 	gitCheckoutMaster := &GitCommand{
