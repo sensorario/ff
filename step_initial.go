@@ -1,74 +1,40 @@
 package main
 
 import (
+	"fmt"
 	"os"
+
+	"github.com/fatih/color"
 )
 
 type InputReadingStep struct{}
 
 func (s InputReadingStep) Execute(c *Context) bool {
 	command := "help"
-	specification := "default"
 
 	if len(os.Args) > 1 {
 		command = os.Args[1]
 	}
 
-	if len(os.Args) > 2 {
-		specification = os.Args[2]
+	container := map[string]FussyStepInterface{}
+
+	container["help"] = &HelpStep{}
+	container["publish"] = &PublishStep{}
+	container["reset"] = &ResetStep{}
+	container["status"] = &StatusStep{}
+	container["commit"] = &WorkingDirStep{}
+	container["complete"] = &CompleteBranchStep{}
+	container["feature"] = &FeatureStep{}
+	container["hotfix"] = &HotfixStep{}
+
+	step, ok := container[command]
+
+	if !ok {
+		fmt.Println(color.RedString(command + " is not in the map"))
+		os.Exit(1)
 	}
 
-	if command == "help" {
-		c.CurrentStep = &HelpStep{}
-		return true
-	}
-
-	if command == "publish" {
-		c.CurrentStep = &PublishStep{}
-		return true
-	}
-
-	if command == "reset" {
-		c.CurrentStep = &ResetStep{}
-		return true
-	}
-
-	if command == "status" {
-		c.CurrentStep = &StatusStep{}
-		return true
-	}
-
-	if command == "commit" {
-		c.CurrentStep = &WorkingDirStep{}
-		return true
-	}
-
-	if command == "feature" {
-		if specification == "default" {
-			c.CurrentStep = &FeatureStep{}
-		}
-		if specification == "complete" {
-			c.CurrentStep = &CompleteBranchStep{}
-		}
-		return true
-	}
-
-	if command == "complete" {
-		c.CurrentStep = &CompleteBranchStep{}
-		return true
-	}
-
-	if command == "hotfix" {
-		if specification == "default" {
-			c.CurrentStep = &HotfixStep{}
-		}
-		if specification == "complete" {
-			c.CurrentStep = &CompleteBranchStep{}
-		}
-		return true
-	}
-
-	c.CurrentStep = &FinalStep{}
+	c.CurrentStep = step
 
 	return true
 }
