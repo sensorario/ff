@@ -51,7 +51,7 @@ func (c Context) Container() map[string]Step {
 	branch := c.CurrentBranch()
 	sem := Branch{branch}
 
-	if sem.IsMaster() == true {
+	if sem.IsMaster() {
 		ss["publish"] = Step{PublishStep{}, "push current branch into remote"}
 		ss["hotfix"] = Step{HotfixStep{}, "create new hotfix branch"}
 		ss["feature"] = Step{FeatureStep{}, "create new feature branch"}
