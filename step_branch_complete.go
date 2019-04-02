@@ -33,20 +33,10 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 
 	gitCheckoutMaster := &GitCommand{
 		c.Logger,
-		[]string{
-			"checkout",
-			branch.Destination(),
-		},
+		[]string{"checkout", branch.Destination()},
 		"Cant checkout destination branch",
 	}
 	_ = gitCheckoutMaster.Execute()
-
-	gitDescribeTags := &GitCommand{
-		c.Logger,
-		[]string{"describe", "--tags"},
-		"cant get tag description",
-	}
-	cmdOut = gitDescribeTags.Execute()
 
 	gitMergeNoFF := &GitCommand{
 		c.Logger,
@@ -54,6 +44,13 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 		"cant merge",
 	}
 	_ = gitMergeNoFF.Execute()
+
+	gitDescribeTags := &GitCommand{
+		c.Logger,
+		[]string{"describe", "--tags"},
+		"cant get tag description",
+	}
+	cmdOut = gitDescribeTags.Execute()
 
 	isHotfix := strings.HasPrefix(branchName, "hotfix/")
 	isFeature := strings.HasPrefix(branchName, "feature/")
