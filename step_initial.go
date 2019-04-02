@@ -26,6 +26,7 @@ func (s InputReadingStep) Execute(c *Context) bool {
 	container["complete"] = &CompleteBranchStep{}
 	container["feature"] = &FeatureStep{}
 	container["hotfix"] = &HotfixStep{}
+	container["refactor"] = &RefactoringStep{}
 
 	step, ok := container[command]
 
