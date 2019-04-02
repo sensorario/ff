@@ -8,7 +8,7 @@ type SemBranch struct {
 	branch string
 }
 
-func (sb *SemBranch) Destination() string {
+func (sb SemBranch) Destination() string {
 	tokens := strings.Split(sb.branch, "/")
 	return tokens[len(tokens)-1]
 }
