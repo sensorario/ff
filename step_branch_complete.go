@@ -48,6 +48,13 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 	}
 	cmdOut = gitDescribeTags.Execute()
 
+	gitMergeNoFF := &GitCommand{
+		c.Logger,
+		[]string{"merge", "--no-ff", branchName},
+		"cant merge",
+	}
+	_ = gitMergeNoFF.Execute()
+
 	isHotfix := strings.HasPrefix(branchName, "hotfix/")
 	isFeature := strings.HasPrefix(branchName, "feature/")
 
@@ -74,13 +81,6 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 	}
 
 	fmt.Println("next tag:   ", color.RedString(tagName))
-
-	gitMergeNoFF := &GitCommand{
-		c.Logger,
-		[]string{"merge", "--no-ff", branchName},
-		"cant merge",
-	}
-	_ = gitMergeNoFF.Execute()
 
 	gitTag := &GitCommand{
 		c.Logger,
