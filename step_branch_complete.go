@@ -64,6 +64,8 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 	if isHotfix {
 		c.Logger.Info("Is Hotfix")
 		c.Logger.Info("patch" + meta.PatchVersion())
+		patch := strconv.Atoi(meta.PatchVersion())
+		c.Logger.Info("patch" + strconv.Atoi(patch))
 		c.Logger.Info("minor" + meta.MinorVersion())
 		c.Logger.Info("major" + meta.MajorVersion())
 		tagName = meta.NextPatchTag()
