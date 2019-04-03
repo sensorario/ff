@@ -44,9 +44,10 @@ func (c Context) Container() map[string]Step {
 	ss["help"] = Step{HelpStep{}, "this help"}
 	ss["status"] = Step{&StatusStep{}, "status"}
 
-	// only if working dir is dirty
-	ss["commit"] = Step{WorkingDirStep{}, "commit everything"}
-	ss["reset"] = Step{ResetStep{}, "reset working directory and stage"}
+	if !c.IsWorkingDirClean() {
+		ss["commit"] = Step{WorkingDirStep{}, "commit everything"}
+		ss["reset"] = Step{ResetStep{}, "reset working directory and stage"}
+	}
 
 	branch := c.CurrentBranch()
 	sem := Branch{branch}
@@ -63,4 +64,24 @@ func (c Context) Container() map[string]Step {
 	}
 
 	return ss
+}
+
+func (c Context) IsWorkingDirClean() bool {
+	gitStatus := &GitCommand{
+		c.Logger,
+		[]string{"status"},
+		"Cant get status",
+	}
+
+	cmdOut := gitStatus.Execute()
+
+	re := regexp.MustCompile(`(?m)nothing to commit, working tree clean`)
+
+	for _, _ = range re.FindAllString(string(cmdOut), -1) {
+		c.Logger.Info("working dir clean")
+		return true
+	}
+
+	c.Logger.Info("working dir dirty")
+	return false
 }
