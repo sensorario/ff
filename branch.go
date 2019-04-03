@@ -13,6 +13,10 @@ func (b Branch) Destination() string {
 	return tokens[len(tokens)-1]
 }
 
+func (b *Branch) IsRefactoring() bool {
+	return strings.HasPrefix(b.branch, "refactor/")
+}
+
 func (b *Branch) IsFeature() bool {
 	return strings.HasPrefix(b.branch, "feature/")
 }
