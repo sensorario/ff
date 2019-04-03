@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 
@@ -32,6 +33,9 @@ func (gc *GitCommand) Execute() string {
 		if err.Error() == "exit status 128" {
 			gc.Logger.Error(color.RedString(err.Error()))
 			gc.Logger.Error(color.RedString(gc.ErrorMessage()))
+			fmt.Println("")
+			fmt.Println("\t" + color.RedString("not a git repository"))
+			fmt.Println("")
 		}
 		os.Exit(1)
 	}
