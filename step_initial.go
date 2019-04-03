@@ -21,7 +21,9 @@ func (s InputReadingStep) Execute(c *Context) bool {
 	item, ok := ss[command]
 
 	if !ok {
-		fmt.Println(color.RedString(command + " is not in the map"))
+		fmt.Println(color.RedString(
+			command + " is not available here",
+		))
 		os.Exit(1)
 	}
 
