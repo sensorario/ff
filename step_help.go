@@ -30,6 +30,8 @@ func (s HelpStep) Execute(c *Context) bool {
 		})
 	}
 
+	fmt.Println("")
+
 	c.CurrentStep = &FinalStep{}
 
 	return true
