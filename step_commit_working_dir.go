@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"regexp"
 
 	"github.com/fatih/color"
@@ -23,7 +22,7 @@ func (s WorkingDirStep) Execute(c *Context) bool {
 	isWorkingTreeClean := false
 	for _, _ = range re.FindAllString(string(cmdOut), -1) {
 		isWorkingTreeClean = true
-		fmt.Println(color.RedString("working tree clean"))
+		c.Logger.Info(color.RedString("working tree clean"))
 	}
 
 	if isWorkingTreeClean {
