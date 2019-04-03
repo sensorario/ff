@@ -12,14 +12,12 @@ type Help struct {
 }
 
 func printHelp(h Help) {
-	fmt.Println(color.YellowString(h.Command) + " " + color.GreenString(h.Description))
+	fmt.Println(color.YellowString(h.Command) + ": " + color.GreenString(h.Description))
 }
 
 type HelpStep struct{}
 
 func (s HelpStep) Execute(c *Context) bool {
-
-	printHelp(Help{"help:", "this help"})
 
 	fmt.Println("")
 
