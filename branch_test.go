@@ -5,7 +5,7 @@ import (
 )
 
 func TestAnalyze(t *testing.T) {
-	branch := SemBranch{"feature/branch-semantico/master"}
+	branch := Branch{"feature/branch-semantico/master"}
 
 	if branch.IsFeature() == false {
 		t.Errorf("branch should be recognyzed as feature")
