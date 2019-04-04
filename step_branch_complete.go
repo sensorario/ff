@@ -55,22 +55,19 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 
 	cmdOut = gitDescribeTags.Execute()
 
-	isHotfix := strings.HasPrefix(branchName, "hotfix/")
-	isFeature := strings.HasPrefix(branchName, "feature/")
-
 	fmt.Print("current tag: ", color.GreenString(string(cmdOut)))
 
 	tagName := ""
 
 	meta := Meta{string(cmdOut), branchName}
 
-	if isHotfix {
-		c.Logger.Info("Is Hotfix")
+	if branch.IsHotfix() || branch.IsRefactoring() {
+		c.Logger.Info("Is Patch branch")
 		tagName = meta.NextPatchTag()
 	}
 
-	if isFeature {
-		c.Logger.Info("Is Feature")
+	if branch.IsFeature() {
+		c.Logger.Info("Is Feature branch")
 		tagName = meta.NextMinorTag()
 	}
 
