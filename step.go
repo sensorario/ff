@@ -4,7 +4,7 @@ import (
 	"github.com/fatih/color"
 )
 
-type FussyStepInterface interface {
+type FFStep interface {
 	Execute(c *Context) bool
 	Stepname() string
 }
