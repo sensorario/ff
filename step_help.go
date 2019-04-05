@@ -12,7 +12,7 @@ type Help struct {
 }
 
 func printHelp(h Help) {
-	fmt.Println("\t" + color.YellowString(h.Command) + ": " + color.GreenString(h.Description))
+	fmt.Println("\t" + color.YellowString(h.Command) + ": " + color.WhiteString(h.Description))
 }
 
 type HelpStep struct{}
@@ -23,11 +23,27 @@ func (s HelpStep) Execute(c *Context) bool {
 
 	container := c.Container()
 
-	for command, _ := range container {
-		printHelp(Help{
-			command,
-			container[command].Description,
-		})
+	show := make(map[string]bool)
+
+	for _, group := range c.Groups() {
+		conta := container[group]
+		show[group] = false
+		for _, _ = range conta {
+			show[group] = true
+		}
+	}
+
+	for _, group := range c.Groups() {
+		conta := container[group]
+		if show[group] {
+			fmt.Println("      " + color.GreenString(group))
+			for command, _ := range conta {
+				printHelp(Help{
+					command,
+					container[group][command].Description,
+				})
+			}
+		}
 	}
 
 	fmt.Println("")
