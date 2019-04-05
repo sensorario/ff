@@ -40,7 +40,7 @@ func (s HelpStep) Execute(c *Context) bool {
 			for command, _ := range conta {
 				printHelp(Help{
 					command,
-					command,
+					container[group][command].Description,
 				})
 			}
 		}
