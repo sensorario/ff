@@ -38,3 +38,9 @@ By default log folder is `/var/log/ff` and file is `logger.log`.  To change log 
  - ff refactor
  - ff reset
  - ff status
+
+## Autocompletion
+
+Append the following lines in your .bash_profile file:
+
+    _ff='commit complete feature help hotfix publish refactor reset status' && complete -W "${_ff}" 'ff'
