@@ -23,14 +23,26 @@ func (s HelpStep) Execute(c *Context) bool {
 
 	container := c.Container()
 
+	show := make(map[string]bool)
+
 	for _, group := range c.Groups() {
 		conta := container[group]
-		fmt.Println("      " + color.GreenString(group))
-		for command, _ := range conta {
-			printHelp(Help{
-				command,
-				command,
-			})
+		show[group] = false
+		for _, _ = range conta {
+			show[group] = true
+		}
+	}
+
+	for _, group := range c.Groups() {
+		conta := container[group]
+		if show[group] {
+			fmt.Println("      " + color.GreenString(group))
+			for command, _ := range conta {
+				printHelp(Help{
+					command,
+					command,
+				})
+			}
 		}
 	}
 
