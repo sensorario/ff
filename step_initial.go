@@ -18,18 +18,19 @@ func (s InputReadingStep) Execute(c *Context) bool {
 
 	ss := c.Container()
 
-	item, ok := ss[command]
-
-	if !ok {
-		fmt.Println(color.RedString(
-			command + " is not available here",
-		))
-		os.Exit(1)
+	for _, group := range c.Groups() {
+		item, ok := ss[group][command]
+		if ok {
+			c.CurrentStep = item.Step
+			return true
+		}
 	}
 
-	c.CurrentStep = item.Step
+	fmt.Println(color.RedString(
+		command + " is not available here",
+	))
 
-	return true
+	return false
 }
 
 func (s InputReadingStep) Stepname() string {

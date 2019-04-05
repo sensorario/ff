@@ -38,30 +38,34 @@ type Step struct {
 	Description string
 }
 
-func (c Context) Container() map[string]Step {
-	ss := map[string]Step{}
+func (c Context) Container() map[string]map[string]Step {
+	ss := map[string]map[string]Step{}
 
-	ss["help"] = Step{HelpStep{}, "this help"}
-	ss["status"] = Step{&StatusStep{}, "status"}
+	ss["command"] = make(map[string]Step)
+	ss["features"] = make(map[string]Step)
+	ss["working"] = make(map[string]Step)
+
+	ss["command"]["help"] = Step{HelpStep{}, "this help"}
+	ss["command"]["status"] = Step{&StatusStep{}, "status"}
 
 	if !c.IsWorkingDirClean() {
-		ss["commit"] = Step{WorkingDirStep{}, "commit everything"}
-		ss["reset"] = Step{ResetStep{}, "reset working directory and stage"}
+		ss["working"]["commit"] = Step{WorkingDirStep{}, "commit everything"}
+		ss["working"]["reset"] = Step{ResetStep{}, "reset working directory and stage"}
 	}
 
 	branch := c.CurrentBranch()
 	sem := Branch{branch}
 
 	if sem.IsMaster() {
-		ss["publish"] = Step{PublishStep{}, "push current branch into remote"}
-		ss["hotfix"] = Step{HotfixStep{}, "create new hotfix branch"}
-		ss["feature"] = Step{FeatureStep{}, "create new feature branch"}
-		ss["refactor"] = Step{RefactoringStep{}, "create new refactor branch"}
+		ss["command"]["publish"] = Step{PublishStep{}, "push current branch into remote"}
+		ss["features"]["hotfix"] = Step{HotfixStep{}, "create new hotfix branch"}
+		ss["features"]["feature"] = Step{FeatureStep{}, "create new feature branch"}
+		ss["features"]["refactor"] = Step{RefactoringStep{}, "create new refactor branch"}
 	}
 
 	if sem.IsRefactoring() || sem.IsFeature() || sem.IsHotfix() {
 		if c.IsWorkingDirClean() {
-			ss["complete"] = Step{CompleteBranchStep{}, "merge current branch into master"}
+			ss["features"]["complete"] = Step{CompleteBranchStep{}, "merge current branch into master"}
 		}
 	}
 
@@ -86,4 +90,12 @@ func (c Context) IsWorkingDirClean() bool {
 
 	c.Logger.Info("working dir dirty")
 	return false
+}
+
+func (c Context) Groups() []string {
+	return []string{
+		"command",
+		"features",
+		"working",
+	}
 }
