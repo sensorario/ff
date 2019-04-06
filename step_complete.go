@@ -19,7 +19,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 
 	cmdOut := gitStatus.Execute()
 
-	re := regexp.MustCompile(`On branch [\w\/\#\-]{0,}`)
+	re := regexp.MustCompile(`On branch [\w\/\#\-\.]{0,}`)
 
 	branchName := ""
 	for _, match := range re.FindAllString(string(cmdOut), -1) {
