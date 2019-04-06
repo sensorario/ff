@@ -58,14 +58,21 @@ func (c Context) Container() map[string]map[string]Step {
 
 	if sem.IsMaster() {
 		ss["command"]["publish"] = Step{PublishStep{}, "push current branch into remote"}
-		ss["features"]["hotfix"] = Step{HotfixStep{}, "create new hotfix branch"}
+		ss["features"]["bugfix"] = Step{BugfixStep{}, "create new bugfix branch"}
 		ss["features"]["feature"] = Step{FeatureStep{}, "create new feature branch"}
 		ss["features"]["refactor"] = Step{RefactoringStep{}, "create new refactor branch"}
 	}
 
-	if sem.IsRefactoring() || sem.IsFeature() || sem.IsHotfix() {
+	if sem.IsRefactoring() || sem.IsFeature() || sem.IsHotfix() || sem.IsBugfix() {
 		if c.IsWorkingDirClean() {
 			ss["features"]["complete"] = Step{CompleteBranchStep{}, "merge current branch into master"}
+		}
+	}
+
+	if sem.Phase() == "production" {
+		ss["features"]["hotfix"] = Step{
+			HotfixStep{},
+			"create new hotfix branch",
 		}
 	}
 

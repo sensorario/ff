@@ -25,6 +25,31 @@ func (b *Branch) IsHotfix() bool {
 	return strings.HasPrefix(b.branch, "hotfix/")
 }
 
+func (b *Branch) IsBugfix() bool {
+	return strings.HasPrefix(b.branch, "bugfix/")
+}
+
 func (b *Branch) IsMaster() bool {
 	return strings.HasPrefix(b.branch, "master")
+}
+
+func (b *Branch) IsRelease() bool {
+	return strings.HasPrefix(b.branch, "release/")
+}
+
+func (b *Branch) Branch() string {
+	return b.branch
+}
+
+func (b *Branch) Phase() string {
+	if b.IsRelease() ||
+		b.IsMaster() ||
+		b.IsFeature() ||
+		b.IsRefactoring() ||
+		b.IsBugfix() ||
+		b.IsHotfix() {
+		return "development"
+	}
+
+	return "production"
 }

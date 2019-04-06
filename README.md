@@ -34,6 +34,7 @@ By default log folder is `/var/log/ff` and file is `logger.log`.  To change log 
  - ff feature
  - ff help
  - ff hotfix
+ - ff bugfix
  - ff publish
  - ff refactor
  - ff reset
@@ -43,4 +44,4 @@ By default log folder is `/var/log/ff` and file is `logger.log`.  To change log 
 
 Append the following lines in your .bash_profile file:
 
-    _ff='commit complete feature help hotfix publish refactor reset status' && complete -W "${_ff}" 'ff'
+    _ff='commit complete feature help hotfix bugfix publish refactor reset status' && complete -W "${_ff}" 'ff'
