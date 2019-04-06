@@ -61,7 +61,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 
 	meta := Meta{string(cmdOut), branchName}
 
-	if branch.IsHotfix() || branch.IsRefactoring() {
+	if branch.IsHotfix() || branch.IsRefactoring() || branch.IsBugfix() {
 		c.Logger.Info("Is Patch branch")
 		tagName = meta.NextPatchTag()
 	}
