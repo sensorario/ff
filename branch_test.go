@@ -34,3 +34,10 @@ func TestMasterOrFeaturesBranchesAreDevelopment(t *testing.T) {
 		}
 	}
 }
+
+func TestExtractCurrentBranch(t *testing.T) {
+	branch := Branch{"1.0"}
+	if branch.Branch() != "1.0" {
+		t.Errorf("Oops! Branch detection fails!")
+	}
+}

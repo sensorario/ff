@@ -22,7 +22,7 @@ func (c Context) CurrentBranch() string {
 
 	cmdOut := gitStatus.Execute()
 
-	re := regexp.MustCompile(`On branch [\w\/\#\-]{0,}`)
+	re := regexp.MustCompile(`On branch [\w\/\#\-\.]{0,}`)
 
 	branchName := ""
 

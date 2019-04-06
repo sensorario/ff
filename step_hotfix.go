@@ -12,14 +12,7 @@ import (
 type HotfixStep struct{}
 
 func (s HotfixStep) Execute(c *Context) bool {
-	developmentBranch := "master"
-
-	gitCheckoutMaster := &GitCommand{
-		c.Logger,
-		[]string{"checkout", "master"},
-		"Cant checkout master",
-	}
-	_ = gitCheckoutMaster.Execute()
+	developmentBranch := c.CurrentBranch()
 
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(color.RedString("Hotfix description: "))
@@ -35,12 +28,8 @@ func (s HotfixStep) Execute(c *Context) bool {
 		"",
 	)
 
-	fmt.Print(
-		"Hotfix: ",
-	)
-
 	hotfixBranch := "hotfix/" + hotfixDescription + "/" + developmentBranch
-	fmt.Println(color.YellowString(hotfixBranch))
+	fmt.Println("Hotfix: ", color.YellowString(hotfixBranch))
 
 	gitCheckoutNewBranch := &GitCommand{
 		c.Logger,
