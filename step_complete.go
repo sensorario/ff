@@ -89,6 +89,22 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 
 	fmt.Println(color.GreenString("branch " + branchName + " deleted"))
 
+	if branch.Destination() != "master" {
+		gitCheckoutMaster := &GitCommand{
+			c.Logger,
+			[]string{"checkout", "master"},
+			"Cant checkout destination branch",
+		}
+		_ = gitCheckoutMaster.Execute()
+
+		gitMergeNoFastForward := &GitCommand{
+			c.Logger,
+			[]string{"merge", "--no-ff", branch.Destination()},
+			"cant move to master updates",
+		}
+		_ = gitMergeNoFastForward.Execute()
+	}
+
 	c.CurrentStep = &FinalStep{}
 
 	return true
