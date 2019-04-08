@@ -75,7 +75,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 
 	gitTag := &GitCommand{
 		c.Logger,
-		[]string{"tag", tagName},
+		[]string{"tag", tagName, "-f"},
 		"cant tag",
 	}
 	_ = gitTag.Execute()
