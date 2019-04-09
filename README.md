@@ -1,6 +1,7 @@
 # FF 1.*
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/sensorario/ff)](https://goreportcard.com/report/github.com/sensorario/ff)
+[![Build Status](https://travis-ci.org/sensorario/ff.svg?branch=master)](https://travis-ci.org/sensorario/ff)
 
 ## Install Binaries
 
