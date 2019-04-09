@@ -1,4 +1,7 @@
 language: go
 
+before_install:
+    - env GO111MODULE=on go build
+
 go:
     - 1.12.1
