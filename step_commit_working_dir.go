@@ -28,7 +28,7 @@ func (s WorkingDirStep) Execute(c *Context) bool {
 		return false
 	}
 
-	c.CurrentStep = &CommitStep{}
+	c.CurrentStep = &commitStep{}
 
 	return true
 }
