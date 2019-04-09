@@ -1,9 +1,8 @@
 package main
 
 import (
-	"regexp"
-
 	"github.com/fatih/color"
+	"regexp"
 )
 
 type WorkingDirStep struct{}
