@@ -7,8 +7,8 @@ func (s PublishStep) Execute(c *Context) bool {
 
 	gitPush := &gitCommand{
 		c.Logger,
-		[]string{"push", "origin", branchName, "--tags"},
-		"cant push",
+		[]string{"push", "origin", branchName, "--tags", "-f"},
+		"cant push current branch and tags",
 	}
 
 	_ = gitPush.Execute()
