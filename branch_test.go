@@ -12,7 +12,7 @@ func TestAnalyze(t *testing.T) {
 	}
 
 	if branch.Destination() != "master" {
-		t.Errorf("destination branch shoudl be master")
+		t.Errorf("destination branch should be master")
 	}
 }
 
