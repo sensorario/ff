@@ -1,5 +1,7 @@
 # FF 1.*
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/sensorario/ff)](https://goreportcard.com/report/github.com/sensorario/ff)
+
 ## Install Binaries
 
 Download binaries from: https://github.com/sensorario/ff/raw/master/dist/ff
