@@ -31,7 +31,7 @@ func (s HotfixStep) Execute(c *Context) bool {
 	hotfixBranch := "hotfix/" + hotfixDescription + "/" + developmentBranch
 	fmt.Println("Hotfix: ", color.YellowString(hotfixBranch))
 
-	gitCheckoutNewBranch := &GitCommand{
+	gitCheckoutNewBranch := &gitCommand{
 		c.Logger,
 		[]string{"checkout", "-b", hotfixBranch},
 		"Cant create new branch",

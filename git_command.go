@@ -9,21 +9,21 @@ import (
 	"github.com/sensorario/gol"
 )
 
-type GitCommand struct {
+type gitCommand struct {
 	Logger  gol.Logger
 	args    []string
 	message string
 }
 
-func (gc GitCommand) ErrorMessage() string {
+func (gc gitCommand) ErrorMessage() string {
 	return gc.message
 }
 
-func (gc GitCommand) Arguments() []string {
+func (gc gitCommand) Arguments() []string {
 	return gc.args
 }
 
-func (gc *GitCommand) Execute() string {
+func (gc *gitCommand) Execute() string {
 	var cmdOut []byte
 	var err error
 	cmdName := "git"

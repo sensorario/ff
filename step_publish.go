@@ -5,7 +5,7 @@ type PublishStep struct{}
 func (s PublishStep) Execute(c *Context) bool {
 	branchName := c.CurrentBranch()
 
-	gitPush := &GitCommand{
+	gitPush := &gitCommand{
 		c.Logger,
 		[]string{"push", "origin", branchName, "--tags"},
 		"cant push",

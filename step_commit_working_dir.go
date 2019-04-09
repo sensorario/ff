@@ -8,7 +8,7 @@ import (
 type WorkingDirStep struct{}
 
 func (s WorkingDirStep) Execute(c *Context) bool {
-	gitStatus := &GitCommand{
+	gitStatus := &gitCommand{
 		c.Logger,
 		[]string{"status"},
 		"Cant get status",

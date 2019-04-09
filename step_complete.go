@@ -11,7 +11,7 @@ import (
 type CompleteBranchStep struct{}
 
 func (s CompleteBranchStep) Execute(c *Context) bool {
-	gitStatus := &GitCommand{
+	gitStatus := &gitCommand{
 		args:    []string{"status"},
 		message: "Cant get status",
 		Logger:  c.Logger,
@@ -31,7 +31,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 	branch := Branch{branchName}
 	fmt.Println(color.RedString("destination: " + branch.Destination()))
 
-	gitCheckoutMaster := &GitCommand{
+	gitCheckoutMaster := &gitCommand{
 		c.Logger,
 		[]string{"checkout", branch.Destination()},
 		"Cant checkout destination branch",
@@ -39,7 +39,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 
 	_ = gitCheckoutMaster.Execute()
 
-	gitMergeNoFF := &GitCommand{
+	gitMergeNoFF := &gitCommand{
 		c.Logger,
 		[]string{"merge", "--no-ff", branchName},
 		"cant merge",
@@ -47,7 +47,7 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 
 	_ = gitMergeNoFF.Execute()
 
-	gitDescribeTags := &GitCommand{
+	gitDescribeTags := &gitCommand{
 		c.Logger,
 		[]string{"describe", "--tags"},
 		"cant get tag description",
@@ -73,14 +73,14 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 
 	fmt.Println("next tag:   ", color.GreenString(tagName))
 
-	gitTag := &GitCommand{
+	gitTag := &gitCommand{
 		c.Logger,
 		[]string{"tag", tagName, "-f"},
 		"cant tag",
 	}
 	_ = gitTag.Execute()
 
-	gitDeleteOldBranch := &GitCommand{
+	gitDeleteOldBranch := &gitCommand{
 		c.Logger,
 		[]string{"branch", "-D", branchName},
 		"cant merge",
@@ -90,14 +90,14 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 	fmt.Println(color.GreenString("branch " + branchName + " deleted"))
 
 	if branch.Destination() != "master" {
-		gitCheckoutMaster := &GitCommand{
+		gitCheckoutMaster := &gitCommand{
 			c.Logger,
 			[]string{"checkout", "master"},
 			"Cant checkout destination branch",
 		}
 		_ = gitCheckoutMaster.Execute()
 
-		gitMergeNoFastForward := &GitCommand{
+		gitMergeNoFastForward := &gitCommand{
 			c.Logger,
 			[]string{"merge", "--no-ff", branch.Destination()},
 			"cant move to master updates",

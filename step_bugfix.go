@@ -14,7 +14,7 @@ type BugfixStep struct{}
 func (s BugfixStep) Execute(c *Context) bool {
 	developmentBranch := "master"
 
-	gitCheckoutMaster := &GitCommand{
+	gitCheckoutMaster := &gitCommand{
 		c.Logger,
 		[]string{"checkout", "master"},
 		"Cant checkout master",
@@ -38,7 +38,7 @@ func (s BugfixStep) Execute(c *Context) bool {
 	bugfixBranch := "bugfix/" + bugfixDescription + "/" + developmentBranch
 	fmt.Println("Bugfix: ", color.YellowString(bugfixBranch))
 
-	gitCheckoutNewBranch := &GitCommand{
+	gitCheckoutNewBranch := &gitCommand{
 		c.Logger,
 		[]string{"checkout", "-b", bugfixBranch},
 		"Cant create new branch",

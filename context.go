@@ -14,7 +14,7 @@ type Context struct {
 }
 
 func (c Context) CurrentBranch() string {
-	gitStatus := &GitCommand{
+	gitStatus := &gitCommand{
 		c.Logger,
 		[]string{"status"},
 		"Cant get status",
@@ -77,7 +77,7 @@ func (c Context) Container() map[string]map[string]Step {
 }
 
 func (c Context) IsWorkingDirClean() bool {
-	gitStatus := &GitCommand{
+	gitStatus := &gitCommand{
 		c.Logger,
 		[]string{"status"},
 		"Cant get status",

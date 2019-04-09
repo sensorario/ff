@@ -14,7 +14,7 @@ type FeatureStep struct{}
 func (s FeatureStep) Execute(c *Context) bool {
 	developmentBranch := "master"
 
-	gitCheckoutMaster := &GitCommand{
+	gitCheckoutMaster := &gitCommand{
 		c.Logger,
 		[]string{"checkout", developmentBranch},
 		"Cant checkout master",
@@ -35,7 +35,7 @@ func (s FeatureStep) Execute(c *Context) bool {
 	featureBranchName := "feature/" + featureName + "/" + developmentBranch
 	fmt.Println(color.YellowString(featureBranchName))
 
-	gitCheckoutNewBranch := &GitCommand{
+	gitCheckoutNewBranch := &gitCommand{
 		c.Logger,
 		[]string{"checkout", "-b", featureBranchName},
 		"Cant create new branch",
