@@ -33,6 +33,10 @@ func (s HelpStep) Execute(c *Context) bool {
 		}
 	}
 
+	fmt.Println("      " + color.GreenString("usage"))
+	fmt.Println("        " + color.WhiteString("ff [command]"))
+	fmt.Println("")
+
 	for _, group := range c.Groups() {
 		conta := container[group]
 		if show[group] {
