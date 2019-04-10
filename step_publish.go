@@ -3,7 +3,7 @@ package main
 type PublishStep struct{}
 
 func (s PublishStep) Execute(c *Context) bool {
-	branchName := c.CurrentBranch()
+	branchName := c.currentBranch()
 
 	gitPush := &gitCommand{
 		c.Logger,

@@ -12,7 +12,7 @@ import (
 type hotfixStep struct{}
 
 func (s hotfixStep) Execute(c *Context) bool {
-	developmentBranch := c.CurrentBranch()
+	developmentBranch := c.currentBranch()
 
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(color.RedString("Hotfix description: "))

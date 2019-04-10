@@ -9,7 +9,7 @@ import (
 type StatusStep struct{}
 
 func (s StatusStep) Execute(c *Context) bool {
-	branchName := c.CurrentBranch()
+	branchName := c.currentBranch()
 
 	fmt.Println(
 		"Current branch is ",

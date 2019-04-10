@@ -13,7 +13,7 @@ type Context struct {
 	Logger      gol.Logger
 }
 
-func (c Context) CurrentBranch() string {
+func (c Context) currentBranch() string {
 	gitStatus := &gitCommand{
 		c.Logger,
 		[]string{"status"},
@@ -54,7 +54,7 @@ func (c Context) Container() map[string]map[string]Step {
 		ss["working"]["reset"] = Step{ResetStep{}, "reset working directory and stage"}
 	}
 
-	name := c.CurrentBranch()
+	name := c.currentBranch()
 	sem := branch{name}
 
 	if sem.isMaster() {
