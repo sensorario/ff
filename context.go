@@ -57,13 +57,13 @@ func (c Context) Container() map[string]map[string]Step {
 	branch := c.CurrentBranch()
 	sem := Branch{branch}
 
-	if sem.IsMaster() {
+	if sem.isMaster() {
 		ss["features"]["bugfix"] = Step{BugfixStep{}, "create new bugfix branch"}
 		ss["features"]["feature"] = Step{FeatureStep{}, "create new feature branch"}
 		ss["features"]["refactor"] = Step{RefactoringStep{}, "create new refactor branch"}
 	}
 
-	if sem.IsRefactoring() || sem.IsFeature() || sem.IsHotfix() || sem.IsBugfix() {
+	if sem.isRefactoring() || sem.isFeature() || sem.isHotfix() || sem.isBugfix() {
 		if c.IsWorkingDirClean() {
 			ss["features"]["complete"] = Step{completeBranchStep{}, "merge current branch into master"}
 		}
