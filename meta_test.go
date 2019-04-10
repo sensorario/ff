@@ -11,16 +11,16 @@ func TestAbs(t *testing.T) {
 		t.Errorf("bad branch detection")
 	}
 
-	if meta.MajorVersion() != "21" {
-		t.Errorf("bad branch detection" + meta.MajorVersion())
+	if meta.majorVersion() != "21" {
+		t.Errorf("bad branch detection" + meta.majorVersion())
 	}
 
-	if meta.MinorVersion() != "2" {
-		t.Errorf("bad branch detection" + meta.MinorVersion())
+	if meta.minorVersion() != "2" {
+		t.Errorf("bad branch detection" + meta.minorVersion())
 	}
 
-	if meta.PatchVersion() != "54" {
-		t.Errorf("bad branch detection" + meta.PatchVersion())
+	if meta.patchVersion() != "54" {
+		t.Errorf("bad branch detection" + meta.patchVersion())
 	}
 
 	if meta.CommitsFromLastTag() != "42" {

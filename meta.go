@@ -14,20 +14,20 @@ func (m Meta) Branch() string {
 	return m.branch
 }
 
-func (m Meta) MajorVersion() string {
+func (m Meta) majorVersion() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 	tokens = strings.Split(tokens[0], "v")
 	return tokens[1]
 }
 
-func (m Meta) MinorVersion() string {
+func (m Meta) minorVersion() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 	return tokens[1]
 }
 
-func (m Meta) IncPatchVersion() int {
+func (m Meta) IncpatchVersion() int {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 	number, _ := strconv.Atoi(tokens[2])
@@ -35,13 +35,13 @@ func (m Meta) IncPatchVersion() int {
 	return nextNumber
 }
 
-func (m Meta) PatchVersion() string {
+func (m Meta) patchVersion() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 	return tokens[2]
 }
 
-func (m Meta) PatchVersionInt() string {
+func (m Meta) patchVersionInt() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 	number, _ := strconv.Atoi(tokens[1])
@@ -55,9 +55,9 @@ func (m Meta) CommitsFromLastTag() string {
 }
 
 func (m Meta) NextPatchTag() string {
-	patch := m.PatchVersion()
-	minor := m.MinorVersion()
-	major := m.MajorVersion()
+	patch := m.patchVersion()
+	minor := m.minorVersion()
+	major := m.majorVersion()
 
 	patchString, _ := strconv.Atoi(patch)
 	minorString, _ := strconv.Atoi(minor)
@@ -76,8 +76,8 @@ func (m Meta) NextPatchTag() string {
 }
 
 func (m Meta) NextMinorTag() string {
-	minor := m.MinorVersion()
-	major := m.MajorVersion()
+	minor := m.minorVersion()
+	major := m.majorVersion()
 
 	minorString, _ := strconv.Atoi(minor)
 	majorString, _ := strconv.Atoi(major)
