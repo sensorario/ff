@@ -8,9 +8,9 @@ import (
 	"github.com/fatih/color"
 )
 
-type CompleteBranchStep struct{}
+type completeBranchStep struct{}
 
-func (s CompleteBranchStep) Execute(c *Context) bool {
+func (s completeBranchStep) Execute(c *Context) bool {
 	gitStatus := &gitCommand{
 		args:    []string{"status"},
 		message: "Cant get status",
@@ -110,6 +110,6 @@ func (s CompleteBranchStep) Execute(c *Context) bool {
 	return true
 }
 
-func (s CompleteBranchStep) Stepname() string {
+func (s completeBranchStep) Stepname() string {
 	return "checkout-master"
 }
