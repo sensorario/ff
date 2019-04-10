@@ -6,12 +6,12 @@ import (
 	"github.com/fatih/color"
 )
 
-type Help struct {
+type help struct {
 	Command     string
 	Description string
 }
 
-func printHelp(h Help) {
+func printHelp(h help) {
 	fmt.Println("\t" + color.YellowString(h.Command) + ": " + color.WhiteString(h.Description))
 }
 
@@ -42,7 +42,7 @@ func (s helpStep) Execute(c *context) bool {
 		if show[group] {
 			fmt.Println("      " + color.GreenString(group))
 			for command, _ := range conta {
-				printHelp(Help{
+				printHelp(help{
 					command,
 					container[group][command].Description,
 				})
