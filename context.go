@@ -7,13 +7,13 @@ import (
 	"github.com/sensorario/gol"
 )
 
-type Context struct {
+type context struct {
 	CurrentStep fFStep
 	Exit        bool
 	Logger      gol.Logger
 }
 
-func (c Context) currentBranch() string {
+func (c context) currentBranch() string {
 	gitStatus := &gitCommand{
 		c.Logger,
 		[]string{"status"},
@@ -38,7 +38,7 @@ type Step struct {
 	Description string
 }
 
-func (c Context) container() map[string]map[string]Step {
+func (c context) container() map[string]map[string]Step {
 	ss := map[string]map[string]Step{}
 
 	ss["command"] = make(map[string]Step)
@@ -76,7 +76,7 @@ func (c Context) container() map[string]map[string]Step {
 	return ss
 }
 
-func (c Context) isWorkingDirClean() bool {
+func (c context) isWorkingDirClean() bool {
 	gitStatus := &gitCommand{
 		c.Logger,
 		[]string{"status"},
@@ -96,7 +96,7 @@ func (c Context) isWorkingDirClean() bool {
 	return false
 }
 
-func (c Context) Groups() []string {
+func (c context) Groups() []string {
 	return []string{
 		"command",
 		"features",

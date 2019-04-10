@@ -16,14 +16,14 @@ func genLog() gol.Logger {
 }
 
 func main() {
-	context := Context{
+	cntxt := context{
 		CurrentStep: &inputReadingStep{},
 		Logger:      genLog(),
 	}
 
-	context.enterStep()
+	cntxt.enterStep()
 
-	for context.CurrentStep.Execute(&context) {
-		context.enterStep()
+	for cntxt.CurrentStep.Execute(&cntxt) {
+		cntxt.enterStep()
 	}
 }

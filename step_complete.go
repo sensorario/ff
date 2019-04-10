@@ -10,7 +10,7 @@ import (
 
 type completeBranchStep struct{}
 
-func (s completeBranchStep) Execute(c *Context) bool {
+func (s completeBranchStep) Execute(c *context) bool {
 	gitStatus := &gitCommand{
 		args:    []string{"status"},
 		message: "Cant get status",

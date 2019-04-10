@@ -11,7 +11,7 @@ import (
 
 type RefactoringStep struct{}
 
-func (s RefactoringStep) Execute(c *Context) bool {
+func (s RefactoringStep) Execute(c *context) bool {
 	developmentBranch := "master"
 
 	gitCheckoutMaster := &gitCommand{

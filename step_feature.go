@@ -11,7 +11,7 @@ import (
 
 type featureStep struct{}
 
-func (s featureStep) Execute(c *Context) bool {
+func (s featureStep) Execute(c *context) bool {
 	developmentBranch := "master"
 
 	gitCheckoutMaster := &gitCommand{

@@ -7,7 +7,7 @@ import (
 
 type WorkingDirStep struct{}
 
-func (s WorkingDirStep) Execute(c *Context) bool {
+func (s WorkingDirStep) Execute(c *context) bool {
 	gitStatus := &gitCommand{
 		c.Logger,
 		[]string{"status"},

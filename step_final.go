@@ -2,7 +2,7 @@ package main
 
 type finalStep struct{}
 
-func (s finalStep) Execute(c *Context) bool {
+func (s finalStep) Execute(c *context) bool {
 	return false
 }
 

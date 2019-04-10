@@ -5,10 +5,10 @@ import (
 )
 
 type fFStep interface {
-	Execute(c *Context) bool
+	Execute(c *context) bool
 	Stepname() string
 }
 
-func (c *Context) enterStep() {
+func (c *context) enterStep() {
 	c.Logger.Info(color.RedString("[step/" + c.CurrentStep.Stepname() + "]"))
 }

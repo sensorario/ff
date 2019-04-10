@@ -11,7 +11,7 @@ import (
 
 type hotfixStep struct{}
 
-func (s hotfixStep) Execute(c *Context) bool {
+func (s hotfixStep) Execute(c *context) bool {
 	developmentBranch := c.currentBranch()
 
 	reader := bufio.NewReader(os.Stdin)

@@ -11,7 +11,7 @@ import (
 
 type bugfixStep struct{}
 
-func (s bugfixStep) Execute(c *Context) bool {
+func (s bugfixStep) Execute(c *context) bool {
 	developmentBranch := "master"
 
 	gitCheckoutMaster := &gitCommand{

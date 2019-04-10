@@ -9,7 +9,7 @@ import (
 
 type inputReadingStep struct{}
 
-func (s inputReadingStep) Execute(c *Context) bool {
+func (s inputReadingStep) Execute(c *context) bool {
 	command := "help"
 
 	if len(os.Args) > 1 {

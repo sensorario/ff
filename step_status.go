@@ -8,7 +8,7 @@ import (
 
 type StatusStep struct{}
 
-func (s StatusStep) Execute(c *Context) bool {
+func (s StatusStep) Execute(c *context) bool {
 	branchName := c.currentBranch()
 
 	fmt.Println(

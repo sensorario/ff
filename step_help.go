@@ -17,7 +17,7 @@ func printHelp(h Help) {
 
 type HelpStep struct{}
 
-func (s HelpStep) Execute(c *Context) bool {
+func (s HelpStep) Execute(c *context) bool {
 
 	fmt.Println("")
 

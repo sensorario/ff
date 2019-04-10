@@ -2,7 +2,7 @@ package main
 
 type ResetStep struct{}
 
-func (s ResetStep) Execute(c *Context) bool {
+func (s ResetStep) Execute(c *context) bool {
 	gitAddEverything := &gitCommand{
 		c.Logger,
 		[]string{"add", "."},

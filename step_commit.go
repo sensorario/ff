@@ -8,7 +8,7 @@ import (
 
 type commitStep struct{}
 
-func (s commitStep) Execute(c *Context) bool {
+func (s commitStep) Execute(c *context) bool {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("What is the commit message: ")
 	text, _ := reader.ReadString('\n')
