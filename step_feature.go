@@ -9,9 +9,9 @@ import (
 	"github.com/fatih/color"
 )
 
-type FeatureStep struct{}
+type featureStep struct{}
 
-func (s FeatureStep) Execute(c *Context) bool {
+func (s featureStep) Execute(c *Context) bool {
 	developmentBranch := "master"
 
 	gitCheckoutMaster := &gitCommand{
@@ -48,6 +48,6 @@ func (s FeatureStep) Execute(c *Context) bool {
 	return true
 }
 
-func (s FeatureStep) Stepname() string {
+func (s featureStep) Stepname() string {
 	return "create-feature-branch"
 }
