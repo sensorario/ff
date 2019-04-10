@@ -15,9 +15,9 @@ func printHelp(h Help) {
 	fmt.Println("\t" + color.YellowString(h.Command) + ": " + color.WhiteString(h.Description))
 }
 
-type HelpStep struct{}
+type helpStep struct{}
 
-func (s HelpStep) Execute(c *context) bool {
+func (s helpStep) Execute(c *context) bool {
 
 	fmt.Println("")
 
@@ -57,6 +57,6 @@ func (s HelpStep) Execute(c *context) bool {
 	return true
 }
 
-func (s HelpStep) Stepname() string {
+func (s helpStep) Stepname() string {
 	return "help"
 }
