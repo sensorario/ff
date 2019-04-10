@@ -49,7 +49,7 @@ func (c Context) Container() map[string]map[string]Step {
 	ss["command"]["status"] = Step{&StatusStep{}, "status"}
 	ss["command"]["publish"] = Step{PublishStep{}, "push current branch into remote"}
 
-	if !c.IsWorkingDirClean() {
+	if !c.isWorkingDirClean() {
 		ss["working"]["commit"] = Step{WorkingDirStep{}, "commit everything"}
 		ss["working"]["reset"] = Step{ResetStep{}, "reset working directory and stage"}
 	}
@@ -64,7 +64,7 @@ func (c Context) Container() map[string]map[string]Step {
 	}
 
 	if sem.isRefactoring() || sem.isFeature() || sem.isHotfix() || sem.isBugfix() {
-		if c.IsWorkingDirClean() {
+		if c.isWorkingDirClean() {
 			ss["features"]["complete"] = Step{completeBranchStep{}, "merge current branch into master"}
 		}
 	}
@@ -76,7 +76,7 @@ func (c Context) Container() map[string]map[string]Step {
 	return ss
 }
 
-func (c Context) IsWorkingDirClean() bool {
+func (c Context) isWorkingDirClean() bool {
 	gitStatus := &gitCommand{
 		c.Logger,
 		[]string{"status"},
