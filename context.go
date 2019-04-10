@@ -47,7 +47,7 @@ func (c context) container() map[string]map[string]stepType {
 	ss["command"]["publish"] = stepType{PublishStep{}, "push current branch into remote"}
 
 	if !c.isWorkingDirClean() {
-		ss["working"]["commit"] = stepType{WorkingDirStep{}, "commit everything"}
+		ss["working"]["commit"] = stepType{wokingDirStep{}, "commit everything"}
 		ss["working"]["reset"] = stepType{ResetStep{}, "reset working directory and stage"}
 	}
 

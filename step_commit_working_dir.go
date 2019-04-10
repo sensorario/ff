@@ -5,9 +5,9 @@ import (
 	"regexp"
 )
 
-type WorkingDirStep struct{}
+type wokingDirStep struct{}
 
-func (s WorkingDirStep) Execute(c *context) bool {
+func (s wokingDirStep) Execute(c *context) bool {
 	gitStatus := &gitCommand{
 		c.Logger,
 		[]string{"status"},
@@ -33,6 +33,6 @@ func (s WorkingDirStep) Execute(c *context) bool {
 	return true
 }
 
-func (s WorkingDirStep) Stepname() string {
+func (s wokingDirStep) Stepname() string {
 	return "check-working-directory"
 }
