@@ -9,9 +9,9 @@ import (
 	"github.com/fatih/color"
 )
 
-type RefactoringStep struct{}
+type refactoringStep struct{}
 
-func (s RefactoringStep) Execute(c *context) bool {
+func (s refactoringStep) Execute(c *context) bool {
 	developmentBranch := "master"
 
 	gitCheckoutMaster := &gitCommand{
@@ -48,6 +48,6 @@ func (s RefactoringStep) Execute(c *context) bool {
 	return true
 }
 
-func (s RefactoringStep) Stepname() string {
+func (s refactoringStep) Stepname() string {
 	return "create-feature-branch"
 }
