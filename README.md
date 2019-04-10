@@ -17,19 +17,20 @@ Logs are stored in .git/logger.log file
 
 ## Commands
 
+ - bugfix
  - commit
  - complete
  - feature
  - help
  - hotfix
- - bugfix
  - publish
  - refactor
  - reset
  - status
+ - tag
 
 ## Autocompletion
 
 Append the following lines in your .bash_profile file:
 
-    _ff='commit complete feature help hotfix bugfix publish refactor reset status' && complete -W "${_ff}" 'ff'
+    _ff='tag commit complete feature help hotfix bugfix publish refactor reset status' && complete -W "${_ff}" 'ff'
