@@ -65,7 +65,7 @@ func (c Context) Container() map[string]map[string]Step {
 
 	if sem.IsRefactoring() || sem.IsFeature() || sem.IsHotfix() || sem.IsBugfix() {
 		if c.IsWorkingDirClean() {
-			ss["features"]["complete"] = Step{CompleteBranchStep{}, "merge current branch into master"}
+			ss["features"]["complete"] = Step{completeBranchStep{}, "merge current branch into master"}
 		}
 	}
 
