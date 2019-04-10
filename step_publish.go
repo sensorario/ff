@@ -1,8 +1,8 @@
 package main
 
-type PublishStep struct{}
+type publishStep struct{}
 
-func (s PublishStep) Execute(c *context) bool {
+func (s publishStep) Execute(c *context) bool {
 	branchName := c.currentBranch()
 
 	gitPush := &gitCommand{
@@ -16,6 +16,6 @@ func (s PublishStep) Execute(c *context) bool {
 	return false
 }
 
-func (s PublishStep) Stepname() string {
+func (s publishStep) Stepname() string {
 	return "publish"
 }

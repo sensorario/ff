@@ -44,11 +44,11 @@ func (c context) container() map[string]map[string]stepType {
 
 	ss["command"]["help"] = stepType{helpStep{}, "this help"}
 	ss["command"]["status"] = stepType{&statusStep{}, "status"}
-	ss["command"]["publish"] = stepType{PublishStep{}, "push current branch into remote"}
+	ss["command"]["publish"] = stepType{publishStep{}, "push current branch into remote"}
 
 	if !c.isWorkingDirClean() {
 		ss["working"]["commit"] = stepType{wokingDirStep{}, "commit everything"}
-		ss["working"]["reset"] = stepType{ResetStep{}, "reset working directory and stage"}
+		ss["working"]["reset"] = stepType{resetStep{}, "reset working directory and stage"}
 	}
 
 	name := c.currentBranch()
