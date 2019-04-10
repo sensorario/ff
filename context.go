@@ -1,11 +1,8 @@
 package main
 
-import (
-	"regexp"
-	"strings"
-
-	"github.com/sensorario/gol"
-)
+import "regexp"
+import "strings"
+import "github.com/sensorario/gol"
 
 type context struct {
 	CurrentStep fFStep
