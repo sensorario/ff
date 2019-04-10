@@ -8,7 +8,7 @@ import (
 )
 
 type Context struct {
-	CurrentStep FFStep
+	CurrentStep fFStep
 	Exit        bool
 	Logger      gol.Logger
 }
@@ -34,7 +34,7 @@ func (c Context) CurrentBranch() string {
 }
 
 type Step struct {
-	Step        FFStep
+	Step        fFStep
 	Description string
 }
 

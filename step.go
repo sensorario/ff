@@ -4,7 +4,7 @@ import (
 	"github.com/fatih/color"
 )
 
-type FFStep interface {
+type fFStep interface {
 	Execute(c *Context) bool
 	Stepname() string
 }
