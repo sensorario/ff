@@ -1,18 +1,9 @@
 # ff 1.* [![GitHub version](https://badge.fury.io/gh/sensorario%2Fff.svg)](https://github.com/sensorario/ff/releases) [![Go Report Card](https://goreportcard.com/badge/github.com/sensorario/ff)](https://goreportcard.com/report/github.com/sensorario/ff) [![Build Status](https://travis-ci.org/sensorario/ff.svg?branch=master)](https://travis-ci.org/sensorario/ff)
 
-## Install Binaries
+## Install
 
-Download binaries from: https://github.com/sensorario/ff/raw/master/dist/ff
-And then make it executable:
-
-    sudo chmod +x ff
-
-Move it into `/usr/local/bin/` folder to execute it from everywhere.
-
-Remember to load `gol` and `color`:
-
-    go get github.com/sensorario/gol
-    go get github.com/fatih/color
+    go get github.com/sensorario/ff
+    env GO111MODULE=on go build -o /usr/local/bin/ff
 
 ## Features
 
