@@ -33,44 +33,44 @@ func (c context) currentBranch() string {
 	return branchName
 }
 
-type Step struct {
+type stepType struct {
 	Step        fFStep
 	Description string
 }
 
-func (c context) container() map[string]map[string]Step {
-	ss := map[string]map[string]Step{}
+func (c context) container() map[string]map[string]stepType {
+	ss := map[string]map[string]stepType{}
 
-	ss["command"] = make(map[string]Step)
-	ss["features"] = make(map[string]Step)
-	ss["working"] = make(map[string]Step)
+	ss["command"] = make(map[string]stepType)
+	ss["features"] = make(map[string]stepType)
+	ss["working"] = make(map[string]stepType)
 
-	ss["command"]["help"] = Step{HelpStep{}, "this help"}
-	ss["command"]["status"] = Step{&StatusStep{}, "status"}
-	ss["command"]["publish"] = Step{PublishStep{}, "push current branch into remote"}
+	ss["command"]["help"] = stepType{HelpStep{}, "this help"}
+	ss["command"]["status"] = stepType{&StatusStep{}, "status"}
+	ss["command"]["publish"] = stepType{PublishStep{}, "push current branch into remote"}
 
 	if !c.isWorkingDirClean() {
-		ss["working"]["commit"] = Step{WorkingDirStep{}, "commit everything"}
-		ss["working"]["reset"] = Step{ResetStep{}, "reset working directory and stage"}
+		ss["working"]["commit"] = stepType{WorkingDirStep{}, "commit everything"}
+		ss["working"]["reset"] = stepType{ResetStep{}, "reset working directory and stage"}
 	}
 
 	name := c.currentBranch()
 	sem := branch{name}
 
 	if sem.isMaster() {
-		ss["features"]["bugfix"] = Step{bugfixStep{}, "create new bugfix branch"}
-		ss["features"]["feature"] = Step{featureStep{}, "create new feature branch"}
-		ss["features"]["refactor"] = Step{RefactoringStep{}, "create new refactor branch"}
+		ss["features"]["bugfix"] = stepType{bugfixStep{}, "create new bugfix branch"}
+		ss["features"]["feature"] = stepType{featureStep{}, "create new feature branch"}
+		ss["features"]["refactor"] = stepType{RefactoringStep{}, "create new refactor branch"}
 	}
 
 	if sem.isRefactoring() || sem.isFeature() || sem.isHotfix() || sem.isBugfix() {
 		if c.isWorkingDirClean() {
-			ss["features"]["complete"] = Step{completeBranchStep{}, "merge current branch into master"}
+			ss["features"]["complete"] = stepType{completeBranchStep{}, "merge current branch into master"}
 		}
 	}
 
 	if sem.phase() == "production" {
-		ss["features"]["hotfix"] = Step{hotfixStep{}, "create new hotfix branch"}
+		ss["features"]["hotfix"] = stepType{hotfixStep{}, "create new hotfix branch"}
 	}
 
 	return ss
@@ -87,7 +87,7 @@ func (c context) isWorkingDirClean() bool {
 
 	re := regexp.MustCompile(`(?m)nothing to commit, working tree clean`)
 
-	for _, _ = range re.FindAllString(string(cmdOut), -1) {
+	for _ = range re.FindAllString(string(cmdOut), -1) {
 		c.Logger.Info("working dir clean")
 		return true
 	}
