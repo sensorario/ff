@@ -54,8 +54,8 @@ func (c Context) Container() map[string]map[string]Step {
 		ss["working"]["reset"] = Step{ResetStep{}, "reset working directory and stage"}
 	}
 
-	branch := c.CurrentBranch()
-	sem := Branch{branch}
+	name := c.CurrentBranch()
+	sem := Branch{name}
 
 	if sem.isMaster() {
 		ss["features"]["bugfix"] = Step{BugfixStep{}, "create new bugfix branch"}
