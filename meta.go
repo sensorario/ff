@@ -5,29 +5,29 @@ import (
 	"strings"
 )
 
-type Meta struct {
+type meta struct {
 	describe string
 	branch   string
 }
 
-func (m Meta) Branch() string {
+func (m meta) Branch() string {
 	return m.branch
 }
 
-func (m Meta) majorVersion() string {
+func (m meta) majorVersion() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 	tokens = strings.Split(tokens[0], "v")
 	return tokens[1]
 }
 
-func (m Meta) minorVersion() string {
+func (m meta) minorVersion() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 	return tokens[1]
 }
 
-func (m Meta) IncpatchVersion() int {
+func (m meta) incPatchVersion() int {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 	number, _ := strconv.Atoi(tokens[2])
@@ -35,26 +35,26 @@ func (m Meta) IncpatchVersion() int {
 	return nextNumber
 }
 
-func (m Meta) patchVersion() string {
+func (m meta) patchVersion() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 	return tokens[2]
 }
 
-func (m Meta) patchVersionInt() string {
+func (m meta) patchVersionInt() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 	number, _ := strconv.Atoi(tokens[1])
 	return string(number)
 }
 
-func (m Meta) CommitsFromLastTag() string {
+func (m meta) CommitsFromLastTag() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[1], ".")
 	return tokens[0]
 }
 
-func (m Meta) NextPatchTag() string {
+func (m meta) NextPatchTag() string {
 	patch := m.patchVersion()
 	minor := m.minorVersion()
 	major := m.majorVersion()
@@ -75,7 +75,7 @@ func (m Meta) NextPatchTag() string {
 	return strings.Join(version, "")
 }
 
-func (m Meta) NextMinorTag() string {
+func (m meta) NextMinorTag() string {
 	minor := m.minorVersion()
 	major := m.majorVersion()
 

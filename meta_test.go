@@ -5,7 +5,7 @@ import (
 )
 
 func TestAbs(t *testing.T) {
-	meta := Meta{"v21.2.54-42-b67b5vr", "master"}
+	meta := meta{"v21.2.54-42-b67b5vr", "master"}
 
 	if meta.Branch() != "master" {
 		t.Errorf("bad branch detection")

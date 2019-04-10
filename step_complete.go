@@ -59,16 +59,16 @@ func (s completeBranchStep) Execute(c *context) bool {
 
 	tagName := ""
 
-	meta := Meta{string(cmdOut), branchName}
+	mt := meta{string(cmdOut), branchName}
 
 	if br.isHotfix() || br.isRefactoring() || br.isBugfix() {
 		c.Logger.Info("Is Patch branch")
-		tagName = meta.NextPatchTag()
+		tagName = mt.NextPatchTag()
 	}
 
 	if br.isFeature() {
 		c.Logger.Info("Is Feature branch")
-		tagName = meta.NextMinorTag()
+		tagName = mt.NextMinorTag()
 	}
 
 	fmt.Println("next tag:   ", color.GreenString(tagName))
