@@ -15,6 +15,8 @@ In case of LTS (a minor version) after each new tag merge updates into master to
 
 Logs are stored in .git/logger.log file
 
+Tag directly from master.
+
 ## Commands
 
  - bugfix
