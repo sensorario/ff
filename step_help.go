@@ -28,7 +28,7 @@ func (s helpStep) Execute(c *context) bool {
 	for _, group := range c.Groups() {
 		conta := container[group]
 		show[group] = false
-		for _, _ = range conta {
+		for _ = range conta {
 			show[group] = true
 		}
 	}
@@ -41,7 +41,7 @@ func (s helpStep) Execute(c *context) bool {
 		conta := container[group]
 		if show[group] {
 			fmt.Println("      " + color.GreenString(group))
-			for command, _ := range conta {
+			for command := range conta {
 				printHelp(help{
 					command,
 					container[group][command].Description,
