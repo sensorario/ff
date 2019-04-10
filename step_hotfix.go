@@ -9,9 +9,9 @@ import (
 	"github.com/fatih/color"
 )
 
-type HotfixStep struct{}
+type hotfixStep struct{}
 
-func (s HotfixStep) Execute(c *Context) bool {
+func (s hotfixStep) Execute(c *Context) bool {
 	developmentBranch := c.CurrentBranch()
 
 	reader := bufio.NewReader(os.Stdin)
@@ -44,6 +44,6 @@ func (s HotfixStep) Execute(c *Context) bool {
 	return true
 }
 
-func (s HotfixStep) Stepname() string {
+func (s hotfixStep) Stepname() string {
 	return "create-hotfix-branch"
 }
