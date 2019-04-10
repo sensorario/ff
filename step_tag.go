@@ -31,7 +31,7 @@ func (s tagStep) Execute(c *context) bool {
 
 	mt := meta{string(cmdOut), branchName}
 
-	tagName = mt.NextMinorTag()
+	tagName = mt.NextPatchTag()
 
 	fmt.Println("next tag:   ", color.GreenString(tagName))
 
