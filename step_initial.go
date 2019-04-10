@@ -16,7 +16,7 @@ func (s inputReadingStep) Execute(c *Context) bool {
 		command = os.Args[1]
 	}
 
-	ss := c.Container()
+	ss := c.container()
 
 	for _, group := range c.Groups() {
 		item, ok := ss[group][command]

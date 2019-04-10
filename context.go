@@ -38,7 +38,7 @@ type Step struct {
 	Description string
 }
 
-func (c Context) Container() map[string]map[string]Step {
+func (c Context) container() map[string]map[string]Step {
 	ss := map[string]map[string]Step{}
 
 	ss["command"] = make(map[string]Step)

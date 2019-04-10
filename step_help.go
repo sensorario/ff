@@ -21,7 +21,7 @@ func (s HelpStep) Execute(c *Context) bool {
 
 	fmt.Println("")
 
-	container := c.Container()
+	container := c.container()
 
 	show := make(map[string]bool)
 
