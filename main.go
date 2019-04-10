@@ -11,7 +11,8 @@ func genLog() gol.Logger {
 		return gol.NewCustomLogger(envLogPath)
 	}
 
-	return gol.NewLogger("ff")
+	dir, _ := os.Getwd()
+	return gol.NewCustomLogger(dir + "/.git/")
 }
 
 func main() {

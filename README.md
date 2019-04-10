@@ -13,25 +13,20 @@ An hotfix/feature branch can be created only from master.
 
 In case of LTS (a minor version) after each new tag merge updates into master to keep development version updated with all hotfixes.
 
-## Personalization
+Logs are stored in .git/logger.log file
 
-By default log folder is `/var/log/ff` and file is `logger.log`.  To change log destination path you  should define environment variable `FF_LOG_PATH`.  Remember that the program MUST HAVE write permission in the selected folder. Actually is not possible to change file name.
+## Commands
 
-    sudo mkdir /var/log/ff/
-    sudo chmod 777 /var/log/ff/
-
-## Available commands
-
- - ff commit
- - ff complete
- - ff feature
- - ff help
- - ff hotfix
- - ff bugfix
- - ff publish
- - ff refactor
- - ff reset
- - ff status
+ - commit
+ - complete
+ - feature
+ - help
+ - hotfix
+ - bugfix
+ - publish
+ - refactor
+ - reset
+ - status
 
 ## Autocompletion
 
