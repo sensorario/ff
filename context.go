@@ -58,6 +58,7 @@ func (c context) container() map[string]map[string]stepType {
 		ss["features"]["bugfix"] = stepType{bugfixStep{}, "create new bugfix branch"}
 		ss["features"]["feature"] = stepType{featureStep{}, "create new feature branch"}
 		ss["features"]["refactor"] = stepType{refactoringStep{}, "create new refactor branch"}
+		ss["command"]["tag"] = stepType{tagStep{}, "force creation of new tag"}
 	}
 
 	if sem.isRefactoring() || sem.isFeature() || sem.isHotfix() || sem.isBugfix() {
