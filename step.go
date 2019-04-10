@@ -9,6 +9,6 @@ type fFStep interface {
 	Stepname() string
 }
 
-func (c *Context) EnterStep() {
+func (c *Context) enterStep() {
 	c.Logger.Info(color.RedString("[step/" + c.CurrentStep.Stepname() + "]"))
 }

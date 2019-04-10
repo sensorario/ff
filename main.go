@@ -20,9 +20,9 @@ func main() {
 		Logger:      genLog(),
 	}
 
-	context.EnterStep()
+	context.enterStep()
 
 	for context.CurrentStep.Execute(&context) {
-		context.EnterStep()
+		context.enterStep()
 	}
 }
