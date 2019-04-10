@@ -6,9 +6,9 @@ import (
 	"github.com/fatih/color"
 )
 
-type StatusStep struct{}
+type statusStep struct{}
 
-func (s StatusStep) Execute(c *context) bool {
+func (s statusStep) Execute(c *context) bool {
 	branchName := c.currentBranch()
 
 	fmt.Println(
@@ -19,6 +19,6 @@ func (s StatusStep) Execute(c *context) bool {
 	return false
 }
 
-func (s StatusStep) Stepname() string {
+func (s statusStep) Stepname() string {
 	return "status"
 }

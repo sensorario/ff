@@ -43,7 +43,7 @@ func (c context) container() map[string]map[string]stepType {
 	ss["working"] = make(map[string]stepType)
 
 	ss["command"]["help"] = stepType{HelpStep{}, "this help"}
-	ss["command"]["status"] = stepType{&StatusStep{}, "status"}
+	ss["command"]["status"] = stepType{&statusStep{}, "status"}
 	ss["command"]["publish"] = stepType{PublishStep{}, "push current branch into remote"}
 
 	if !c.isWorkingDirClean() {
