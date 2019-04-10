@@ -55,7 +55,7 @@ func (c Context) Container() map[string]map[string]Step {
 	}
 
 	name := c.CurrentBranch()
-	sem := Branch{name}
+	sem := branch{name}
 
 	if sem.isMaster() {
 		ss["features"]["bugfix"] = Step{BugfixStep{}, "create new bugfix branch"}
@@ -69,7 +69,7 @@ func (c Context) Container() map[string]map[string]Step {
 		}
 	}
 
-	if sem.Phase() == "production" {
+	if sem.phase() == "production" {
 		ss["features"]["hotfix"] = Step{hotfixStep{}, "create new hotfix branch"}
 	}
 
