@@ -4,40 +4,40 @@ import (
 	"strings"
 )
 
-type Branch struct {
+type branch struct {
 	name string
 }
 
-func (b Branch) Destination() string {
+func (b branch) destination() string {
 	tokens := strings.Split(b.name, "/")
 	return tokens[len(tokens)-1]
 }
 
-func (b Branch) isRefactoring() bool {
+func (b branch) isRefactoring() bool {
 	return strings.HasPrefix(b.name, "refactor/")
 }
 
-func (b Branch) isFeature() bool {
+func (b branch) isFeature() bool {
 	return strings.HasPrefix(b.name, "feature/")
 }
 
-func (b Branch) isHotfix() bool {
+func (b branch) isHotfix() bool {
 	return strings.HasPrefix(b.name, "hotfix/")
 }
 
-func (b Branch) isBugfix() bool {
+func (b branch) isBugfix() bool {
 	return strings.HasPrefix(b.name, "bugfix/")
 }
 
-func (b Branch) isMaster() bool {
+func (b branch) isMaster() bool {
 	return strings.HasPrefix(b.name, "master")
 }
 
-func (b Branch) isRelease() bool {
+func (b branch) isRelease() bool {
 	return strings.HasPrefix(b.name, "release/")
 }
 
-func (b Branch) Phase() string {
+func (b branch) phase() string {
 	if b.isRelease() ||
 		b.isMaster() ||
 		b.isFeature() ||

@@ -28,12 +28,12 @@ func (s completeBranchStep) Execute(c *Context) bool {
 
 	fmt.Println(color.RedString("leaving: " + branchName))
 
-	branch := Branch{branchName}
-	fmt.Println(color.RedString("destination: " + branch.Destination()))
+	br := branch{branchName}
+	fmt.Println(color.RedString("destination: " + br.destination()))
 
 	gitCheckoutMaster := &gitCommand{
 		c.Logger,
-		[]string{"checkout", branch.Destination()},
+		[]string{"checkout", br.destination()},
 		"Cant checkout destination branch",
 	}
 
@@ -61,12 +61,12 @@ func (s completeBranchStep) Execute(c *Context) bool {
 
 	meta := Meta{string(cmdOut), branchName}
 
-	if branch.isHotfix() || branch.isRefactoring() || branch.isBugfix() {
+	if br.isHotfix() || br.isRefactoring() || br.isBugfix() {
 		c.Logger.Info("Is Patch branch")
 		tagName = meta.NextPatchTag()
 	}
 
-	if branch.isFeature() {
+	if br.isFeature() {
 		c.Logger.Info("Is Feature branch")
 		tagName = meta.NextMinorTag()
 	}
@@ -89,7 +89,7 @@ func (s completeBranchStep) Execute(c *Context) bool {
 
 	fmt.Println(color.GreenString("branch " + branchName + " deleted"))
 
-	if branch.Destination() != "master" {
+	if br.destination() != "master" {
 		gitCheckoutMaster := &gitCommand{
 			c.Logger,
 			[]string{"checkout", "master"},
@@ -99,7 +99,7 @@ func (s completeBranchStep) Execute(c *Context) bool {
 
 		gitMergeNoFastForward := &gitCommand{
 			c.Logger,
-			[]string{"merge", "--no-ff", branch.Destination()},
+			[]string{"merge", "--no-ff", br.destination()},
 			"cant move to master updates",
 		}
 		_ = gitMergeNoFastForward.Execute()
