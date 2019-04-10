@@ -9,9 +9,9 @@ import (
 	"github.com/fatih/color"
 )
 
-type BugfixStep struct{}
+type bugfixStep struct{}
 
-func (s BugfixStep) Execute(c *Context) bool {
+func (s bugfixStep) Execute(c *Context) bool {
 	developmentBranch := "master"
 
 	gitCheckoutMaster := &gitCommand{
@@ -51,6 +51,6 @@ func (s BugfixStep) Execute(c *Context) bool {
 	return true
 }
 
-func (s BugfixStep) Stepname() string {
+func (s bugfixStep) Stepname() string {
 	return "create-bugfix-branch"
 }

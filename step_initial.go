@@ -7,9 +7,9 @@ import (
 	"github.com/fatih/color"
 )
 
-type InputReadingStep struct{}
+type inputReadingStep struct{}
 
-func (s InputReadingStep) Execute(c *Context) bool {
+func (s inputReadingStep) Execute(c *Context) bool {
 	command := "help"
 
 	if len(os.Args) > 1 {
@@ -33,6 +33,6 @@ func (s InputReadingStep) Execute(c *Context) bool {
 	return false
 }
 
-func (s InputReadingStep) Stepname() string {
+func (s inputReadingStep) Stepname() string {
 	return "command-detection"
 }

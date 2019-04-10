@@ -58,7 +58,7 @@ func (c Context) Container() map[string]map[string]Step {
 	sem := branch{name}
 
 	if sem.isMaster() {
-		ss["features"]["bugfix"] = Step{BugfixStep{}, "create new bugfix branch"}
+		ss["features"]["bugfix"] = Step{bugfixStep{}, "create new bugfix branch"}
 		ss["features"]["feature"] = Step{featureStep{}, "create new feature branch"}
 		ss["features"]["refactor"] = Step{RefactoringStep{}, "create new refactor branch"}
 	}

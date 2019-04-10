@@ -17,7 +17,7 @@ func genLog() gol.Logger {
 
 func main() {
 	context := Context{
-		CurrentStep: &InputReadingStep{},
+		CurrentStep: &inputReadingStep{},
 		Logger:      genLog(),
 	}
 
