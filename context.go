@@ -70,7 +70,7 @@ func (c Context) Container() map[string]map[string]Step {
 	}
 
 	if sem.Phase() == "production" {
-		ss["features"]["hotfix"] = Step{HotfixStep{}, "create new hotfix branch"}
+		ss["features"]["hotfix"] = Step{hotfixStep{}, "create new hotfix branch"}
 	}
 
 	return ss
