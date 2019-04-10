@@ -105,7 +105,7 @@ func (s completeBranchStep) Execute(c *Context) bool {
 		_ = gitMergeNoFastForward.Execute()
 	}
 
-	c.CurrentStep = &FinalStep{}
+	c.CurrentStep = &finalStep{}
 
 	return true
 }

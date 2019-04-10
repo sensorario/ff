@@ -46,7 +46,7 @@ func (s BugfixStep) Execute(c *Context) bool {
 
 	_ = gitCheckoutNewBranch.Execute()
 
-	c.CurrentStep = &FinalStep{}
+	c.CurrentStep = &finalStep{}
 
 	return true
 }

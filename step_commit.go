@@ -30,7 +30,7 @@ func (s commitStep) Execute(c *Context) bool {
 
 	_ = gitCommit.Execute()
 
-	c.CurrentStep = &FinalStep{}
+	c.CurrentStep = &finalStep{}
 
 	return false
 }

@@ -19,7 +19,7 @@ func (s ResetStep) Execute(c *Context) bool {
 
 	_ = gitResetHard.Execute()
 
-	c.CurrentStep = &FinalStep{}
+	c.CurrentStep = &finalStep{}
 
 	return true
 }

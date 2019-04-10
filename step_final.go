@@ -1,11 +1,11 @@
 package main
 
-type FinalStep struct{}
+type finalStep struct{}
 
-func (s FinalStep) Execute(c *Context) bool {
+func (s finalStep) Execute(c *Context) bool {
 	return false
 }
 
-func (s FinalStep) Stepname() string {
+func (s finalStep) Stepname() string {
 	return "final"
 }
