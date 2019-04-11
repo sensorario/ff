@@ -34,8 +34,14 @@ func main() {
 					args:    []string{"init"},
 					message: "Cant create new branch",
 				}
-
 				_ = gitInit.Execute()
+
+				gitInit := &gitCommand{
+					args:    []string{"tag", "v0.0.0"},
+					message: "Cant apply first tag",
+				}
+				_ = gitInit.Execute()
+
 				os.Exit(0)
 			}
 
