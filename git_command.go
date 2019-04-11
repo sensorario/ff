@@ -31,14 +31,10 @@ func (gc *gitCommand) Execute() string {
 
 	if cmdOut, err = exec.Command(cmdName, cmdArgs...).Output(); err != nil {
 
-		if err.Error() == "exit status 1" {
-			// No commits yet ?
-			fmt.Println(color.RedString(err.Error()))
-			fmt.Println(color.RedString(gc.ErrorMessage()))
-		}
+		fmt.Println(color.RedString(err.Error()))
+		fmt.Println(color.RedString(gc.ErrorMessage()))
 
 		if err.Error() == "exit status 128" {
-			// ... ?
 			gc.Logger.Error(color.RedString(err.Error()))
 			gc.Logger.Error(color.RedString(gc.ErrorMessage()))
 		}
