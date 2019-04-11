@@ -20,7 +20,8 @@ func (s featureStep) Execute(c *context) bool {
 		"Cant checkout master",
 	}
 
-	_ = gitCheckoutMaster.Execute()
+	output := gitCheckoutMaster.Execute()
+	fmt.Println(output)
 
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(color.RedString("New feature description: "))
