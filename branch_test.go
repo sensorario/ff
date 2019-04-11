@@ -5,39 +5,39 @@ import (
 )
 
 func TestAnalyze(t *testing.T) {
-	branch := Branch{"feature/branch-semantico/master"}
+	br := branch{"feature/branch-semantico/master"}
 
-	if branch.IsFeature() == false {
+	if br.isFeature() == false {
 		t.Errorf("branch should be recognyzed as feature")
 	}
 
-	if branch.Destination() != "master" {
+	if br.destination() != "master" {
 		t.Errorf("destination branch should be master")
 	}
 }
 
 func TestMasterOrFeaturesBranchesAreDevelopment(t *testing.T) {
 	tests := []struct {
-		branch Branch
+		branch branch
 		phase  string
 	}{
-		{Branch{"feature/branch-semantico/master"}, "development"},
-		{Branch{"hotfix/branch-semantico/master"}, "development"},
-		{Branch{"release/branch-semantico/master"}, "development"},
-		{Branch{"master"}, "development"},
-		{Branch{"1.4"}, "production"},
+		{branch{"feature/branch-semantico/master"}, "development"},
+		{branch{"hotfix/branch-semantico/master"}, "development"},
+		{branch{"release/branch-semantico/master"}, "development"},
+		{branch{"master"}, "development"},
+		{branch{"1.4"}, "production"},
 	}
 
 	for _, test := range tests {
-		if got := test.branch.Phase(); got != test.phase {
-			t.Errorf("Oops! Expected " + test.phase + " but got " + test.branch.Phase() + " using branch " + test.branch.branch)
+		if got := test.branch.phase(); got != test.phase {
+			t.Errorf("Oops! Expected " + test.phase + " but got " + test.branch.phase() + " using branch " + test.branch.name)
 		}
 	}
 }
 
 func TestExtractCurrentBranch(t *testing.T) {
-	branch := Branch{"1.0"}
-	if branch.Branch() != "1.0" {
+	br := branch{"1.0"}
+	if br.name != "1.0" {
 		t.Errorf("Oops! Branch detection fails!")
 	}
 }
