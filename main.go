@@ -1,8 +1,11 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
 	"os"
 
+	"github.com/fatih/color"
 	"github.com/sensorario/gol"
 )
 
@@ -16,6 +19,32 @@ func genLog() gol.Logger {
 }
 
 func main() {
+	dir, _ := os.Getwd()
+	if _, err := os.Stat(dir + "/.git/"); os.IsNotExist(err) {
+		for {
+			reader := bufio.NewReader(os.Stdin)
+			fmt.Println(color.RedString("No repository found"))
+			fmt.Println(color.YellowString("Want you create new git repository here? (yes/no)"))
+			response, _ := reader.ReadString('\n')
+			fmt.Println(response)
+			fmt.Println("no")
+
+			if string(response) == "yes\n" {
+				gitInit := &gitCommand{
+					args:    []string{"init"},
+					message: "Cant create new branch",
+				}
+
+				_ = gitInit.Execute()
+				os.Exit(0)
+			}
+
+			if string(response) == "no\n" {
+				os.Exit(0)
+			}
+		}
+	}
+
 	cntxt := context{
 		CurrentStep: &inputReadingStep{},
 		Logger:      genLog(),

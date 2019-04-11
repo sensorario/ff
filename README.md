@@ -17,6 +17,8 @@ Logs are stored in .git/logger.log file
 
 Tag directly from master.
 
+Create git repository if not exists.
+
 ## Commands
 
  - bugfix
