@@ -19,6 +19,8 @@ func genLog() gol.Logger {
 }
 
 func main() {
+	logger := genLog()
+
 	dir, _ := os.Getwd()
 	if _, err := os.Stat(dir + "/.git/"); os.IsNotExist(err) {
 		for {
@@ -36,7 +38,25 @@ func main() {
 				}
 				_ = gitInit.Execute()
 
-				gitInit := &gitCommand{
+				dir, _ := os.Getwd()
+				os.Create(dir + "/README.md")
+
+				gitInit = &gitCommand{
+					Logger:  logger,
+					args:    []string{"add", "."},
+					message: "Cant stage everything",
+				}
+				_ = gitInit.Execute()
+
+				gitInit = &gitCommand{
+					Logger:  logger,
+					args:    []string{"commit", "-m", "start"},
+					message: "Cant commit",
+				}
+				_ = gitInit.Execute()
+
+				gitInit = &gitCommand{
+					Logger:  logger,
 					args:    []string{"tag", "v0.0.0"},
 					message: "Cant apply first tag",
 				}
@@ -53,7 +73,7 @@ func main() {
 
 	cntxt := context{
 		CurrentStep: &inputReadingStep{},
-		Logger:      genLog(),
+		Logger:      logger,
 	}
 
 	cntxt.enterStep()

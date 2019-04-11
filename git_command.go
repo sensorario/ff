@@ -39,9 +39,15 @@ func (gc *gitCommand) Execute() string {
 
 		if err.Error() == "exit status 128" {
 			// ... ?
+			fmt.Println(color.RedString(err.Error()))
+			fmt.Println(color.RedString(gc.ErrorMessage()))
+
 			gc.Logger.Error(color.RedString(err.Error()))
 			gc.Logger.Error(color.RedString(gc.ErrorMessage()))
 		}
+
+		fmt.Println(color.RedString(err.Error()))
+		fmt.Println(color.RedString(gc.ErrorMessage()))
 
 		os.Exit(1)
 	}
