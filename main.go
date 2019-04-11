@@ -28,8 +28,6 @@ func main() {
 			fmt.Println(color.RedString("No repository found"))
 			fmt.Println(color.YellowString("Want you create new git repository here? (yes/no)"))
 			response, _ := reader.ReadString('\n')
-			fmt.Println(response)
-			fmt.Println("no")
 
 			if string(response) == "yes\n" {
 				gitInit := &gitCommand{
