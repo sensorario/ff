@@ -36,9 +36,15 @@ func main() {
 					message: "Cant create new branch",
 				}
 				_ = gitInit.Execute()
+				fmt.Println(color.YellowString(
+					"repository initialized",
+				))
 
 				dir, _ := os.Getwd()
 				os.Create(dir + "/README.md")
+				fmt.Println(color.YellowString(
+					"readme file added",
+				))
 
 				gitInit = &gitCommand{
 					Logger:  logger,
@@ -46,6 +52,9 @@ func main() {
 					message: "Cant stage everything",
 				}
 				_ = gitInit.Execute()
+				fmt.Println(color.YellowString(
+					"readme file staged",
+				))
 
 				gitInit = &gitCommand{
 					Logger:  logger,
@@ -53,6 +62,9 @@ func main() {
 					message: "Cant commit",
 				}
 				_ = gitInit.Execute()
+				fmt.Println(color.YellowString(
+					"first commit committed",
+				))
 
 				gitInit = &gitCommand{
 					Logger:  logger,
@@ -60,6 +72,9 @@ func main() {
 					message: "Cant apply first tag",
 				}
 				_ = gitInit.Execute()
+				fmt.Println(color.YellowString(
+					"first tag v0.0.0 added",
+				))
 
 				os.Exit(0)
 			}
