@@ -3,6 +3,7 @@
 ## Install
 
     go get github.com/sensorario/ff
+    cd ff
     env GO111MODULE=on go build -o /usr/local/bin/ff
 
 ## Features
