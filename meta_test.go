@@ -2,6 +2,8 @@ package main
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestAbs(t *testing.T) {
@@ -34,4 +36,7 @@ func TestAbs(t *testing.T) {
 	if meta.NextMinorTag() != "v21.3.0" {
 		t.Errorf("Bad branch detection // " + meta.NextMinorTag())
 	}
+
+	num := meta.incPatchVersion()
+	assert.Equal(t, num, 55, "Bad branch detection // "+meta.NextMinorTag())
 }
