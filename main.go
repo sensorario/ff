@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"os/exec"
 
 	"github.com/fatih/color"
 	"github.com/sensorario/gol"
@@ -92,27 +91,8 @@ func main() {
 		}
 	}
 
-	// fatal: your current branch 'master' does not have any commits yet
-	canTag := true
-	if _, err := exec.Command("git", "log").Output(); err != nil {
-		canTag = false
-	}
-
-	if canTag == true {
-		cmdName := "git"
-		cmdArgs := []string{"describe", "--tags"}
-		if _, err := exec.Command(cmdName, cmdArgs...).Output(); err != nil {
-			gitInit := &gitCommand{
-				Logger:  logger,
-				args:    []string{"tag", "v0.0.0"},
-				message: "Cant apply first tag",
-			}
-			_ = gitInit.Execute()
-		}
-	}
-
 	cntxt := context{
-		CurrentStep: &inputReadingStep{},
+		CurrentStep: &checkTagStep{},
 		Logger:      logger,
 	}
 
