@@ -40,11 +40,18 @@ func main() {
 					"repository initialized",
 				))
 
+				// check if file exists
 				dir, _ := os.Getwd()
-				os.Create(dir + "/README.md")
-				fmt.Println(color.YellowString(
-					"readme file added",
-				))
+				if _, err := os.Stat(dir + "/README.md"); os.IsNotExist(err) {
+					os.Create(dir + "/README.md")
+					fmt.Println(color.YellowString(
+						"readme file added",
+					))
+				} else {
+					fmt.Println(color.YellowString(
+						"readme file preserved",
+					))
+				}
 
 				gitInit = &gitCommand{
 					Logger:  logger,
