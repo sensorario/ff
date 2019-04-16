@@ -7,4 +7,5 @@ require (
 	github.com/mattn/go-colorable v0.1.1 // indirect
 	github.com/mattn/go-isatty v0.0.7 // indirect
 	github.com/sensorario/gol v1.1.4
+	github.com/stretchr/testify v1.3.0 // indirect
 )
