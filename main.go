@@ -2,7 +2,9 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"os"
 
 	"github.com/fatih/color"
@@ -20,10 +22,21 @@ func genLog() gol.Logger {
 
 func main() {
 	conf := ReadConfiguration()
+	dir, _ := os.Getwd()
+
+	confIndented, _ := json.MarshalIndent(conf, "", "  ")
+
+	// salvo configurazione se non esiste
+	if _, err := os.Stat(dir + "/.git/conf.json"); os.IsNotExist(err) {
+		_ = ioutil.WriteFile(
+			dir+"/.git/conf.json",
+			confIndented,
+			0644,
+		)
+	}
 
 	logger := genLog()
 
-	dir, _ := os.Getwd()
 	if _, err := os.Stat(dir + "/.git"); os.IsNotExist(err) {
 		for {
 			reader := bufio.NewReader(os.Stdin)

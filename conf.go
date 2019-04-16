@@ -23,11 +23,18 @@ type JSONConf struct {
 
 func ReadConfiguration() JSONConf {
 	dir, _ := os.Getwd()
-	file, _ := ioutil.ReadFile(dir + ".git/conf.json")
+
+	file, err := ioutil.ReadFile(dir + "/.git/conf.json")
+
 	c := JSONConf{}
 
+	// se non c'e' il file, ... allora imposto
+	// dei valori di default
+	if err != nil {
+		c.Branches.Historical.Development = "master"
+	}
+
 	// defaults
-	c.Branches.Historical.Development = "master"
 
 	json.Unmarshal([]byte(file), &c)
 	return c
