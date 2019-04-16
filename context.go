@@ -39,13 +39,13 @@ type stepType struct {
 func (c context) container() map[string]map[string]stepType {
 	ss := map[string]map[string]stepType{}
 
-	ss["command"] = make(map[string]stepType)
-	ss["features"] = make(map[string]stepType)
+	ss["exec"] = make(map[string]stepType)
+	ss["start"] = make(map[string]stepType)
 	ss["working"] = make(map[string]stepType)
 
-	ss["command"]["help"] = stepType{helpStep{}, "this help"}
-	ss["command"]["status"] = stepType{&statusStep{}, "status"}
-	ss["command"]["publish"] = stepType{publishStep{}, "push current branch into remote"}
+	ss["exec"]["help"] = stepType{helpStep{}, "this help"}
+	ss["exec"]["status"] = stepType{&statusStep{}, "status"}
+	ss["exec"]["publish"] = stepType{publishStep{}, "push current branch into remote"}
 
 	if !c.isWorkingDirClean() {
 		ss["working"]["commit"] = stepType{wokingDirStep{}, "commit everything"}
@@ -56,17 +56,17 @@ func (c context) container() map[string]map[string]stepType {
 	sem := branch{name}
 
 	if sem.isDevelopment(c.devBranchName) {
-		ss["features"]["bugfix"] = stepType{bugfixStep{}, "create new bugfix branch"}
-		ss["features"]["feature"] = stepType{featureStep{}, "create new feature branch"}
-		ss["features"]["refactor"] = stepType{refactoringStep{}, "create new refactor branch"}
-		ss["command"]["tag"] = stepType{tagStep{}, "force creation of new tag"}
+		ss["start"]["bugfix"] = stepType{bugfixStep{}, "create new bugfix branch"}
+		ss["start"]["feature"] = stepType{featureStep{}, "create new feature branch"}
+		ss["start"]["refactor"] = stepType{refactoringStep{}, "create new refactor branch"}
+		ss["exec"]["tag"] = stepType{tagStep{}, "force creation of new tag"}
 	} else {
-		ss["features"]["hotfix"] = stepType{hotfixStep{}, "create new hotfix branch"}
+		ss["start"]["hotfix"] = stepType{hotfixStep{}, "create new hotfix branch"}
 	}
 
 	if sem.isRefactoring() || sem.isFeature() || sem.isHotfix() || sem.isBugfix() {
 		if c.isWorkingDirClean() {
-			ss["features"]["complete"] = stepType{completeBranchStep{}, "merge current branch into master"}
+			ss["start"]["complete"] = stepType{completeBranchStep{}, "merge current branch into master"}
 		}
 	}
 
@@ -95,8 +95,8 @@ func (c context) isWorkingDirClean() bool {
 
 func (c context) Groups() []string {
 	return []string{
-		"command",
-		"features",
+		"exec",
+		"start",
 		"working",
 	}
 }
