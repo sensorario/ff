@@ -2,4 +2,5 @@ default:
 	go test
 
 build:
-	sudo env GO111MODULE=on go build -o /usr/local/bin/ff
+	env GO111MODULE=on go build -o ff
+	sudo mv ff /usr/local/bin/ff
