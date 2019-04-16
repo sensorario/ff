@@ -21,8 +21,6 @@ func genLog() gol.Logger {
 func main() {
 	conf := ReadConfiguration()
 
-	fmt.Println("Development branch is : " + conf.Branches.Historical.Development)
-
 	logger := genLog()
 
 	dir, _ := os.Getwd()
@@ -95,13 +93,7 @@ func main() {
 		}
 	}
 
-	devBranchName := "master"
-	if _, err := os.Stat(dir + "/.git/ff.conf"); os.IsNotExist(err) {
-		fmt.Println(color.RedString(
-			"Oops! No configuration provided!",
-		))
-		//os.Exit(1)
-	}
+	devBranchName := conf.Branches.Historical.Development
 
 	cntxt := context{
 		CurrentStep:   &checkTagStep{},

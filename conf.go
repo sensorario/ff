@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"os"
 )
@@ -23,14 +22,13 @@ type JSONConf struct {
 }
 
 func ReadConfiguration() JSONConf {
-	fmt.Println("Read json configuration")
 	dir, _ := os.Getwd()
 	file, _ := ioutil.ReadFile(dir + ".git/conf.json")
+	c := JSONConf{}
 
-	data := JSONConf{}
-	data.Branches.Historical.Development = "master"
+	// defaults
+	c.Branches.Historical.Development = "master"
 
-	json.Unmarshal([]byte(file), &data)
-
-	return data
+	json.Unmarshal([]byte(file), &c)
+	return c
 }
