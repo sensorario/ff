@@ -1,0 +1,36 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"os"
+)
+
+type JSONConf struct {
+	Branches struct {
+		Historical struct {
+			Development string `json:"development"`
+			Poduction   string `json:"production"`
+		}
+	} `json:"branches"`
+	Tags struct {
+		OnFeatureBranchMerged string `json:"onFeatureMerge"`
+	} `json:"tags"`
+}
+
+func ReadConfiguration() JSONConf {
+	fmt.Println("Read json configuration")
+	dir, _ := os.Getwd()
+	file, _ := ioutil.ReadFile(dir + ".git/conf.json")
+
+	data := JSONConf{}
+	data.Branches.BranchName = "master"
+	data.Tags.OnFeatureBranchMerged = "true"
+
+	json.Unmarshal([]byte(file), &data)
+	fmt.Println("Dev branch:", data.Branches.BranchName)
+	fmt.Println("Tags:", data.Tags.OnFeatureBranchMerged)
+
+	return data
+}

@@ -5,9 +5,10 @@ import "strings"
 import "github.com/sensorario/gol"
 
 type context struct {
-	CurrentStep fFStep
-	Exit        bool
-	Logger      gol.Logger
+	CurrentStep   fFStep
+	Exit          bool
+	Logger        gol.Logger
+	devBranchName string
 }
 
 func (c context) currentBranch() string {
@@ -54,7 +55,7 @@ func (c context) container() map[string]map[string]stepType {
 	name := c.currentBranch()
 	sem := branch{name}
 
-	if sem.isMaster() {
+	if sem.isDevelopment(c.devBranchName) {
 		ss["features"]["bugfix"] = stepType{bugfixStep{}, "create new bugfix branch"}
 		ss["features"]["feature"] = stepType{featureStep{}, "create new feature branch"}
 		ss["features"]["refactor"] = stepType{refactoringStep{}, "create new refactor branch"}
@@ -67,7 +68,7 @@ func (c context) container() map[string]map[string]stepType {
 		}
 	}
 
-	if sem.phase() == "production" {
+	if sem.phase(c.devBranchName) == "production" {
 		ss["features"]["hotfix"] = stepType{hotfixStep{}, "create new hotfix branch"}
 	}
 
