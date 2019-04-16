@@ -36,14 +36,11 @@ func ReadConfiguration() jsonConf {
 
 	c := jsonConf{}
 
-	// se non c'e' il file, ... allora imposto
-	// dei valori di default
 	if err != nil {
 		c.Branches.Historical.Development = "master"
 	}
 
-	// defaults
-
 	json.Unmarshal([]byte(file), &c)
+
 	return c
 }
