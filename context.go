@@ -60,16 +60,14 @@ func (c context) container() map[string]map[string]stepType {
 		ss["features"]["feature"] = stepType{featureStep{}, "create new feature branch"}
 		ss["features"]["refactor"] = stepType{refactoringStep{}, "create new refactor branch"}
 		ss["command"]["tag"] = stepType{tagStep{}, "force creation of new tag"}
+	} else {
+		ss["features"]["hotfix"] = stepType{hotfixStep{}, "create new hotfix branch"}
 	}
 
 	if sem.isRefactoring() || sem.isFeature() || sem.isHotfix() || sem.isBugfix() {
 		if c.isWorkingDirClean() {
 			ss["features"]["complete"] = stepType{completeBranchStep{}, "merge current branch into master"}
 		}
-	}
-
-	if sem.phase(c.devBranchName) == "production" {
-		ss["features"]["hotfix"] = stepType{hotfixStep{}, "create new hotfix branch"}
 	}
 
 	return ss

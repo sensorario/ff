@@ -36,16 +36,3 @@ func (b branch) isDevelopment(devBranchName string) bool {
 func (b branch) isRelease() bool {
 	return strings.HasPrefix(b.name, "release/")
 }
-
-func (b branch) phase(devBranchName string) string {
-	if b.isRelease() ||
-		b.isDevelopment(devBranchName) ||
-		b.isFeature() ||
-		b.isRefactoring() ||
-		b.isBugfix() ||
-		b.isHotfix() {
-		return "development"
-	}
-
-	return "production"
-}
