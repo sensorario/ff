@@ -32,7 +32,7 @@ func ReadConfiguration() jsonConf {
 		os.Exit(1)
 	}
 
-	file, err := ioutil.ReadFile(dir + "/.git/conf.json")
+	file, err := ioutil.ReadFile(dir + "/.git/ff.conf.json")
 
 	c := jsonConf{}
 

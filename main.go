@@ -27,9 +27,9 @@ func main() {
 	confIndented, _ := json.MarshalIndent(conf, "", "  ")
 
 	// salvo configurazione se non esiste
-	if _, err := os.Stat(dir + "/.git/conf.json"); os.IsNotExist(err) {
+	if _, err := os.Stat(dir + "/.git/ff.conf.json"); os.IsNotExist(err) {
 		_ = ioutil.WriteFile(
-			dir+"/.git/conf.json",
+			dir+"/.git/ff.conf.json",
 			confIndented,
 			0644,
 		)
