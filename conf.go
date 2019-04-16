@@ -2,8 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os"
+
+	"github.com/fatih/color"
 )
 
 type jsonConf struct {
@@ -22,7 +25,12 @@ type jsonConf struct {
 }
 
 func ReadConfiguration() jsonConf {
-	dir, _ := os.Getwd()
+	dir, err := os.Getwd()
+
+	if err != nil {
+		fmt.Println(color.RedString(err.Error()))
+		os.Exit(1)
+	}
 
 	file, err := ioutil.ReadFile(dir + "/.git/conf.json")
 
