@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-type JSONConf struct {
+type jsonConf struct {
 	Branches struct {
 		Historical struct {
 			Development string `json:"development"`
@@ -21,12 +21,12 @@ type JSONConf struct {
 	} `json:"branches"`
 }
 
-func ReadConfiguration() JSONConf {
+func ReadConfiguration() jsonConf {
 	dir, _ := os.Getwd()
 
 	file, err := ioutil.ReadFile(dir + "/.git/conf.json")
 
-	c := JSONConf{}
+	c := jsonConf{}
 
 	// se non c'e' il file, ... allora imposto
 	// dei valori di default
