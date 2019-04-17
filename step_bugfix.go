@@ -12,14 +12,14 @@ import (
 type bugfixStep struct{}
 
 func (s bugfixStep) Execute(c *context) bool {
-	developmentBranch := "master"
+	developmentBranch := c.conf.Branches.Historical.Development
 
-	gitCheckoutMaster := &gitCommand{
+	gitCheckoutBackToDev := &gitCommand{
 		c.Logger,
-		[]string{"checkout", "master"},
-		"Cant checkout master",
+		[]string{"checkout", developmentBranch},
+		"Cant checkout " + developmentBranch,
 	}
-	_ = gitCheckoutMaster.Execute()
+	_ = gitCheckoutBackToDev.Execute()
 
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(color.RedString("Bugfix description: "))

@@ -31,13 +31,13 @@ func (s completeBranchStep) Execute(c *context) bool {
 	br := branch{branchName}
 	fmt.Println(color.RedString("destination: " + br.destination()))
 
-	gitCheckoutMaster := &gitCommand{
+	gitCheckoutToDev := &gitCommand{
 		c.Logger,
 		[]string{"checkout", br.destination()},
 		"Cant checkout destination branch",
 	}
 
-	_ = gitCheckoutMaster.Execute()
+	_ = gitCheckoutToDev.Execute()
 
 	gitMergeNoFF := &gitCommand{
 		c.Logger,
@@ -47,6 +47,7 @@ func (s completeBranchStep) Execute(c *context) bool {
 
 	_ = gitMergeNoFF.Execute()
 
+	// @todo set CurrentStep as tagMergedBranchStep{}
 	if c.conf.Features.TagAfterMerge == true {
 		gitDescribeTags := &gitCommand{
 			c.Logger,
@@ -86,27 +87,28 @@ func (s completeBranchStep) Execute(c *context) bool {
 		fmt.Println(color.RedString("tag skipped"))
 	}
 
+	// @todo set CurrentStep as delete old branch{}
 	gitDeleteOldBranch := &gitCommand{
 		c.Logger,
 		[]string{"branch", "-D", branchName},
 		"cant merge",
 	}
 	_ = gitDeleteOldBranch.Execute()
-
 	fmt.Println(color.GreenString("branch " + branchName + " deleted"))
 
-	if br.destination() != "master" {
-		gitCheckoutMaster := &gitCommand{
+	// @todo set CurrentStep as mergeIntoDevBranchStep{}
+	if !br.isDevelopment(branchName) {
+		gitCheckoutToDev := &gitCommand{
 			c.Logger,
-			[]string{"checkout", "master"},
+			[]string{"checkout", c.conf.Branches.Historical.Development},
 			"Cant checkout destination branch",
 		}
-		_ = gitCheckoutMaster.Execute()
+		_ = gitCheckoutToDev.Execute()
 
 		gitMergeNoFastForward := &gitCommand{
 			c.Logger,
 			[]string{"merge", "--no-ff", br.destination()},
-			"cant move to master updates",
+			"cant move to " + br.destination() + " updates",
 		}
 		_ = gitMergeNoFastForward.Execute()
 	}
@@ -117,5 +119,5 @@ func (s completeBranchStep) Execute(c *context) bool {
 }
 
 func (s completeBranchStep) Stepname() string {
-	return "checkout-master"
+	return "checkout-dev-branch"
 }

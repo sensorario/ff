@@ -12,15 +12,15 @@ import (
 type refactoringStep struct{}
 
 func (s refactoringStep) Execute(c *context) bool {
-	developmentBranch := "master"
+	developmentBranch := c.conf.Branches.Historical.Development
 
-	gitCheckoutMaster := &gitCommand{
+	gitCheckoutToDev := &gitCommand{
 		c.Logger,
 		[]string{"checkout", developmentBranch},
-		"Cant checkout master",
+		"Cant checkout " + developmentBranch,
 	}
 
-	_ = gitCheckoutMaster.Execute()
+	_ = gitCheckoutToDev.Execute()
 
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(color.RedString("Refactoring descrption: "))

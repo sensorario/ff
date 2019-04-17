@@ -67,7 +67,10 @@ func (c context) container() map[string]map[string]stepType {
 
 	if sem.isRefactoring() || sem.isFeature() || sem.isHotfix() || sem.isBugfix() {
 		if c.isWorkingDirClean() {
-			ss["start"]["complete"] = stepType{completeBranchStep{}, "merge current branch into master"}
+			ss["start"]["complete"] = stepType{
+				completeBranchStep{},
+				"merge current branch into " + c.conf.Branches.Historical.Development,
+			}
 		}
 	}
 
