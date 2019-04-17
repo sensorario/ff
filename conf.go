@@ -28,28 +28,33 @@ type jsonConf struct {
 }
 
 func ReadConfiguration() jsonConf {
-	dir, err := os.Getwd()
+	dir, errWd := os.Getwd()
 
-	if err != nil {
-		fmt.Println(color.RedString(err.Error()))
+	if errWd != nil {
+		fmt.Println(color.RedString(errWd.Error()))
 		os.Exit(1)
 	}
 
-	file, err := ioutil.ReadFile(dir + "/.git/ff.conf.json")
+	file, errReadingConf := ioutil.ReadFile(dir + "/.git/ff.conf.json")
 
 	c := jsonConf{}
 
-	if err != nil {
-		fmt.Println(color.RedString(err.Error()))
+	if errReadingConf != nil {
+		fmt.Println(color.RedString(errReadingConf.Error()))
 		os.Exit(1)
 	}
 
-	if os.IsNotExist(err) {
+	if os.IsNotExist(errReadingConf) {
 		c.Branches.Historical.Development = "master"
 		c.Features.TagAfterMerge = true
 	}
 
-	json.Unmarshal([]byte(file), &c)
+	errUnmarshal := json.Unmarshal([]byte(file), &c)
+
+	if errUnmarshal != nil {
+		fmt.Println(color.RedString("config file is corrupted"))
+		os.Exit(1)
+	}
 
 	return c
 }
