@@ -9,6 +9,7 @@ type context struct {
 	Exit          bool
 	Logger        gol.Logger
 	devBranchName string
+	conf          jsonConf
 }
 
 func (c context) currentBranch() string {

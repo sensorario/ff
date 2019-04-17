@@ -10,6 +10,9 @@ import (
 )
 
 type jsonConf struct {
+	Features struct {
+		TagAfterMerge bool `json:"tagAfterMerge"`
+	} `json:"features"`
 	Branches struct {
 		Historical struct {
 			Development string `json:"development"`
@@ -38,6 +41,7 @@ func ReadConfiguration() jsonConf {
 
 	if err != nil {
 		c.Branches.Historical.Development = "master"
+		c.Features.TagAfterMerge = true
 	}
 
 	json.Unmarshal([]byte(file), &c)

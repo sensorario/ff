@@ -95,6 +95,12 @@ func main() {
 				os.Exit(0)
 			}
 		}
+	} else {
+		confIndented, _ := json.MarshalIndent(conf, "", "  ")
+		if _, err := os.Stat(dir + "/.git/ff.conf.json"); os.IsNotExist(err) {
+			_ = ioutil.WriteFile(dir+"/.git/ff.conf.json", confIndented, 0644)
+		}
+		fmt.Println(color.YellowString("configuration file created"))
 	}
 
 	devBranchName := conf.Branches.Historical.Development
@@ -103,6 +109,7 @@ func main() {
 		CurrentStep:   &checkTagStep{},
 		Logger:        logger,
 		devBranchName: devBranchName,
+		conf:          conf,
 	}
 
 	cntxt.enterStep()

@@ -47,40 +47,42 @@ func (s completeBranchStep) Execute(c *context) bool {
 
 	_ = gitMergeNoFF.Execute()
 
-	gitDescribeTags := &gitCommand{
-		c.Logger,
-		[]string{"describe", "--tags"},
-		"cant get tag description",
+	if c.conf.Features.TagAfterMerge == true {
+		gitDescribeTags := &gitCommand{
+			c.Logger,
+			[]string{"describe", "--tags"},
+			"cant get tag description",
+		}
+
+		cmdOut = gitDescribeTags.Execute()
+
+		fmt.Print("current tag: ", color.GreenString(string(cmdOut)))
+
+		tagName := ""
+
+		mt := meta{string(cmdOut), branchName}
+
+		// @todo check from configuration if tag must be applied or not
+		if br.isHotfix() || br.isRefactoring() || br.isBugfix() {
+			c.Logger.Info("Is Patch branch")
+			tagName = mt.NextPatchTag()
+		}
+
+		// @todo check from configuration if tag must be applied or not
+		if br.isFeature() {
+			c.Logger.Info("Is Feature branch")
+			tagName = mt.NextMinorTag()
+		}
+
+		fmt.Println("next tag:   ", color.GreenString(tagName))
+
+		gitTag := &gitCommand{
+			c.Logger,
+			[]string{"tag", tagName, "-f"},
+			"cant tag",
+		}
+		_ = gitTag.Execute()
 	}
-
-	cmdOut = gitDescribeTags.Execute()
-
-	fmt.Print("current tag: ", color.GreenString(string(cmdOut)))
-
-	tagName := ""
-
-	mt := meta{string(cmdOut), branchName}
-
-	// @todo check from configuration if tag must be applied or not
-	if br.isHotfix() || br.isRefactoring() || br.isBugfix() {
-		c.Logger.Info("Is Patch branch")
-		tagName = mt.NextPatchTag()
-	}
-
-	// @todo check from configuration if tag must be applied or not
-	if br.isFeature() {
-		c.Logger.Info("Is Feature branch")
-		tagName = mt.NextMinorTag()
-	}
-
-	fmt.Println("next tag:   ", color.GreenString(tagName))
-
-	gitTag := &gitCommand{
-		c.Logger,
-		[]string{"tag", tagName, "-f"},
-		"cant tag",
-	}
-	_ = gitTag.Execute()
 
 	gitDeleteOldBranch := &gitCommand{
 		c.Logger,
