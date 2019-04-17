@@ -39,7 +39,12 @@ func ReadConfiguration() jsonConf {
 
 	c := jsonConf{}
 
-	if err != nil || os.IsNotExist(err) {
+	if err != nil {
+		fmt.Println(color.RedString(err.Error()))
+		os.Exit(1)
+	}
+
+	if os.IsNotExist(err) {
 		c.Branches.Historical.Development = "master"
 		c.Features.TagAfterMerge = true
 	}
