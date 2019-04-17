@@ -100,7 +100,6 @@ func main() {
 		if _, err := os.Stat(dir + "/.git/ff.conf.json"); os.IsNotExist(err) {
 			_ = ioutil.WriteFile(dir+"/.git/ff.conf.json", confIndented, 0644)
 		}
-		fmt.Println(color.YellowString("configuration file created"))
 	}
 
 	devBranchName := conf.Branches.Historical.Development
