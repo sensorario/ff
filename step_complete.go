@@ -82,6 +82,8 @@ func (s completeBranchStep) Execute(c *context) bool {
 			"cant tag",
 		}
 		_ = gitTag.Execute()
+	} else {
+		fmt.Println(color.RedString("tag skipped"))
 	}
 
 	gitDeleteOldBranch := &gitCommand{
