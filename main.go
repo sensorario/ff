@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 
 	"github.com/fatih/color"
@@ -21,8 +22,19 @@ func genLog() gol.Logger {
 }
 
 func main() {
+	dir, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
+	}
+	// Best effort attempt, don't want to interfere with the logic
+	// below, I'll let the maintainer decide how to use this
+	// helper.
+	if repo, err := findRepository(dir); err == nil {
+		_ = os.Chdir(repo)
+	}
+
 	conf := ReadConfiguration()
-	dir, _ := os.Getwd()
+	dir, _ = os.Getwd()
 	logger := genLog()
 
 	if _, err := os.Stat(dir + "/.git"); os.IsNotExist(err) {
