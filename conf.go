@@ -39,14 +39,15 @@ func ReadConfiguration() jsonConf {
 
 	c := jsonConf{}
 
-	if errReadingConf != nil {
-		fmt.Println(color.RedString(errReadingConf.Error()))
-		os.Exit(1)
-	}
-
 	if os.IsNotExist(errReadingConf) {
 		c.Branches.Historical.Development = "master"
 		c.Features.TagAfterMerge = true
+		return c
+	}
+
+	if errReadingConf != nil {
+		fmt.Println(color.RedString(errReadingConf.Error()))
+		os.Exit(1)
 	}
 
 	errUnmarshal := json.Unmarshal([]byte(file), &c)
