@@ -6,6 +6,24 @@
     cd $GOPATH/src/github.com/sensorario/ff/
     env GO111MODULE=on go build -o /usr/local/bin/ff
 
+## Configuration
+
+ - change name of development branch
+ - disable auto-tag whenever a support branch is merged
+
+```json
+{
+  "features": {
+    "tagAfterMerge": true
+  },
+  "branches": {
+    "historical": {
+      "development": "master"
+    }
+  }
+}
+```
+
 ## Features
 
 The `ff` does not allow command if not allowed according to the git flow. For example, no hotfix/feature branches can be created if current branch is an hotfix/feature branch in turn.

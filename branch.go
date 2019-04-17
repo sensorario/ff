@@ -29,23 +29,10 @@ func (b branch) isBugfix() bool {
 	return strings.HasPrefix(b.name, "bugfix/")
 }
 
-func (b branch) isMaster() bool {
-	return strings.HasPrefix(b.name, "master")
+func (b branch) isDevelopment(devBranchName string) bool {
+	return strings.HasPrefix(b.name, devBranchName)
 }
 
 func (b branch) isRelease() bool {
 	return strings.HasPrefix(b.name, "release/")
-}
-
-func (b branch) phase() string {
-	if b.isRelease() ||
-		b.isMaster() ||
-		b.isFeature() ||
-		b.isRefactoring() ||
-		b.isBugfix() ||
-		b.isHotfix() {
-		return "development"
-	}
-
-	return "production"
 }

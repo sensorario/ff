@@ -2,7 +2,9 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"os"
 
 	"github.com/fatih/color"
@@ -19,9 +21,10 @@ func genLog() gol.Logger {
 }
 
 func main() {
+	conf := ReadConfiguration()
+	dir, _ := os.Getwd()
 	logger := genLog()
 
-	dir, _ := os.Getwd()
 	if _, err := os.Stat(dir + "/.git"); os.IsNotExist(err) {
 		for {
 			reader := bufio.NewReader(os.Stdin)
@@ -39,17 +42,20 @@ func main() {
 					"repository initialized",
 				))
 
-				// check if file exists
+				// @todo ask what is the development branche
+
+				confIndented, _ := json.MarshalIndent(conf, "", "  ")
+				if _, err := os.Stat(dir + "/.git/ff.conf.json"); os.IsNotExist(err) {
+					_ = ioutil.WriteFile(dir+"/.git/ff.conf.json", confIndented, 0644)
+				}
+				fmt.Println(color.YellowString("configuration file created"))
+
 				dir, _ := os.Getwd()
 				if _, err := os.Stat(dir + "/README.md"); os.IsNotExist(err) {
 					os.Create(dir + "/README.md")
-					fmt.Println(color.YellowString(
-						"readme file added",
-					))
+					fmt.Println(color.YellowString("readme file added"))
 				} else {
-					fmt.Println(color.YellowString(
-						"readme file preserved",
-					))
+					fmt.Println(color.YellowString("readme file preserved"))
 				}
 
 				gitInit = &gitCommand{
@@ -89,11 +95,20 @@ func main() {
 				os.Exit(0)
 			}
 		}
+	} else {
+		confIndented, _ := json.MarshalIndent(conf, "", "  ")
+		if _, err := os.Stat(dir + "/.git/ff.conf.json"); os.IsNotExist(err) {
+			_ = ioutil.WriteFile(dir+"/.git/ff.conf.json", confIndented, 0644)
+		}
 	}
 
+	devBranchName := conf.Branches.Historical.Development
+
 	cntxt := context{
-		CurrentStep: &checkTagStep{},
-		Logger:      logger,
+		CurrentStep:   &checkTagStep{},
+		Logger:        logger,
+		devBranchName: devBranchName,
+		conf:          conf,
 	}
 
 	cntxt.enterStep()
