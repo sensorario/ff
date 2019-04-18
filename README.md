@@ -38,6 +38,8 @@ Tag directly from master.
 
 Create git repository if not exists.
 
+Undo last commit.
+
 ## Commands
 
  - bugfix
@@ -51,9 +53,10 @@ Create git repository if not exists.
  - reset
  - status
  - tag
+ - undo
 
 ## Autocompletion
 
 Append the following lines in your .bash_profile file:
 
-    _ff='tag commit complete feature help hotfix bugfix publish refactor reset status' && complete -W "${_ff}" 'ff'
+    _ff='undo tag commit complete feature help hotfix bugfix publish refactor reset status' && complete -W "${_ff}" 'ff'
