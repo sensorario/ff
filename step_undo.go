@@ -5,7 +5,7 @@ type undoStep struct{}
 func (s undoStep) Execute(c *context) bool {
 	gitUndo := &gitCommand{
 		c.Logger,
-		[]string{"reset", "HEAD"},
+		[]string{"revert", "HEAD"},
 		"Cant undo last commit",
 	}
 
