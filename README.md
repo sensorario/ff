@@ -2,7 +2,6 @@
     <img
       alt="ff"
       src="https://raw.githubusercontent.com/sensorario/ff/master/logo.png"
-      width="400"
     />
 </p>
 
