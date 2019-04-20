@@ -46,74 +46,7 @@ func main() {
 	logger := genLog()
 
 	if !repositoryExists {
-		for {
-			fmt.Println(color.YellowString("Want you create new git repository here? (yes/no)"))
-
-			reader := bufio.NewReader(os.Stdin)
-			response, _ := reader.ReadString('\n')
-
-			if string(response) == "yes\n" {
-				gitInit := &gitCommand{
-					args:    []string{"init"},
-					message: "Cant create new branch",
-				}
-				_ = gitInit.Execute()
-				fmt.Println(color.YellowString(
-					"repository initialized",
-				))
-
-				// @todo ask what is the development branche
-
-				confIndented, _ := json.MarshalIndent(conf, "", "  ")
-				if _, err := os.Stat(".git/ff.conf.json"); os.IsNotExist(err) {
-					_ = ioutil.WriteFile(".git/ff.conf.json", confIndented, 0644)
-				}
-				fmt.Println(color.YellowString("configuration file created"))
-
-				if _, err := os.Stat("README.md"); os.IsNotExist(err) {
-					os.Create("README.md")
-					fmt.Println(color.YellowString("readme file added"))
-				} else {
-					fmt.Println(color.YellowString("readme file preserved"))
-				}
-
-				gitInit = &gitCommand{
-					Logger:  logger,
-					args:    []string{"add", "."},
-					message: "Cant stage everything",
-				}
-				_ = gitInit.Execute()
-				fmt.Println(color.YellowString(
-					"readme file staged",
-				))
-
-				gitInit = &gitCommand{
-					Logger:  logger,
-					args:    []string{"commit", "-m", "start"},
-					message: "Cant commit",
-				}
-				_ = gitInit.Execute()
-				fmt.Println(color.YellowString(
-					"first commit committed",
-				))
-
-				gitInit = &gitCommand{
-					Logger:  logger,
-					args:    []string{"tag", "v0.0.0"},
-					message: "Cant apply first tag",
-				}
-				_ = gitInit.Execute()
-				fmt.Println(color.YellowString(
-					"first tag v0.0.0 added",
-				))
-
-				os.Exit(0)
-			}
-
-			if string(response) == "no\n" {
-				os.Exit(0)
-			}
-		}
+		guidedRepositoryCreation(logger, conf)
 	} else {
 		confIndented, _ := json.MarshalIndent(conf, "", "  ")
 		if _, err := os.Stat(".git/ff.conf.json"); os.IsNotExist(err) {
@@ -134,5 +67,76 @@ func main() {
 
 	for cntxt.CurrentStep.Execute(&cntxt) {
 		cntxt.enterStep()
+	}
+}
+
+func guidedRepositoryCreation(logger gol.Logger, conf jsonConf) {
+	for {
+		fmt.Println(color.YellowString("Want you create new git repository here? (yes/no)"))
+
+		reader := bufio.NewReader(os.Stdin)
+		response, _ := reader.ReadString('\n')
+
+		if string(response) == "yes\n" {
+			gitInit := &gitCommand{
+				args:    []string{"init"},
+				message: "Cant create new branch",
+			}
+			_ = gitInit.Execute()
+			fmt.Println(color.YellowString(
+				"repository initialized",
+			))
+
+			// @todo ask what is the development branche
+
+			confIndented, _ := json.MarshalIndent(conf, "", "  ")
+			if _, err := os.Stat(".git/ff.conf.json"); os.IsNotExist(err) {
+				_ = ioutil.WriteFile(".git/ff.conf.json", confIndented, 0644)
+			}
+			fmt.Println(color.YellowString("configuration file created"))
+
+			if _, err := os.Stat("README.md"); os.IsNotExist(err) {
+				os.Create("README.md")
+				fmt.Println(color.YellowString("readme file added"))
+			} else {
+				fmt.Println(color.YellowString("readme file preserved"))
+			}
+
+			gitInit = &gitCommand{
+				Logger:  logger,
+				args:    []string{"add", "."},
+				message: "Cant stage everything",
+			}
+			_ = gitInit.Execute()
+			fmt.Println(color.YellowString(
+				"readme file staged",
+			))
+
+			gitInit = &gitCommand{
+				Logger:  logger,
+				args:    []string{"commit", "-m", "start"},
+				message: "Cant commit",
+			}
+			_ = gitInit.Execute()
+			fmt.Println(color.YellowString(
+				"first commit committed",
+			))
+
+			gitInit = &gitCommand{
+				Logger:  logger,
+				args:    []string{"tag", "v0.0.0"},
+				message: "Cant apply first tag",
+			}
+			_ = gitInit.Execute()
+			fmt.Println(color.YellowString(
+				"first tag v0.0.0 added",
+			))
+
+			os.Exit(0)
+		}
+
+		if string(response) == "no\n" {
+			os.Exit(0)
+		}
 	}
 }
