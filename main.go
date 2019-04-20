@@ -34,9 +34,8 @@ func main() {
 		_ = os.Chdir(repositoryRoot)
 	}
 
-	repositoryExists := true
-	if repositoryRoot == "" {
-		repositoryExists = false
+	repositoryExists := !os.IsNotExist(err)
+	if !repositoryExists {
 		fmt.Println(color.RedString("No repository found"))
 	}
 
