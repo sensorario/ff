@@ -31,7 +31,7 @@ func main() {
 	repositoryRoot, err := findRepository(currentFolder)
 
 	if err == nil {
-		if err := os.Chdir(repositoryRoot); err!=nil{
+		if err := os.Chdir(repositoryRoot); err != nil {
 			log.Fatalf("Could not change to repository root %q: %v", repositoryRoot, err)
 		}
 	}
@@ -65,13 +65,13 @@ func main() {
 				// @todo ask what is the development branche
 
 				confIndented, _ := json.MarshalIndent(conf, "", "  ")
-				if _, err := os.Stat(repositoryRoot + "/.git/ff.conf.json"); os.IsNotExist(err) {
-					_ = ioutil.WriteFile(repositoryRoot+"/.git/ff.conf.json", confIndented, 0644)
+				if _, err := os.Stat(".git/ff.conf.json"); os.IsNotExist(err) {
+					_ = ioutil.WriteFile(".git/ff.conf.json", confIndented, 0644)
 				}
 				fmt.Println(color.YellowString("configuration file created"))
 
-				if _, err := os.Stat(repositoryRoot + "/README.md"); os.IsNotExist(err) {
-					os.Create(repositoryRoot + "/README.md")
+				if _, err := os.Stat("README.md"); os.IsNotExist(err) {
+					os.Create("README.md")
 					fmt.Println(color.YellowString("readme file added"))
 				} else {
 					fmt.Println(color.YellowString("readme file preserved"))
@@ -116,8 +116,8 @@ func main() {
 		}
 	} else {
 		confIndented, _ := json.MarshalIndent(conf, "", "  ")
-		if _, err := os.Stat(repositoryRoot + "/.git/ff.conf.json"); os.IsNotExist(err) {
-			_ = ioutil.WriteFile(repositoryRoot+"/.git/ff.conf.json", confIndented, 0644)
+		if _, err := os.Stat(".git/ff.conf.json"); os.IsNotExist(err) {
+			_ = ioutil.WriteFile(".git/ff.conf.json", confIndented, 0644)
 		}
 	}
 
