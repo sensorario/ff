@@ -45,7 +45,6 @@ func main() {
 	logger := genLog()
 
 	if !repositoryExists {
-		fmt.Println("ciaone then")
 		for {
 			fmt.Println(color.YellowString("Want you create new git repository here? (yes/no)"))
 
@@ -115,7 +114,6 @@ func main() {
 			}
 		}
 	} else {
-		fmt.Println("ciaone")
 		confIndented, _ := json.MarshalIndent(conf, "", "  ")
 		if _, err := os.Stat(repositoryRoot + "/.git/ff.conf.json"); os.IsNotExist(err) {
 			_ = ioutil.WriteFile(repositoryRoot+"/.git/ff.conf.json", confIndented, 0644)
