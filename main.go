@@ -22,26 +22,34 @@ func genLog() gol.Logger {
 }
 
 func main() {
-	dir, err := os.Getwd()
+	currentFolder, err := os.Getwd()
+
 	if err != nil {
 		log.Fatal(err)
 	}
-	// Best effort attempt, don't want to interfere with the logic
-	// below, I'll let the maintainer decide how to use this
-	// helper.
-	if repo, err := findRepository(dir); err == nil {
-		_ = os.Chdir(repo)
+
+	repositoryRoot, err := findRepository(currentFolder)
+
+	if err == nil {
+		_ = os.Chdir(repositoryRoot)
 	}
 
-	conf := ReadConfiguration()
-	dir, _ = os.Getwd()
+	repositoryExists := true
+	if repositoryRoot == "" {
+		repositoryExists = false
+		fmt.Println(color.RedString("No repository found"))
+	}
+
+	conf, err := ReadConfiguration(repositoryRoot)
+
 	logger := genLog()
 
-	if _, err := os.Stat(dir + "/.git"); os.IsNotExist(err) {
+	if !repositoryExists {
+		fmt.Println("ciaone then")
 		for {
-			reader := bufio.NewReader(os.Stdin)
-			fmt.Println(color.RedString("No repository found"))
 			fmt.Println(color.YellowString("Want you create new git repository here? (yes/no)"))
+
+			reader := bufio.NewReader(os.Stdin)
 			response, _ := reader.ReadString('\n')
 
 			if string(response) == "yes\n" {
@@ -57,14 +65,13 @@ func main() {
 				// @todo ask what is the development branche
 
 				confIndented, _ := json.MarshalIndent(conf, "", "  ")
-				if _, err := os.Stat(dir + "/.git/ff.conf.json"); os.IsNotExist(err) {
-					_ = ioutil.WriteFile(dir+"/.git/ff.conf.json", confIndented, 0644)
+				if _, err := os.Stat(repositoryRoot + "/.git/ff.conf.json"); os.IsNotExist(err) {
+					_ = ioutil.WriteFile(repositoryRoot+"/.git/ff.conf.json", confIndented, 0644)
 				}
 				fmt.Println(color.YellowString("configuration file created"))
 
-				dir, _ := os.Getwd()
-				if _, err := os.Stat(dir + "/README.md"); os.IsNotExist(err) {
-					os.Create(dir + "/README.md")
+				if _, err := os.Stat(repositoryRoot + "/README.md"); os.IsNotExist(err) {
+					os.Create(repositoryRoot + "/README.md")
 					fmt.Println(color.YellowString("readme file added"))
 				} else {
 					fmt.Println(color.YellowString("readme file preserved"))
@@ -108,9 +115,10 @@ func main() {
 			}
 		}
 	} else {
+		fmt.Println("ciaone")
 		confIndented, _ := json.MarshalIndent(conf, "", "  ")
-		if _, err := os.Stat(dir + "/.git/ff.conf.json"); os.IsNotExist(err) {
-			_ = ioutil.WriteFile(dir+"/.git/ff.conf.json", confIndented, 0644)
+		if _, err := os.Stat(repositoryRoot + "/.git/ff.conf.json"); os.IsNotExist(err) {
+			_ = ioutil.WriteFile(repositoryRoot+"/.git/ff.conf.json", confIndented, 0644)
 		}
 	}
 

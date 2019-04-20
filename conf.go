@@ -27,15 +27,14 @@ type jsonConf struct {
 	} `json:"branches"`
 }
 
-func ReadConfiguration() jsonConf {
-	dir, errWd := os.Getwd()
-
-	if errWd != nil {
-		fmt.Println(color.RedString(errWd.Error()))
-		os.Exit(1)
+func ReadConfiguration(repositoryRoot string) (jj jsonConf, err error) {
+	if repositoryRoot == "" {
+		return jsonConf{}, fmt.Errorf("invalid repository folder")
 	}
 
-	file, errReadingConf := ioutil.ReadFile(dir + "/.git/ff.conf.json")
+	file, errReadingConf := ioutil.ReadFile(
+		repositoryRoot + "/.git/ff.conf.json",
+	)
 
 	c := jsonConf{}
 
@@ -56,5 +55,5 @@ func ReadConfiguration() jsonConf {
 		os.Exit(1)
 	}
 
-	return c
+	return c, nil
 }
