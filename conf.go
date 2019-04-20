@@ -41,7 +41,7 @@ func ReadConfiguration(repositoryRoot string) (jj jsonConf, err error) {
 	if os.IsNotExist(errReadingConf) {
 		c.Branches.Historical.Development = "master"
 		c.Features.TagAfterMerge = true
-		return c
+		return c, nil
 	}
 
 	if errReadingConf != nil {
