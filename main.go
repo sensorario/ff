@@ -31,7 +31,9 @@ func main() {
 	repositoryRoot, err := findRepository(currentFolder)
 
 	if err == nil {
-		_ = os.Chdir(repositoryRoot)
+		if err := os.Chdir(repositoryRoot); err!=nil{
+			log.Fatalf("Could not change to repository root %q: %v", repositoryRoot, err)
+		}
 	}
 
 	repositoryExists := !os.IsNotExist(err)
