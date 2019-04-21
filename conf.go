@@ -62,5 +62,10 @@ func ReadConfiguration(repositoryRoot string) (jj jsonConf, err error) {
 		os.Exit(1)
 	}
 
+	if c.Branches.Historical.Development == "" {
+		fmt.Println(color.RedString("Oops! Bad configuration: development branch cannot be empty"))
+		os.Exit(1)
+	}
+
 	return c, nil
 }
