@@ -11,7 +11,8 @@ import (
 
 type jsonConf struct {
 	Features struct {
-		TagAfterMerge bool `json:"tagAfterMerge"`
+		TagAfterMerge      bool `json:"tagAfterMerge"`
+		DisableUndoCommand bool `json:"disableUndoCommand"`
 	} `json:"features"`
 	Branches struct {
 		Historical struct {
@@ -38,21 +39,26 @@ func ReadConfiguration(repositoryRoot string) (jj jsonConf, err error) {
 
 	c := jsonConf{}
 
+	c.Features.TagAfterMerge = true
+	c.Features.DisableUndoCommand = false
+	c.Branches.Historical.Development = "master"
+
 	if os.IsNotExist(errReadingConf) {
-		c.Branches.Historical.Development = "master"
-		c.Features.TagAfterMerge = true
 		return c, nil
 	}
 
-	if errReadingConf != nil {
-		fmt.Println(color.RedString(errReadingConf.Error()))
+	errUnmarshal := json.Unmarshal([]byte(file), &c)
+	if errUnmarshal != nil {
+		fmt.Println(color.RedString("config file is corrupted"))
 		os.Exit(1)
 	}
 
-	errUnmarshal := json.Unmarshal([]byte(file), &c)
+	confIndented, _ := json.MarshalIndent(c, "", "  ")
 
-	if errUnmarshal != nil {
-		fmt.Println(color.RedString("config file is corrupted"))
+	ioutil.WriteFile(".git/ff.conf.json", confIndented, 0644)
+
+	if errReadingConf != nil {
+		fmt.Println(color.RedString(errReadingConf.Error()))
 		os.Exit(1)
 	}
 

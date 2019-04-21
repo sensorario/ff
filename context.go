@@ -60,7 +60,9 @@ func (c context) container() map[string]map[string]stepType {
 		ss["working"]["commit"] = stepType{wokingDirStep{}, "commit everything"}
 		ss["working"]["reset"] = stepType{resetStep{}, "reset working directory and stage"}
 	} else {
-		ss["working"]["undo"] = stepType{undoStep{}, "undo last commit"}
+		if c.conf.Features.DisableUndoCommand == false {
+			ss["working"]["undo"] = stepType{undoStep{}, "undo last commit"}
+		}
 	}
 
 	name := c.currentBranch()
