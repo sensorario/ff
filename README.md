@@ -17,11 +17,13 @@
 
  - change name of development branch
  - disable auto-tag whenever a support branch is merged
+ - disable undo command
 
 ```json
 {
   "features": {
-    "tagAfterMerge": true
+    "tagAfterMerge": true,
+    "disableUndoCommand": false
   },
   "branches": {
     "historical": {
