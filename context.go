@@ -10,22 +10,29 @@ type context struct {
 	Logger        gol.Logger
 	devBranchName string
 	conf          jsonConf
+	st            string
+}
+
+func (c context) status() string {
+	if c.st == "" {
+		gitStatus := &gitCommand{
+			c.Logger,
+			[]string{"status"},
+			"Cant get status",
+		}
+
+		c.st = gitStatus.Execute()
+	}
+
+	return c.st
 }
 
 func (c context) currentBranch() string {
-	gitStatus := &gitCommand{
-		c.Logger,
-		[]string{"status"},
-		"Cant get status",
-	}
-
-	cmdOut := gitStatus.Execute()
-
 	re := regexp.MustCompile(`On branch [\w\/\#\-\.]{0,}`)
 
 	branchName := ""
 
-	for _, match := range re.FindAllString(string(cmdOut), -1) {
+	for _, match := range re.FindAllString(string(c.status()), -1) {
 		branchName = strings.ReplaceAll(match, "On branch ", "")
 	}
 
@@ -80,17 +87,9 @@ func (c context) container() map[string]map[string]stepType {
 }
 
 func (c context) isWorkingDirClean() bool {
-	gitStatus := &gitCommand{
-		c.Logger,
-		[]string{"status"},
-		"Cant get status",
-	}
-
-	cmdOut := gitStatus.Execute()
-
 	re := regexp.MustCompile(`(?m)nothing to commit, working tree clean`)
 
-	for _ = range re.FindAllString(string(cmdOut), -1) {
+	for _ = range re.FindAllString(string(c.status()), -1) {
 		c.Logger.Info("working dir clean")
 		return true
 	}

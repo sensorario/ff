@@ -11,18 +11,10 @@ import (
 type completeBranchStep struct{}
 
 func (s completeBranchStep) Execute(c *context) bool {
-	gitStatus := &gitCommand{
-		args:    []string{"status"},
-		message: "Cant get status",
-		Logger:  c.Logger,
-	}
-
-	cmdOut := gitStatus.Execute()
-
 	re := regexp.MustCompile(`On branch [\w\/\#\-\.]{0,}`)
 
 	branchName := ""
-	for _, match := range re.FindAllString(string(cmdOut), -1) {
+	for _, match := range re.FindAllString(string(c.status()), -1) {
 		branchName = strings.ReplaceAll(match, "On branch ", "")
 	}
 
@@ -55,7 +47,7 @@ func (s completeBranchStep) Execute(c *context) bool {
 			"cant get tag description",
 		}
 
-		cmdOut = gitDescribeTags.Execute()
+		cmdOut := gitDescribeTags.Execute()
 
 		fmt.Print("current tag: ", color.GreenString(string(cmdOut)))
 
