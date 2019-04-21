@@ -49,6 +49,7 @@ Undo last commit.
 
 ## Commands
 
+ - authors
  - bugfix
  - commit
  - complete
@@ -66,4 +67,4 @@ Undo last commit.
 
 Append the following lines in your .bash_profile file:
 
-    _ff='undo tag commit complete feature help hotfix bugfix publish refactor reset status' && complete -W "${_ff}" 'ff'
+    _ff='authors undo tag commit complete feature help hotfix bugfix publish refactor reset status' && complete -W "${_ff}" 'ff'
