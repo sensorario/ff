@@ -8,18 +8,10 @@ import (
 type wokingDirStep struct{}
 
 func (s wokingDirStep) Execute(c *context) bool {
-	gitStatus := &gitCommand{
-		c.Logger,
-		[]string{"status"},
-		"Cant get status",
-	}
-
-	cmdOut := gitStatus.Execute()
-
 	re := regexp.MustCompile(`(?m)nothing to commit, working tree clean`)
 
 	isWorkingTreeClean := false
-	for _ = range re.FindAllString(string(cmdOut), -1) {
+	for _ = range re.FindAllString(string(c.status()), -1) {
 		isWorkingTreeClean = true
 		c.Logger.Info(color.RedString("working tree clean"))
 	}
