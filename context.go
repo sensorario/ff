@@ -55,6 +55,7 @@ func (c context) container() map[string]map[string]stepType {
 	ss["exec"]["status"] = stepType{&statusStep{}, "status"}
 	ss["exec"]["publish"] = stepType{publishStep{}, "push current branch into remote"}
 	ss["exec"]["authors"] = stepType{authorsStep{}, "list all committers"}
+	ss["exec"]["tree"] = stepType{treeStep{}, "show graph of branches"}
 
 	if !c.isWorkingDirClean() {
 		ss["working"]["commit"] = stepType{wokingDirStep{}, "commit everything"}
