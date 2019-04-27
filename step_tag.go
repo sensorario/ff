@@ -19,7 +19,12 @@ func (s tagStep) Execute(c *context) bool {
 
 	cmdOut := gitDescribeTags.Execute()
 
-	fmt.Print("current tag: ", color.GreenString(string(cmdOut)))
+	initialTag := strings.TrimSuffix(
+		string(cmdOut),
+		"\n",
+	)
+
+	fmt.Println("current tag: ", color.GreenString(initialTag))
 
 	tagName := ""
 
@@ -32,6 +37,20 @@ func (s tagStep) Execute(c *context) bool {
 	mt := meta{string(cmdOut), branchName}
 
 	tagName = mt.NextPatchTag()
+
+	tagName = strings.TrimSuffix(
+		string(tagName),
+		"\n",
+	)
+
+	if initialTag == tagName {
+		fmt.Println("")
+		fmt.Println(color.YellowString("\tsame tag found"))
+		fmt.Println(color.YellowString("\tno new tag will be added"))
+		fmt.Println("")
+	} else {
+		fmt.Println(color.YellowString("different tag"))
+	}
 
 	fmt.Println("next tag:   ", color.GreenString(tagName))
 
