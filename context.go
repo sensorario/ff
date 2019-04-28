@@ -5,12 +5,13 @@ import "strings"
 import "github.com/sensorario/gol"
 
 type context struct {
-	CurrentStep   fFStep
-	Exit          bool
-	Logger        gol.Logger
-	devBranchName string
-	conf          jsonConf
-	st            string
+	RepositoryRoot string
+	CurrentStep    fFStep
+	Exit           bool
+	Logger         gol.Logger
+	devBranchName  string
+	conf           jsonConf
+	st             string
 }
 
 func (c context) status() string {
@@ -55,6 +56,7 @@ func (c context) container() map[string]map[string]stepType {
 	ss["exec"]["status"] = stepType{&statusStep{}, "status"}
 	ss["exec"]["publish"] = stepType{publishStep{}, "push current branch into remote"}
 	ss["exec"]["authors"] = stepType{authorsStep{}, "list all committers"}
+	ss["exec"]["conf"] = stepType{confStep{}, "show configuration"}
 
 	if !c.isWorkingDirClean() {
 		ss["working"]["commit"] = stepType{wokingDirStep{}, "commit everything"}

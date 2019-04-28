@@ -57,10 +57,11 @@ func main() {
 	devBranchName := conf.Branches.Historical.Development
 
 	cntxt := context{
-		CurrentStep:   &checkTagStep{},
-		Logger:        logger,
-		devBranchName: devBranchName,
-		conf:          conf,
+		RepositoryRoot: repositoryRoot,
+		CurrentStep:    &checkTagStep{},
+		Logger:         logger,
+		devBranchName:  devBranchName,
+		conf:           conf,
 	}
 
 	cntxt.enterStep()
