@@ -59,6 +59,7 @@ Undo last commit.
  - feature
  - help
  - hotfix
+ - patch
  - publish
  - pull
  - refactor
@@ -71,4 +72,4 @@ Undo last commit.
 
 Append the following lines in your .bash_profile file:
 
-    _ff='pull conf authors undo tag commit complete feature help hotfix bugfix publish refactor reset status' && complete -W "${_ff}" 'ff'
+    _ff='patch pull conf authors undo tag commit complete feature help hotfix bugfix publish refactor reset status' && complete -W "${_ff}" 'ff'

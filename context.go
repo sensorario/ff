@@ -75,6 +75,7 @@ func (c context) container() map[string]map[string]stepType {
 		ss["start"]["bugfix"] = stepType{bugfixStep{}, "create new bugfix branch"}
 		ss["start"]["feature"] = stepType{featureStep{}, "create new feature branch"}
 		ss["start"]["refactor"] = stepType{refactoringStep{}, "create new refactor branch"}
+		ss["start"]["patch"] = stepType{patchStep{}, "create new patch branch"}
 		ss["exec"]["tag"] = stepType{tagStep{}, "force creation of new tag"}
 	} else {
 		ss["start"]["hotfix"] = stepType{hotfixStep{}, "create new hotfix branch"}
