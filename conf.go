@@ -13,6 +13,8 @@ type jsonConf struct {
 	Features struct {
 		TagAfterMerge      bool `json:"tagAfterMerge"`
 		DisableUndoCommand bool `json:"disableUndoCommand"`
+		StopAskingForTags  bool `json:"stopAskingForTags"`
+		ApplyFirstTag      bool `json:"applyFirstTag"`
 	} `json:"features"`
 	Branches struct {
 		Historical struct {
@@ -41,6 +43,7 @@ func ReadConfiguration(repositoryRoot string) (jj jsonConf, err error) {
 
 	c.Features.TagAfterMerge = true
 	c.Features.DisableUndoCommand = false
+	c.Features.StopAskingForTags = false
 	c.Branches.Historical.Development = "master"
 
 	if os.IsNotExist(errReadingConf) {
