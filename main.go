@@ -123,15 +123,20 @@ func guidedRepositoryCreation(logger gol.Logger, conf jsonConf) {
 				"first commit committed",
 			))
 
-			gitInit = &gitCommand{
-				Logger:  logger,
-				args:    []string{"tag", "v0.0.0"},
-				message: "Cant apply first tag",
+			fmt.Println(color.YellowString("Want you start tagging repository now? (yes/no)"))
+			reader := bufio.NewReader(os.Stdin)
+			response, _ := reader.ReadString('\n')
+			if string(response) == "yes\n" {
+				gitInit = &gitCommand{
+					Logger:  logger,
+					args:    []string{"tag", "v0.0.0"},
+					message: "Cant apply first tag",
+				}
+				_ = gitInit.Execute()
+				fmt.Println(color.YellowString(
+					"first tag v0.0.0 added",
+				))
 			}
-			_ = gitInit.Execute()
-			fmt.Println(color.YellowString(
-				"first tag v0.0.0 added",
-			))
 
 			os.Exit(0)
 		}
