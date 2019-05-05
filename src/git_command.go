@@ -42,7 +42,7 @@ func (gc *gitCommand) Execute() string {
 		os.Exit(1)
 	}
 
-	gc.Logger.Info(cmdOut)
+	gc.Logger.Info(string(cmdOut))
 
 	return string(cmdOut)
 }
