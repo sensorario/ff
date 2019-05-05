@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/fatih/color"
 	"github.com/sensorario/gol"
@@ -31,6 +32,7 @@ func (gc *gitCommand) Execute() string {
 
 	cmdOut, err = exec.Command(cmdName, cmdArgs...).Output()
 
+	gc.Logger.Info(color.YellowString(strings.Join(cmdArgs, " ")))
 	gc.Logger.Info(color.GreenString("<<< Response\n") + string(cmdOut))
 
 	if err != nil {
