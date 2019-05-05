@@ -31,7 +31,7 @@ func (gc *gitCommand) Execute() string {
 
 	cmdOut, err = exec.Command(cmdName, cmdArgs...).Output()
 
-	gc.Logger.Info(color.GreenString("<<< Response") + string(cmdOut))
+	gc.Logger.Info(color.GreenString("<<< Response\n") + string(cmdOut))
 
 	if err != nil {
 
