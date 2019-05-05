@@ -29,7 +29,11 @@ func (gc *gitCommand) Execute() string {
 	cmdName := "git"
 	cmdArgs := gc.Arguments()
 
-	if cmdOut, err = exec.Command(cmdName, cmdArgs...).Output(); err != nil {
+	cmdOut, err = exec.Command(cmdName, cmdArgs...).Output()
+
+	gc.Logger.Info(string(cmdOut))
+
+	if err != nil {
 
 		fmt.Println(color.RedString(err.Error()))
 		fmt.Println(color.RedString(gc.ErrorMessage()))
@@ -41,8 +45,6 @@ func (gc *gitCommand) Execute() string {
 
 		os.Exit(1)
 	}
-
-	gc.Logger.Info(string(cmdOut))
 
 	return string(cmdOut)
 }
