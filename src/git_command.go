@@ -42,5 +42,7 @@ func (gc *gitCommand) Execute() string {
 		os.Exit(1)
 	}
 
+	gc.Logger.Info(cmdOut)
+
 	return string(cmdOut)
 }
