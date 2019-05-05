@@ -5,13 +5,13 @@ type pullStep struct{}
 func (s pullStep) Execute(c *context) bool {
 	branchName := c.currentBranch()
 
-	gitPush := &gitCommand{
+	gitPull := &gitCommand{
 		c.Logger,
 		[]string{"pull", "origin", branchName, "--tags", "-f"},
 		"cant pull current branch and tags",
 	}
 
-	_ = gitPush.Execute()
+	_ = gitPull.Execute()
 
 	return false
 }
