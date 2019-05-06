@@ -28,7 +28,7 @@ func (s helpStep) Execute(c *context) bool {
 	for _, group := range c.Groups() {
 		conta := container[group]
 		show[group] = false
-		for _ = range conta {
+		for range conta {
 			show[group] = true
 		}
 	}

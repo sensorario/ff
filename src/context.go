@@ -97,7 +97,7 @@ func (c context) container() map[string]map[string]stepType {
 func (c context) isWorkingDirClean() bool {
 	re := regexp.MustCompile(`(?m)nothing to commit, working tree clean`)
 
-	for _ = range re.FindAllString(string(c.status()), -1) {
+	for range re.FindAllString(string(c.status()), -1) {
 		c.Logger.Info("working dir clean")
 		return true
 	}

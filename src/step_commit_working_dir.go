@@ -11,7 +11,7 @@ func (s wokingDirStep) Execute(c *context) bool {
 	re := regexp.MustCompile(`(?m)nothing to commit, working tree clean`)
 
 	isWorkingTreeClean := false
-	for _ = range re.FindAllString(string(c.status()), -1) {
+	for range re.FindAllString(string(c.status()), -1) {
 		isWorkingTreeClean = true
 		c.Logger.Info(color.RedString("working tree clean"))
 	}
