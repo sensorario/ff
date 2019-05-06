@@ -7,6 +7,7 @@ func (s undoStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"revert", "HEAD"},
 		"Cant undo last commit",
+		c.conf,
 	}
 
 	_ = gitUndo.Execute()

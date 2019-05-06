@@ -18,6 +18,7 @@ func (s commitStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"add", "."},
 		"Cant add files",
+		c.conf,
 	}
 
 	_ = gitAddAll.Execute()
@@ -26,6 +27,7 @@ func (s commitStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"commit", "-m", text},
 		"Cant add files",
+		c.conf,
 	}
 
 	_ = gitCommit.Execute()

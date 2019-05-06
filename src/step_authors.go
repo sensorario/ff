@@ -16,6 +16,7 @@ func (s authorsStep) Execute(c *context) bool {
 		c.Logger,
 		args,
 		"Cant lista authors",
+		c.conf,
 	}
 
 	out := gitShortLog.Execute()

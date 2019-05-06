@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/fatih/color"
 	"github.com/sensorario/gol"
@@ -13,6 +14,7 @@ type gitCommand struct {
 	Logger  gol.Logger
 	args    []string
 	message string
+	conf    jsonConf
 }
 
 func (gc gitCommand) ErrorMessage() string {
@@ -29,7 +31,14 @@ func (gc *gitCommand) Execute() string {
 	cmdName := "git"
 	cmdArgs := gc.Arguments()
 
-	if cmdOut, err = exec.Command(cmdName, cmdArgs...).Output(); err != nil {
+	cmdOut, err = exec.Command(cmdName, cmdArgs...).Output()
+
+	if gc.conf.Features.EnableGitCommandLog == true {
+		gc.Logger.Info(color.YellowString(strings.Join(cmdArgs, " ")))
+		gc.Logger.Info(color.GreenString("<<< Response\n") + string(cmdOut))
+	}
+
+	if err != nil {
 
 		fmt.Println(color.RedString(err.Error()))
 		fmt.Println(color.RedString(gc.ErrorMessage()))

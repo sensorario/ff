@@ -11,10 +11,11 @@ import (
 
 type jsonConf struct {
 	Features struct {
-		TagAfterMerge      bool `json:"tagAfterMerge"`
-		DisableUndoCommand bool `json:"disableUndoCommand"`
-		StopAskingForTags  bool `json:"stopAskingForTags"`
-		ApplyFirstTag      bool `json:"applyFirstTag"`
+		TagAfterMerge       bool `json:"tagAfterMerge"`
+		DisableUndoCommand  bool `json:"disableUndoCommand"`
+		StopAskingForTags   bool `json:"stopAskingForTags"`
+		ApplyFirstTag       bool `json:"applyFirstTag"`
+		EnableGitCommandLog bool `json:"enableGitCommandLog"`
 	} `json:"features"`
 	Branches struct {
 		Historical struct {
@@ -31,20 +32,21 @@ type jsonConf struct {
 }
 
 func ReadConfiguration(repositoryRoot string) (jj jsonConf, err error) {
+	c := jsonConf{}
+
 	if repositoryRoot == "" {
-		return jsonConf{}, fmt.Errorf("invalid repository folder")
+		c.Features.TagAfterMerge = true
+		c.Features.DisableUndoCommand = false
+		c.Features.StopAskingForTags = false
+		c.Features.EnableGitCommandLog = false
+		c.Branches.Historical.Development = "master"
+
+		return c, fmt.Errorf("invalid repository folder")
 	}
 
 	file, errReadingConf := ioutil.ReadFile(
 		repositoryRoot + "/.git/ff.conf.json",
 	)
-
-	c := jsonConf{}
-
-	c.Features.TagAfterMerge = true
-	c.Features.DisableUndoCommand = false
-	c.Features.StopAskingForTags = false
-	c.Branches.Historical.Development = "master"
 
 	if os.IsNotExist(errReadingConf) {
 		return c, nil

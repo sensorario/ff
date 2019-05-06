@@ -18,6 +18,7 @@ func (s bugfixStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"checkout", developmentBranch},
 		"Cant checkout " + developmentBranch,
+		c.conf,
 	}
 	_ = gitCheckoutBackToDev.Execute()
 
@@ -42,6 +43,7 @@ func (s bugfixStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"checkout", "-b", bugfixBranch},
 		"Cant create new branch",
+		c.conf,
 	}
 
 	_ = gitCheckoutNewBranch.Execute()

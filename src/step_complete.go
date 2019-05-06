@@ -27,6 +27,7 @@ func (s completeBranchStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"checkout", br.destination()},
 		"Cant checkout destination branch",
+		c.conf,
 	}
 
 	_ = gitCheckoutToDev.Execute()
@@ -35,6 +36,7 @@ func (s completeBranchStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"merge", "--no-ff", branchName},
 		"cant merge",
+		c.conf,
 	}
 
 	_ = gitMergeNoFF.Execute()
@@ -45,6 +47,7 @@ func (s completeBranchStep) Execute(c *context) bool {
 			c.Logger,
 			[]string{"describe", "--tags"},
 			"cant get tag description",
+			c.conf,
 		}
 
 		cmdOut := gitDescribeTags.Execute()
@@ -73,6 +76,7 @@ func (s completeBranchStep) Execute(c *context) bool {
 			c.Logger,
 			[]string{"tag", tagName, "-f"},
 			"cant tag",
+			c.conf,
 		}
 		_ = gitTag.Execute()
 	} else {
@@ -84,6 +88,7 @@ func (s completeBranchStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"branch", "-D", branchName},
 		"cant merge",
+		c.conf,
 	}
 	_ = gitDeleteOldBranch.Execute()
 	fmt.Println(color.GreenString("branch " + branchName + " deleted"))
@@ -94,6 +99,7 @@ func (s completeBranchStep) Execute(c *context) bool {
 			c.Logger,
 			[]string{"checkout", c.conf.Branches.Historical.Development},
 			"Cant checkout destination branch",
+			c.conf,
 		}
 		_ = gitCheckoutToDev.Execute()
 
@@ -101,6 +107,7 @@ func (s completeBranchStep) Execute(c *context) bool {
 			c.Logger,
 			[]string{"merge", "--no-ff", br.destination()},
 			"cant move to " + br.destination() + " updates",
+			c.conf,
 		}
 		_ = gitMergeNoFastForward.Execute()
 	}

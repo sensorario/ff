@@ -35,6 +35,7 @@ func (s hotfixStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"checkout", "-b", hotfixBranch},
 		"Cant create new branch",
+		c.conf,
 	}
 
 	_ = gitCheckoutNewBranch.Execute()
