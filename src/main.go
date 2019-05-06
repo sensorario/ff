@@ -12,13 +12,14 @@ import (
 	"github.com/sensorario/gol"
 )
 
-func genLog() gol.Logger {
+func genLog(repositoryRoot string) gol.Logger {
 	if envLogPath := os.Getenv("FF_LOG_PATH"); envLogPath != "" {
 		return gol.NewCustomLogger(envLogPath)
 	}
 
-	dir, _ := os.Getwd()
-	return gol.NewCustomLogger(dir + "/.git")
+	return gol.NewCustomLogger(
+		repositoryRoot + "/.git",
+	)
 }
 
 func main() {
@@ -43,7 +44,7 @@ func main() {
 
 	conf, err := ReadConfiguration(repositoryRoot)
 
-	logger := genLog()
+	logger := genLog(repositoryRoot)
 
 	if !repositoryExists {
 		guidedRepositoryCreation(logger, conf)
@@ -88,7 +89,7 @@ func guidedRepositoryCreation(logger gol.Logger, conf jsonConf) {
 				"repository initialized",
 			))
 
-			// @todo ask what is the development branche
+			// @todo ask what is the development branch
 
 			confIndented, _ := json.MarshalIndent(conf, "", "  ")
 			if _, err := os.Stat(".git/ff.conf.json"); os.IsNotExist(err) {
@@ -134,7 +135,7 @@ func guidedRepositoryCreation(logger gol.Logger, conf jsonConf) {
 				}
 				_ = gitInit.Execute()
 				fmt.Println(color.YellowString(
-					"first tag v0.0.0 added",
+					"first tag v0.0.0 added!",
 				))
 			}
 

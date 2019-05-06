@@ -32,23 +32,23 @@ type jsonConf struct {
 }
 
 func ReadConfiguration(repositoryRoot string) (jj jsonConf, err error) {
+	c := jsonConf{}
+
 	if repositoryRoot == "" {
-		return jsonConf{}, fmt.Errorf("invalid repository folder")
+		c.Features.TagAfterMerge = true
+		c.Features.DisableUndoCommand = false
+		c.Features.StopAskingForTags = false
+		c.Features.EnableGitCommandLog = false
+		c.Branches.Historical.Development = "master"
+
+		return c, fmt.Errorf("invalid repository folder")
 	}
 
 	file, errReadingConf := ioutil.ReadFile(
 		repositoryRoot + "/.git/ff.conf.json",
 	)
 
-	c := jsonConf{}
-
 	if os.IsNotExist(errReadingConf) {
-		c.Features.TagAfterMerge = true
-		c.Features.DisableUndoCommand = false
-		c.Features.StopAskingForTags = false
-		c.Features.EnableGitCommandLog = true
-		c.Branches.Historical.Development = "master"
-
 		return c, nil
 	}
 
