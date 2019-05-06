@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type pullStep struct{}
 
 func (s pullStep) Execute(c *context) bool {
@@ -12,7 +14,9 @@ func (s pullStep) Execute(c *context) bool {
 		c.conf,
 	}
 
-	_ = gitPull.Execute()
+	output := gitPull.Execute()
+
+	fmt.Println(output)
 
 	return false
 }
