@@ -9,6 +9,7 @@ func (s pullStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"pull", "origin", branchName, "--tags", "-f"},
 		"cant pull current branch and tags",
+		c.conf,
 	}
 
 	_ = gitPull.Execute()

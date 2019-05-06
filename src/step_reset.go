@@ -7,6 +7,7 @@ func (s resetStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"add", "."},
 		"Cant add working directory to stage",
+		c.conf,
 	}
 
 	_ = gitAddEverything.Execute()
@@ -15,6 +16,7 @@ func (s resetStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"reset", "--hard"},
 		"Cant reset",
+		c.conf,
 	}
 
 	_ = gitResetHard.Execute()

@@ -14,6 +14,7 @@ type gitCommand struct {
 	Logger  gol.Logger
 	args    []string
 	message string
+	conf    jsonConf
 }
 
 func (gc gitCommand) ErrorMessage() string {
@@ -32,8 +33,10 @@ func (gc *gitCommand) Execute() string {
 
 	cmdOut, err = exec.Command(cmdName, cmdArgs...).Output()
 
-	gc.Logger.Info(color.YellowString(strings.Join(cmdArgs, " ")))
-	gc.Logger.Info(color.GreenString("<<< Response\n") + string(cmdOut))
+	if gc.conf.Features.EnableGitCommandLog == true {
+		gc.Logger.Info(color.YellowString(strings.Join(cmdArgs, " ")))
+		gc.Logger.Info(color.GreenString("<<< Response\n") + string(cmdOut))
+	}
 
 	if err != nil {
 

@@ -20,6 +20,7 @@ func (c context) status() string {
 			c.Logger,
 			[]string{"status"},
 			"Cant get status",
+			c.conf,
 		}
 
 		c.st = gitStatus.Execute()

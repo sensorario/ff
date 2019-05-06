@@ -15,6 +15,7 @@ func (s tagStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"describe", "--tags"},
 		"cant force tag",
+		c.conf,
 	}
 
 	cmdOut := gitDescribeTags.Execute()
@@ -58,6 +59,7 @@ func (s tagStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"tag", tagName, "-f"},
 		"cant tag",
+		c.conf,
 	}
 	_ = gitTag.Execute()
 

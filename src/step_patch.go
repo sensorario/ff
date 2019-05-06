@@ -18,6 +18,7 @@ func (s patchStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"checkout", developmentBranch},
 		"Cant checkout " + developmentBranch,
+		c.conf,
 	}
 
 	_ = gitCheckoutToDev.Execute()
@@ -39,6 +40,7 @@ func (s patchStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"checkout", "-b", patchBranchName},
 		"Cant create new branch",
+		c.conf,
 	}
 
 	_ = gitCheckoutNewBranch.Execute()

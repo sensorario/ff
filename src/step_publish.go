@@ -9,6 +9,7 @@ func (s publishStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"push", "origin", branchName, "--tags", "-f"},
 		"cant push current branch and tags",
+		c.conf,
 	}
 
 	_ = gitPush.Execute()

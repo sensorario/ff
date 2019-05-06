@@ -18,6 +18,7 @@ func (s featureStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"checkout", developmentBranch},
 		"Cant checkout " + developmentBranch,
+		c.conf,
 	}
 	output := gitCheckoutToDev.Execute()
 	fmt.Println(output)
@@ -39,6 +40,7 @@ func (s featureStep) Execute(c *context) bool {
 		c.Logger,
 		[]string{"checkout", "-b", featureBranchName},
 		"Cant create new branch",
+		c.conf,
 	}
 
 	_ = gitCheckoutNewBranch.Execute()

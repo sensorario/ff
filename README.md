@@ -20,6 +20,7 @@
  - disable undo command
  - ask if user want to tag
  - stop asking for auto-tag
+ - enable/disable git command output log
 
 ```json
 {
@@ -27,7 +28,8 @@
     "tagAfterMerge": true,
     "disableUndoCommand": false,
     "stopAskingForTags": false,
-    "applyFirstTag": false
+    "applyFirstTag": false,
+    "enableGitCommandLog": true
   },
   "branches": {
     "historical": {
@@ -53,7 +55,7 @@ Create git repository if not exists.
 
 Undo last commit.
 
-Any git command's output is logged in *.git/logger.log*.
+Any git command's output is logged in *.git/logger.log*. Logs may be disabled or not using configuration.
 
 ## Commands
 
