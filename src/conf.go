@@ -31,7 +31,7 @@ type jsonConf struct {
 	} `json:"branches"`
 }
 
-func ReadConfiguration(repositoryRoot string) (jj jsonConf, err error) {
+func readConfiguration(repositoryRoot string) (jj jsonConf, err error) {
 	c := jsonConf{}
 
 	if repositoryRoot == "" {
