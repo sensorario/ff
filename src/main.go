@@ -42,7 +42,7 @@ func main() {
 		fmt.Println(color.RedString("No repository found"))
 	}
 
-	conf, err := ReadConfiguration(repositoryRoot)
+	conf, err := readConfiguration(repositoryRoot)
 
 	logger := genLog(repositoryRoot)
 

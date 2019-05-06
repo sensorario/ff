@@ -68,7 +68,7 @@ func (s checkTagStep) Execute(c *context) bool {
 				response, _ := reader.ReadString('\n')
 
 				if string(response) == "yes\n" {
-					conf, _ := ReadConfiguration(c.RepositoryRoot)
+					conf, _ := readConfiguration(c.RepositoryRoot)
 					conf.Features.StopAskingForTags = true
 					confIndented, _ := json.MarshalIndent(conf, "", "  ")
 					ioutil.WriteFile(".git/ff.conf.json", confIndented, 0644)
