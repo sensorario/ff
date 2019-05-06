@@ -53,7 +53,7 @@ Create git repository if not exists.
 
 Undo last commit.
 
-Any git command's output is logged and retrieved in *.git/logger.log*.
+Any git command's output is logged in *.git/logger.log*.
 
 ## Commands
 
