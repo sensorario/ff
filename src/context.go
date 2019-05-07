@@ -58,6 +58,7 @@ func (c context) container() map[string]map[string]stepType {
 	ss["exec"]["publish"] = stepType{publishStep{}, "push current branch into remote"}
 	ss["exec"]["pull"] = stepType{pullStep{}, "pull current branch from remote"}
 	ss["exec"]["authors"] = stepType{authorsStep{}, "list all committers"}
+	ss["exec"]["fetch_all"] = stepType{fetchAllStep{}, "fetch all branches"}
 	ss["exec"]["conf"] = stepType{confStep{}, "show configuration"}
 
 	if !c.isWorkingDirClean() {
