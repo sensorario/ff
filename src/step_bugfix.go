@@ -32,6 +32,11 @@ func (s bugfixStep) Execute(c *context) bool {
 	)
 	bugfixDescription = strings.ReplaceAll(
 		bugfixDescription,
+		"'",
+		"-",
+	)
+	bugfixDescription = strings.ReplaceAll(
+		bugfixDescription,
 		"\n",
 		"",
 	)

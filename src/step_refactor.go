@@ -27,6 +27,7 @@ func (s refactoringStep) Execute(c *context) bool {
 	fmt.Print(color.RedString("Refactoring descrption: "))
 	featureName, _ := reader.ReadString('\n')
 	featureName = strings.ReplaceAll(featureName, " ", "-")
+	featureName = strings.ReplaceAll(featureName, "'", "-")
 	featureName = strings.ReplaceAll(featureName, "\n", "")
 
 	fmt.Print(

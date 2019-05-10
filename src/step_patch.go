@@ -27,6 +27,7 @@ func (s patchStep) Execute(c *context) bool {
 	fmt.Print(color.RedString("Patch descrption: "))
 	patchDescription, _ := reader.ReadString('\n')
 	patchDescription = strings.ReplaceAll(patchDescription, " ", "-")
+	patchDescription = strings.ReplaceAll(patchDescription, "'", "-")
 	patchDescription = strings.ReplaceAll(patchDescription, "\n", "")
 
 	fmt.Print(
