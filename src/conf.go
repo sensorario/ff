@@ -16,6 +16,8 @@ type jsonConf struct {
 		StopAskingForTags   bool `json:"stopAskingForTags"`
 		ApplyFirstTag       bool `json:"applyFirstTag"`
 		EnableGitCommandLog bool `json:"enableGitCommandLog"`
+		ForceOnPublish      bool `json:"forceOnPublish"`
+		PushTagsOnPublish   bool `json:"pushTagsOnPublish"`
 	} `json:"features"`
 	Branches struct {
 		Historical struct {

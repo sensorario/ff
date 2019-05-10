@@ -14,7 +14,9 @@
     "disableUndoCommand": false,
     "stopAskingForTags": false,
     "applyFirstTag": false,
-    "enableGitCommandLog": true
+    "enableGitCommandLog": true,
+    "forceOnPublish": false,
+    "pushTagsOnPublish": false
   },
   "branches": {
     "historical": {
@@ -23,4 +25,3 @@
   }
 }
 ```
-
