@@ -16,3 +16,4 @@ Undo last commit.
 
 Any git command's output is logged in *.git/logger.log*. Logs may be disabled or not using configuration.
 
+Fetch all branches and tags.

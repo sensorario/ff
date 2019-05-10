@@ -6,6 +6,7 @@
  - complete
  - conf
  - feature
+ - fetch_all
  - help
  - hotfix
  - patch
