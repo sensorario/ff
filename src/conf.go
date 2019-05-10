@@ -33,16 +33,22 @@ type jsonConf struct {
 	} `json:"branches"`
 }
 
-func readConfiguration(repositoryRoot string) (jj jsonConf, err error) {
+func defaultConfig() jsonConf {
 	c := jsonConf{}
 
-	if repositoryRoot == "" {
-		c.Features.TagAfterMerge = true
-		c.Features.DisableUndoCommand = false
-		c.Features.StopAskingForTags = false
-		c.Features.EnableGitCommandLog = false
-		c.Branches.Historical.Development = "master"
+	c.Features.TagAfterMerge = true
+	c.Features.DisableUndoCommand = false
+	c.Features.StopAskingForTags = false
+	c.Features.EnableGitCommandLog = false
+	c.Branches.Historical.Development = "master"
 
+	return c
+}
+
+func readConfiguration(repositoryRoot string) (jj jsonConf, err error) {
+	c := defaultConfig()
+
+	if repositoryRoot == "" {
 		return c, fmt.Errorf("invalid repository folder")
 	}
 
