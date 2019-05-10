@@ -6,6 +6,8 @@
  - ask if user want to tag
  - stop asking for auto-tag
  - enable/disable git command output log
+ - git push may be forced or not
+ - git push with tags
 
 ```json
 {
