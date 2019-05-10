@@ -39,7 +39,11 @@ func defaultConfig() jsonConf {
 	c.Features.TagAfterMerge = true
 	c.Features.DisableUndoCommand = false
 	c.Features.StopAskingForTags = false
+	c.Features.ApplyFirstTag = true
 	c.Features.EnableGitCommandLog = false
+	c.Features.ForceOnPublish = false
+	c.Features.PushTagsOnPublish = false
+
 	c.Branches.Historical.Development = "master"
 
 	return c
