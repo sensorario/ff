@@ -5,12 +5,12 @@ type publishStep struct{}
 func (s publishStep) Execute(c *context) bool {
 	branchName := c.currentBranch()
 
-	args = []string{"push", "origin", branchName}
-	if gc.conf.Features.ForceOnPublish == true {
+	args := []string{"push", "origin", branchName}
+	if c.conf.Features.ForceOnPublish == true {
 		args = append(args, "-f")
 	}
 
-	if gc.conf.Features.PushTagsOnPublish == true {
+	if c.conf.Features.PushTagsOnPublish == true {
 		args = append(args, "--tags")
 	}
 
