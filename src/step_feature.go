@@ -29,6 +29,7 @@ func (s featureStep) Execute(c *context) bool {
 	featureName = strings.ReplaceAll(featureName, " ", "-")
 	featureName = strings.ReplaceAll(featureName, "'", "-")
 	featureName = strings.ReplaceAll(featureName, "\n", "")
+	featureName = strings.ToLower(featureName)
 
 	fmt.Print(
 		"Feature: ",

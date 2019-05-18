@@ -29,6 +29,7 @@ func (s patchStep) Execute(c *context) bool {
 	patchDescription = strings.ReplaceAll(patchDescription, " ", "-")
 	patchDescription = strings.ReplaceAll(patchDescription, "'", "-")
 	patchDescription = strings.ReplaceAll(patchDescription, "\n", "")
+	patchDescription = strings.ToLower(patchDescription)
 
 	fmt.Print(
 		"Patch: ",
