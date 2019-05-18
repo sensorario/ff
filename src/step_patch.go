@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/fatih/color"
 )
@@ -25,11 +24,8 @@ func (s patchStep) Execute(c *context) bool {
 
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(color.RedString("Patch descrption: "))
-	patchDescription, _ := reader.ReadString('\n')
-	patchDescription = strings.ReplaceAll(patchDescription, " ", "-")
-	patchDescription = strings.ReplaceAll(patchDescription, "'", "-")
-	patchDescription = strings.ReplaceAll(patchDescription, "\n", "")
-	patchDescription = strings.ToLower(patchDescription)
+	readedString, _ := reader.ReadString('\n')
+	patchDescription := slugify(readedString)
 
 	fmt.Print(
 		"Patch: ",

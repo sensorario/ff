@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/fatih/color"
 )
@@ -25,11 +24,8 @@ func (s featureStep) Execute(c *context) bool {
 
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(color.RedString("New feature description: "))
-	featureName, _ := reader.ReadString('\n')
-	featureName = strings.ReplaceAll(featureName, " ", "-")
-	featureName = strings.ReplaceAll(featureName, "'", "-")
-	featureName = strings.ReplaceAll(featureName, "\n", "")
-	featureName = strings.ToLower(featureName)
+	readedString, _ := reader.ReadString('\n')
+	featureName := slugify(readedString)
 
 	fmt.Print(
 		"Feature: ",

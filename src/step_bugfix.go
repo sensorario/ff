@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/fatih/color"
 )
@@ -24,11 +23,8 @@ func (s bugfixStep) Execute(c *context) bool {
 
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print(color.RedString("Bugfix description: "))
-	bugfixDescription, _ := reader.ReadString('\n')
-	bugfixDescription = strings.ReplaceAll(bugfixDescription, " ", "-")
-	bugfixDescription = strings.ReplaceAll(bugfixDescription, "'", "-")
-	bugfixDescription = strings.ReplaceAll(bugfixDescription, "\n", "")
-	bugfixDescription = strings.ToLower(bugfixDescription)
+	readedString, _ := reader.ReadString('\n')
+	bugfixDescription := slugify(readedString)
 
 	bugfixBranch := "bugfix/" + bugfixDescription + "/" + developmentBranch
 	fmt.Println("Bugfix: ", color.YellowString(bugfixBranch))
