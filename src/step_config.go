@@ -1,10 +1,16 @@
 package main
 
+import (
+	"fmt"
+)
+
 type configStep struct{}
 
 func (s configStep) Execute(c *context) bool {
 
-	c.Logger.Info("ciaone")
+	for i := range c.getInput() {
+		fmt.Println(i)
+	}
 
 	c.CurrentStep = &finalStep{}
 

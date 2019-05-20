@@ -1,8 +1,11 @@
 package main
 
-import "regexp"
-import "strings"
-import "github.com/sensorario/gol"
+import (
+	"fmt"
+	"github.com/sensorario/gol"
+	"regexp"
+	"strings"
+)
 
 type context struct {
 	RepositoryRoot string
@@ -12,6 +15,19 @@ type context struct {
 	devBranchName  string
 	conf           jsonConf
 	st             string
+	arguments      []string
+}
+
+func (c context) getInput() []string {
+	return c.arguments
+}
+
+func (c context) args(input []string) {
+	for _, v := range input {
+		fmt.Println(v)
+	}
+
+	c.arguments = input
 }
 
 func (c context) status() string {
