@@ -18,6 +18,8 @@ func (s inputReadingStep) Execute(c *context) bool {
 
 	ss := c.container()
 
+	c.args(os.Args)
+
 	for _, group := range c.Groups() {
 		item, ok := ss[group][command]
 		if ok {

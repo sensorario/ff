@@ -1,8 +1,11 @@
 package main
 
-import "regexp"
-import "strings"
-import "github.com/sensorario/gol"
+import (
+	"regexp"
+	"strings"
+
+	"github.com/sensorario/gol"
+)
 
 type context struct {
 	RepositoryRoot string
@@ -12,6 +15,15 @@ type context struct {
 	devBranchName  string
 	conf           jsonConf
 	st             string
+	arguments      []string
+}
+
+func (c context) getInput() []string {
+	return c.arguments
+}
+
+func (c *context) args(input []string) {
+	c.arguments = input
 }
 
 func (c context) status() string {
@@ -60,6 +72,7 @@ func (c context) container() map[string]map[string]stepType {
 	ss["exec"]["authors"] = stepType{authorsStep{}, "list all committers"}
 	ss["exec"]["fetch_all"] = stepType{fetchAllStep{}, "fetch all branches"}
 	ss["exec"]["conf"] = stepType{confStep{}, "show configuration"}
+	ss["exec"]["config"] = stepType{configStep{}, "update configuration"}
 
 	if !c.isWorkingDirClean() {
 		ss["working"]["commit"] = stepType{wokingDirStep{}, "commit everything"}
