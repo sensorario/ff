@@ -60,6 +60,7 @@ func (c context) container() map[string]map[string]stepType {
 	ss["exec"]["authors"] = stepType{authorsStep{}, "list all committers"}
 	ss["exec"]["fetch_all"] = stepType{fetchAllStep{}, "fetch all branches"}
 	ss["exec"]["conf"] = stepType{confStep{}, "show configuration"}
+	ss["exec"]["config"] = stepType{configStep{}, "update configuration"}
 
 	if !c.isWorkingDirClean() {
 		ss["working"]["commit"] = stepType{wokingDirStep{}, "commit everything"}
