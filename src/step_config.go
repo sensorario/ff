@@ -42,11 +42,33 @@ func (s configStep) Execute(c *context) bool {
 			c.conf.Features.DisableUndoCommand = c.conf.Features.DisableUndoCommand == false
 		}
 
+		if feature == "stopAskingForTags" {
+			c.conf.Features.StopAskingForTags = c.conf.Features.StopAskingForTags == false
+		}
+
+		if feature == "applyFirstTag" {
+			c.conf.Features.ApplyFirstTag = c.conf.Features.ApplyFirstTag == false
+		}
+
+		if feature == "enableGitCommandLog" {
+			c.conf.Features.EnableGitCommandLog = c.conf.Features.EnableGitCommandLog == false
+		}
+
+		if feature == "forceOnPublish" {
+			c.conf.Features.ForceOnPublish = c.conf.Features.ForceOnPublish == false
+		}
+
+		if feature == "pushTagsOnPublish" {
+			c.conf.Features.PushTagsOnPublish = c.conf.Features.PushTagsOnPublish == false
+		}
+
 		confIndented, _ := json.MarshalIndent(c.conf, "", "  ")
 		ioutil.WriteFile(".git/ff.conf.json", confIndented, 0644)
 	} else {
 		fmt.Println(color.RedString("Comando NON trovato"))
 	}
+
+	fmt.Println(color.RedString("type `ff conf` to see configuration"))
 
 	c.CurrentStep = &finalStep{}
 
