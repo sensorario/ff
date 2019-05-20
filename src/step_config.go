@@ -12,6 +12,13 @@ type configStep struct{}
 
 func (s configStep) Execute(c *context) bool {
 
+	if len(c.getInput()) < 3 {
+		confIndented, _ := json.MarshalIndent(c.conf, "", "  ")
+		fmt.Println(string(confIndented))
+		c.CurrentStep = &finalStep{}
+		return true
+	}
+
 	inputs := c.getInput()
 	feature := inputs[2] // ff config *****
 	fmt.Println(feature)
@@ -67,8 +74,6 @@ func (s configStep) Execute(c *context) bool {
 	} else {
 		fmt.Println(color.RedString("Comando NON trovato"))
 	}
-
-	fmt.Println(color.RedString("type `ff conf` to see configuration"))
 
 	c.CurrentStep = &finalStep{}
 
