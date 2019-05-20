@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
-	"github.com/sensorario/gol"
 	"regexp"
 	"strings"
+
+	"github.com/sensorario/gol"
 )
 
 type context struct {
@@ -22,11 +22,7 @@ func (c context) getInput() []string {
 	return c.arguments
 }
 
-func (c context) args(input []string) {
-	for _, v := range input {
-		fmt.Println(v)
-	}
-
+func (c *context) args(input []string) {
 	c.arguments = input
 }
 
