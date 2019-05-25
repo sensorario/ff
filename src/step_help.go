@@ -42,6 +42,7 @@ func (s helpStep) Execute(c *context) bool {
 	fmt.Println("        " + color.WhiteString("                    // 'enableGitCommandLog'"))
 	fmt.Println("        " + color.WhiteString("                    // 'forceOnPublish'"))
 	fmt.Println("        " + color.WhiteString("                    // 'pushTagsOnPublish'"))
+	fmt.Println("        " + color.WhiteString("                    // 'removeRemotelyMerged'"))
 	fmt.Println("")
 
 	for _, group := range c.Groups() {

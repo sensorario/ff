@@ -11,13 +11,14 @@ import (
 
 type jsonConf struct {
 	Features struct {
-		TagAfterMerge       bool `json:"tagAfterMerge"`
-		DisableUndoCommand  bool `json:"disableUndoCommand"`
-		StopAskingForTags   bool `json:"stopAskingForTags"`
-		ApplyFirstTag       bool `json:"applyFirstTag"`
-		EnableGitCommandLog bool `json:"enableGitCommandLog"`
-		ForceOnPublish      bool `json:"forceOnPublish"`
-		PushTagsOnPublish   bool `json:"pushTagsOnPublish"`
+		ApplyFirstTag        bool `json:"applyFirstTag"`
+		DisableUndoCommand   bool `json:"disableUndoCommand"`
+		EnableGitCommandLog  bool `json:"enableGitCommandLog"`
+		ForceOnPublish       bool `json:"forceOnPublish"`
+		PushTagsOnPublish    bool `json:"pushTagsOnPublish"`
+		RemoveRemotelyMerged bool `json:"removeRemotelyMerged"`
+		StopAskingForTags    bool `json:"stopAskingForTags"`
+		TagAfterMerge        bool `json:"tagAfterMerge"`
 	} `json:"features"`
 	Branches struct {
 		Historical struct {
@@ -37,11 +38,12 @@ func readConfiguration(repositoryRoot string) (jj jsonConf, err error) {
 	c := jsonConf{}
 
 	if repositoryRoot == "" {
-		c.Features.TagAfterMerge = true
-		c.Features.DisableUndoCommand = false
-		c.Features.StopAskingForTags = false
-		c.Features.EnableGitCommandLog = false
 		c.Branches.Historical.Development = "master"
+		c.Features.DisableUndoCommand = false
+		c.Features.EnableGitCommandLog = false
+		c.Features.RemoveRemotelyMerged = true
+		c.Features.StopAskingForTags = false
+		c.Features.TagAfterMerge = true
 
 		return c, fmt.Errorf("invalid repository folder")
 	}
