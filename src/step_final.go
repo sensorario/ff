@@ -25,7 +25,6 @@ func (s finalStep) Execute(c *context) bool {
 		lines := strings.Split(output, "\n")
 		for _, line := range lines {
 			if strings.Contains(line, "origin") {
-				// @todo use development or historical branches
 				if !strings.Contains(line, c.conf.Branches.Historical.Development) {
 					c.Logger.Info(color.RedString("delete " + line))
 
