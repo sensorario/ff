@@ -24,25 +24,18 @@ func (s finalStep) Execute(c *context) bool {
 
 		lines := strings.Split(output, "\n")
 		for _, line := range lines {
-			if strings.Contains(line, "origin") {
-				if strings.Contains(line, "/"+c.conf.Branches.Historical.Development) && !strings.Contains(line, "HEAD") && line != "remotes/origin/"+c.conf.Branches.Historical.Development {
-					c.Logger.Info(color.RedString("delete " + line))
+			if strings.Contains(line, "remotes/origin") {
 
-					branchName := strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)
-					if branchName != c.conf.Branches.Historical.Development {
-						gitCheckoutToDev := &gitCommand{
-							c.Logger,
-							[]string{"push", "origin", ":" + strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)},
-							"Cant list all local branches ",
-							c.conf,
-						}
-
-						gitCheckoutToDev.Execute()
+				branchName := strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)
+				if branchName != c.conf.Branches.Historical.Development && !strings.Contains(branchName, "HEAD") {
+					gitCheckoutToDev := &gitCommand{
+						c.Logger,
+						[]string{"push", "origin", ":" + strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)},
+						"Cant list all local branches ",
+						c.conf,
 					}
-				} else {
-					c.Logger.Info(
-						color.RedString("not dev " + line),
-					)
+
+					gitCheckoutToDev.Execute()
 				}
 			}
 		}
