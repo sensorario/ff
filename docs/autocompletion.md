@@ -17,7 +17,7 @@ _ff()
         2)
             case ${prev} in
                 config)
-                    COMPREPLY=($(compgen -W "tagAfterMerge disableUndoCommand stopAskingForTags applyFirstTag enableGitCommandLog forceOnPublish pushTagsOnPublish" -- ${cur}))
+                    COMPREPLY=($(compgen -W "tagAfterMerge disableUndoCommand stopAskingForTags applyFirstTag enableGitCommandLog forceOnPublish pushTagsOnPublish removeRemotelyMerged" -- ${cur}))
                     ;;
             esac
             ;;
