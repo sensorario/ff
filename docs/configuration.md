@@ -8,17 +8,19 @@
  - enable/disable git command output log
  - git push may be forced or not
  - git push with tags
+ - remove merged branches already in origin
 
 ```json
 {
   "features": {
-    "tagAfterMerge": true,
-    "disableUndoCommand": false,
-    "stopAskingForTags": false,
     "applyFirstTag": false,
+    "disableUndoCommand": false,
     "enableGitCommandLog": true,
     "forceOnPublish": false,
-    "pushTagsOnPublish": false
+    "pushTagsOnPublish": false,
+    "removeRemotelyMerged": false,
+    "stopAskingForTags": false,
+    "tagAfterMerge": true
   },
   "branches": {
     "historical": {
