@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"strings"
 
 	"github.com/fatih/color"
 )
@@ -22,7 +22,21 @@ func (s finalStep) Execute(c *context) bool {
 		}
 		output := gitCheckoutToDev.Execute()
 
-		fmt.Println(output)
+		lines := strings.Split(output, "\n")
+		for _, line := range lines {
+			if strings.Contains(line, "origin") {
+				// @todo use development or historical branches
+				if !strings.Contains(line, "master") {
+					gitCheckoutToDev := &gitCommand{
+						c.Logger,
+						[]string{"push", "origin", ":" + strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)},
+						"Cant list all local branches ",
+						c.conf,
+					}
+					gitCheckoutToDev.Execute()
+				}
+			}
+		}
 
 	} else {
 		c.Logger.Info(color.GreenString("leave remotely merged branches"))
