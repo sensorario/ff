@@ -5,6 +5,7 @@
  - commit
  - complete
  - conf
+ - config [feature]
  - feature
  - fetch_all
  - help

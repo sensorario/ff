@@ -19,3 +19,5 @@ Any git command's output is logged in *.git/logger.log*. Logs may be disabled or
 Fetch all branches and tags.
 
 Toggle all configuration directly from bash.
+
+Keep origin clean from merged branches.
