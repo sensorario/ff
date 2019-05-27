@@ -24,13 +24,14 @@ func (s configStep) Execute(c *context) bool {
 	fmt.Println(feature)
 
 	knownConfigs := []string{
-		"tagAfterMerge",
-		"disableUndoCommand",
-		"stopAskingForTags",
 		"applyFirstTag",
+		"disableUndoCommand",
 		"enableGitCommandLog",
 		"forceOnPublish",
 		"pushTagsOnPublish",
+		"removeRemotelyMerged",
+		"stopAskingForTags",
+		"tagAfterMerge",
 	}
 
 	found := false
@@ -41,6 +42,10 @@ func (s configStep) Execute(c *context) bool {
 	}
 
 	if found {
+		if feature == "removeRemotelyMerged" {
+			c.conf.Features.RemoveRemotelyMerged = c.conf.Features.RemoveRemotelyMerged == false
+		}
+
 		if feature == "tagAfterMerge" {
 			c.conf.Features.TagAfterMerge = c.conf.Features.TagAfterMerge == false
 		}
