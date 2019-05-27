@@ -26,13 +26,16 @@ func (s finalStep) Execute(c *context) bool {
 		for _, line := range lines {
 			if strings.Contains(line, "origin") {
 				// @todo use development or historical branches
-				if !strings.Contains(line, "master") {
+				if !strings.Contains(line, c.conf.Branches.Historical.Development) {
+					c.Logger.Info(color.RedString("delete " + line))
+
 					gitCheckoutToDev := &gitCommand{
 						c.Logger,
 						[]string{"push", "origin", ":" + strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)},
 						"Cant list all local branches ",
 						c.conf,
 					}
+
 					gitCheckoutToDev.Execute()
 				}
 			}
