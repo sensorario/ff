@@ -37,14 +37,14 @@ type jsonConf struct {
 func readConfiguration(repositoryRoot string) (jj jsonConf, err error) {
 	c := jsonConf{}
 
-	if repositoryRoot == "" {
-		c.Branches.Historical.Development = "master"
-		c.Features.DisableUndoCommand = false
-		c.Features.EnableGitCommandLog = false
-		c.Features.RemoveRemotelyMerged = true
-		c.Features.StopAskingForTags = false
-		c.Features.TagAfterMerge = true
+	c.Branches.Historical.Development = "master"
+	c.Features.DisableUndoCommand = false
+	c.Features.EnableGitCommandLog = false
+	c.Features.RemoveRemotelyMerged = false
+	c.Features.StopAskingForTags = true
+	c.Features.TagAfterMerge = false
 
+	if repositoryRoot == "" {
 		return c, fmt.Errorf("invalid repository folder")
 	}
 
