@@ -17,6 +17,7 @@ type context struct {
 	st             string
 	arguments      []string
 	version        string
+	remote         string
 }
 
 func (c context) getInput() []string {
@@ -25,6 +26,14 @@ func (c context) getInput() []string {
 
 func (c *context) setCurrentVersion(version string) {
 	c.version = version
+}
+
+func (c context) getRemote() string {
+	return c.remote
+}
+
+func (c *context) setRemote(remote string) {
+	c.remote = remote
 }
 
 func (c context) getVersion() string {

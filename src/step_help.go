@@ -33,8 +33,7 @@ func (s helpStep) Execute(c *context) bool {
 		}
 	}
 
-	fmt.Println("      " + color.GreenString("current version"))
-	// @todo display software repository name
+	fmt.Print("      " + color.GreenString(c.getRemote()))
 	fmt.Println("        " + color.WhiteString(c.getVersion()))
 
 	fmt.Println("      " + color.GreenString("usage"))

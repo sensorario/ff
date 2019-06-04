@@ -21,10 +21,14 @@ func (s checkTagStep) Execute(c *context) bool {
 
 	if canTag == true {
 
-		cmdName := "git"
-		cmdArgs := []string{"describe", "--tags"}
+		// check remote origin
+		cmdGetUrlArgs := []string{"remote", "get-url", "origin"}
+		outputRemote, err := exec.Command("git", cmdGetUrlArgs...).Output()
+		c.setRemote(string(outputRemote))
 
-		outputWithVersion, err := exec.Command(cmdName, cmdArgs...).Output()
+		// check current version
+		cmdArgs := []string{"describe", "--tags"}
+		outputWithVersion, err := exec.Command("git", cmdArgs...).Output()
 		c.setCurrentVersion(string(outputWithVersion))
 
 		if err != nil {
