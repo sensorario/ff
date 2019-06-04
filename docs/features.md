@@ -21,3 +21,7 @@ Fetch all branches and tags.
 Toggle all configuration directly from bash.
 
 Keep origin clean from merged branches.
+
+Always show current software version.
+
+Always show current remote named origin in help.

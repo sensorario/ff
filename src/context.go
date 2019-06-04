@@ -16,10 +16,28 @@ type context struct {
 	conf           jsonConf
 	st             string
 	arguments      []string
+	version        string
+	remote         string
 }
 
 func (c context) getInput() []string {
 	return c.arguments
+}
+
+func (c *context) setCurrentVersion(version string) {
+	c.version = version
+}
+
+func (c context) getRemote() string {
+	return c.remote
+}
+
+func (c *context) setRemote(remote string) {
+	c.remote = remote
+}
+
+func (c context) getVersion() string {
+	return c.version
 }
 
 func (c *context) args(input []string) {

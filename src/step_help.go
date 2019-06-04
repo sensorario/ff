@@ -33,6 +33,9 @@ func (s helpStep) Execute(c *context) bool {
 		}
 	}
 
+	fmt.Print("      " + color.GreenString(c.getRemote()))
+	fmt.Println("        " + color.WhiteString(c.getVersion()))
+
 	fmt.Println("      " + color.GreenString("usage"))
 	fmt.Println("        " + color.WhiteString("ff [command]"))
 	fmt.Println("        " + color.WhiteString("ff config [feature]"))
