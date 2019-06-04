@@ -13,6 +13,7 @@
  - patch
  - publish
  - pull
+ - push
  - refactor
  - reset
  - status

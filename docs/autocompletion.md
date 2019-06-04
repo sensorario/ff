@@ -12,7 +12,7 @@ _ff()
 
     case ${COMP_CWORD} in
         1)
-            COMPREPLY=($(compgen -W "patch pull conf config authors undo tag commit complete feature help hotfix bugfix publish refactor reset status" -- ${cur}))
+            COMPREPLY=($(compgen -W "patch pull push conf config authors undo tag commit complete feature help hotfix bugfix publish refactor reset status" -- ${cur}))
             ;;
         2)
             case ${prev} in
