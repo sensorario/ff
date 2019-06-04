@@ -23,7 +23,7 @@ func (c context) getInput() []string {
 	return c.arguments
 }
 
-func (c *context) setCurrentVersion(version string) {
+func (c *context) setCurrentVersion(string version) {
 	c.version = version
 }
 

@@ -23,7 +23,11 @@ func (s checkTagStep) Execute(c *context) bool {
 
 		cmdName := "git"
 		cmdArgs := []string{"describe", "--tags"}
-		if _, err := exec.Command(cmdName, cmdArgs...).Output(); err != nil {
+
+		outputWithVersion, err := exec.Command(cmdName, cmdArgs...).Output()
+		c.setCurrentVersion(string(outputWithVersion))
+
+		if err != nil {
 
 			applyTag := false
 
