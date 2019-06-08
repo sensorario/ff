@@ -27,8 +27,6 @@ func (s tagStep) Execute(c *context) bool {
 
 	fmt.Println("current tag: ", color.GreenString(initialTag))
 
-	tagName := ""
-
 	branchName := ""
 	re := regexp.MustCompile(`On branch [\w\/\#\-\.]{0,}`)
 	for _, match := range re.FindAllString(string(cmdOut), -1) {
@@ -37,8 +35,8 @@ func (s tagStep) Execute(c *context) bool {
 
 	mt := meta{string(cmdOut), branchName}
 
+	tagName := ""
 	tagName = mt.NextPatchTag()
-
 	tagName = strings.TrimSuffix(
 		string(tagName),
 		"\n",
