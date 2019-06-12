@@ -29,7 +29,8 @@ func (s finalStep) Execute(c *context) bool {
 	foo, _ := json.Marshal(pullRequests)
 	fmt.Println(string(foo))
 
-	if c.conf.Features.RemoveRemotelyMerged && c.currentBranch() == c.conf.Branches.Historical.Development {
+	if c.conf.Features.RemoveRemotelyMerged {
+		//	&& c.currentBranch() == c.conf.Branches.Historical.Development {
 
 		c.Logger.Info(color.RedString("will remove remotely merged branches"))
 
@@ -48,16 +49,21 @@ func (s finalStep) Execute(c *context) bool {
 				branchName := strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)
 				if branchName != c.conf.Branches.Historical.Development && !strings.Contains(branchName, "HEAD") {
 
-					// skip all branches listed in pullRequests collection
-
-					deleteRemoteBranch := &gitCommand{
-						c.Logger,
-						[]string{"push", "origin", ":" + strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)},
-						"Cant list all local branches ",
-						c.conf,
+					removableBranch := strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)
+					for _, v := range pullRequests {
+						fmt.Println("branch: " + v.Head.Ref)
+						fmt.Println("branch *: " + branchName)
+						fmt.Println("branch **: " + removableBranch)
 					}
 
-					deleteRemoteBranch.Execute()
+					//deleteRemoteBranch := &gitCommand{
+					//c.Logger,
+					//[]string{"push", "origin", ":" + removableBranch},
+					//"Cant list all local branches ",
+					//c.conf,
+					//}
+
+					//deleteRemoteBranch.Execute()
 				}
 			}
 		}
