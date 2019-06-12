@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -26,11 +25,8 @@ func (s finalStep) Execute(c *context) bool {
 	bodyBytes, _ := ioutil.ReadAll(resp.Body)
 	var pullRequests []pullRequest
 	json.Unmarshal(bodyBytes, &pullRequests)
-	foo, _ := json.Marshal(pullRequests)
-	fmt.Println(string(foo))
 
 	if c.conf.Features.RemoveRemotelyMerged {
-		//	&& c.currentBranch() == c.conf.Branches.Historical.Development {
 
 		c.Logger.Info(color.RedString("will remove remotely merged branches"))
 
