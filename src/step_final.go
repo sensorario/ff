@@ -49,18 +49,21 @@ func (s finalStep) Execute(c *context) bool {
 				branchName := strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)
 				if branchName != c.conf.Branches.Historical.Development && !strings.Contains(branchName, "HEAD") {
 					removableBranch := strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)
+					isDifferentFromAllPR := true
 					for _, v := range pullRequests {
-						if v.Head.Ref != removableBranch {
-							deleteRemoteBranch := &gitCommand{
-								c.Logger,
-								[]string{"push", "origin", ":" + removableBranch},
-								"Cant list all local branches ",
-								c.conf,
-							}
-							deleteRemoteBranch.Execute()
+						if v.Head.Ref == removableBranch {
+							isDifferentFromAllPR = false
 						}
 					}
-
+					if isDifferentFromAllPR {
+						deleteRemoteBranch := &gitCommand{
+							c.Logger,
+							[]string{"push", "origin", ":" + removableBranch},
+							"Cant list all local branches ",
+							c.conf,
+						}
+						deleteRemoteBranch.Execute()
+					}
 				}
 			}
 		}
