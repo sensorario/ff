@@ -47,6 +47,9 @@ func (s finalStep) Execute(c *context) bool {
 
 				branchName := strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)
 				if branchName != c.conf.Branches.Historical.Development && !strings.Contains(branchName, "HEAD") {
+
+					// skip all branches listed in pullRequests collection
+
 					deleteRemoteBranch := &gitCommand{
 						c.Logger,
 						[]string{"push", "origin", ":" + strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)},
