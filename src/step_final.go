@@ -1,6 +1,10 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"net/http"
 	"strings"
 
 	"github.com/fatih/color"
@@ -8,7 +12,22 @@ import (
 
 type finalStep struct{}
 
+type pullRequest struct {
+	Url  string `json:"url"`
+	Head struct {
+		Ref string `json:"ref"`
+	} `json:"head"`
+}
+
 func (s finalStep) Execute(c *context) bool {
+
+	resp, _ := http.Get("https://api.github.com/repos/sensorario/ff/pulls")
+	defer resp.Body.Close()
+	bodyBytes, _ := ioutil.ReadAll(resp.Body)
+	var pullRequests []pullRequest
+	json.Unmarshal(bodyBytes, &pullRequests)
+	foo, _ := json.Marshal(pullRequests)
+	fmt.Println(string(foo))
 
 	if c.conf.Features.RemoveRemotelyMerged && c.currentBranch() == c.conf.Branches.Historical.Development {
 
