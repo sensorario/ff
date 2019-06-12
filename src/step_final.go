@@ -28,14 +28,14 @@ func (s finalStep) Execute(c *context) bool {
 
 				branchName := strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)
 				if branchName != c.conf.Branches.Historical.Development && !strings.Contains(branchName, "HEAD") {
-					gitCheckoutToDev := &gitCommand{
+					deleteRemoteBranch := &gitCommand{
 						c.Logger,
 						[]string{"push", "origin", ":" + strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)},
 						"Cant list all local branches ",
 						c.conf,
 					}
 
-					gitCheckoutToDev.Execute()
+					deleteRemoteBranch.Execute()
 				}
 			}
 		}
