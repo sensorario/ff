@@ -10,7 +10,7 @@ type finalStep struct{}
 
 func (s finalStep) Execute(c *context) bool {
 
-	if c.conf.Features.RemoveRemotelyMerged {
+	if c.conf.Features.RemoveRemotelyMerged && c.currentBranch() == c.conf.Branches.Historical.Development {
 
 		c.Logger.Info(color.RedString("will remove remotely merged branches"))
 
