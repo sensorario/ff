@@ -11,4 +11,3 @@
  * [Commands](docs/commands.md)
  * [Configuration](docs/configuration.md)
  * [Features](docs/features.md)
- * [Installation](docs/install.md)
