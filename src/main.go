@@ -13,12 +13,14 @@ import (
 )
 
 func genLog(repositoryRoot string) gol.Logger {
+    defaultLogDirectory := "/.git"
+
 	if envLogPath := os.Getenv("FF_LOG_PATH"); envLogPath != "" {
 		return gol.NewCustomLogger(envLogPath)
 	}
 
 	return gol.NewCustomLogger(
-		repositoryRoot + "/.git",
+		repositoryRoot + defaultLogDirectory,
 	)
 }
 
