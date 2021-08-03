@@ -115,7 +115,7 @@ func (c context) container() map[string]map[string]stepType {
 		ss["start"]["hotfix"] = stepType{hotfixStep{}, "create new hotfix branch"}
 	}
 
-	if sem.isRefactoring() || sem.isFeature() || sem.isHotfix() || sem.isBugfix() {
+	if sem.isRefactoring() || sem.isPatch() || sem.isFeature() || sem.isHotfix() || sem.isBugfix() {
 		if c.isWorkingDirClean() {
 			ss["start"]["complete"] = stepType{
 				completeBranchStep{},
