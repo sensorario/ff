@@ -17,6 +17,10 @@ func (b branch) isRefactoring() bool {
 	return strings.HasPrefix(b.name, "refactor/")
 }
 
+func (b branch) isPatch() bool {
+	return strings.HasPrefix(b.name, "patch/")
+}
+
 func (b branch) isFeature() bool {
 	return strings.HasPrefix(b.name, "feature/")
 }

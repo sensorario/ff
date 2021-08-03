@@ -31,7 +31,7 @@ func (s patchStep) Execute(c *context) bool {
 		"Patch: ",
 	)
 
-	patchBranchName := "refactor/" + patchDescription + "/" + developmentBranch
+	patchBranchName := "patch/" + patchDescription + "/" + developmentBranch
 	fmt.Println(color.YellowString(patchBranchName))
 
 	gitCheckoutNewBranch := &gitCommand{
