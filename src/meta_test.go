@@ -7,36 +7,45 @@ import (
 )
 
 func TestAbs(t *testing.T) {
-	meta := meta{"v21.2.54-42-b67b5vr", "master"}
+	m := meta{"v21.2.54-42-b67b5vr", "master"}
 
-	if meta.Branch() != "master" {
+	if m.Branch() != "master" {
 		t.Errorf("bad branch detection")
 	}
 
-	if meta.majorVersion() != "21" {
-		t.Errorf("bad branch detection" + meta.majorVersion())
+	if m.majorVersion() != "21" {
+		t.Errorf("bad branch detection" + m.majorVersion())
 	}
 
-	if meta.minorVersion() != "2" {
-		t.Errorf("bad branch detection" + meta.minorVersion())
+	if m.minorVersion() != "2" {
+		t.Errorf("bad branch detection" + m.minorVersion())
 	}
 
-	if meta.patchVersion() != "54" {
-		t.Errorf("bad branch detection" + meta.patchVersion())
+	if m.patchVersion() != "54" {
+		t.Errorf("bad branch detection" + m.patchVersion())
 	}
 
-	if meta.CommitsFromLastTag() != "42" {
-		t.Errorf("bad number detection" + meta.CommitsFromLastTag())
+	if m.CommitsFromLastTag() != "42" {
+		t.Errorf("bad number detection" + m.CommitsFromLastTag())
 	}
 
-	if meta.NextPatchTag() != "v21.2.55" {
-		t.Errorf("Bad branch detection // " + meta.NextPatchTag())
+	if m.NextPatchTag() != "v21.2.55" {
+		t.Errorf("Bad branch detection // " + m.NextPatchTag())
 	}
 
-	if meta.NextMinorTag() != "v21.3.0" {
-		t.Errorf("Bad branch detection // " + meta.NextMinorTag())
-	}
+	num := m.incPatchVersion()
+	assert.Equal(t, num, 55, "Bad branch detection // "+m.NextMinorTag())
+}
 
-	num := meta.incPatchVersion()
-	assert.Equal(t, num, 55, "Bad branch detection // "+meta.NextMinorTag())
+func TestMinorTagDetection(t *testing.T) {
+	m := meta{"v1.2.3", "master"}
+    expected := "v1.3.0"
+
+	if m.NextMinorTag() != expected {
+        t.Errorf(
+            m.NextMinorTag(),
+            " instead of ",
+            expected,
+        )
+    }
 }
