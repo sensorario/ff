@@ -5,6 +5,8 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
+	// "os"
+	// "fmt"
 
 	"github.com/fatih/color"
 )
@@ -20,15 +22,18 @@ type pullRequest struct {
 
 func (s finalStep) Execute(c *context) bool {
 
+    // @todo se non va la connessione qui si rompe tutto?
 	resp, _ := http.Get("https://api.github.com/repos/sensorario/ff/pulls")
 	defer resp.Body.Close()
 	bodyBytes, _ := ioutil.ReadAll(resp.Body)
 	var pullRequests []pullRequest
 	json.Unmarshal(bodyBytes, &pullRequests)
 
+	c.Logger.Info(color.GreenString("info ... "))
+
 	if c.conf.Features.RemoveRemotelyMerged {
 
-		c.Logger.Info(color.RedString("will remove remotely merged branches"))
+		c.Logger.Info(color.RedString("I will remove remotely merged branches"))
 
 		gitCheckoutToDev := &gitCommand{
 			c.Logger,
@@ -36,15 +41,19 @@ func (s finalStep) Execute(c *context) bool {
 			"Cant list all local branches ",
 			c.conf,
 		}
+
 		output := gitCheckoutToDev.Execute()
 
+        // all branches
 		lines := strings.Split(output, "\n")
+
 		for _, line := range lines {
 			if strings.Contains(line, "remotes/origin") {
-
 				branchName := strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)
+                c.Logger.Info(color.GreenString("branch found "+branchName))
 				if branchName != c.conf.Branches.Historical.Development && !strings.Contains(branchName, "HEAD") {
 					removableBranch := strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)
+                    c.Logger.Info(color.GreenString("removable branch found "+removableBranch))
 					isDifferentFromAllPR := true
 					for _, v := range pullRequests {
 						if v.Head.Ref == removableBranch {
@@ -60,13 +69,17 @@ func (s finalStep) Execute(c *context) bool {
 						}
 						deleteRemoteBranch.Execute()
 					}
-				}
+				} else {
+                    c.Logger.Info(color.GreenString("branch " + branchName))
+                }
 			}
 		}
 
 	} else {
 		c.Logger.Info(color.GreenString("leave remotely merged branches"))
 	}
+
+	c.Logger.Info(color.GreenString("info ... "))
 
 	return false
 }

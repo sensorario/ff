@@ -3,6 +3,8 @@ package main
 import (
 	"strconv"
 	"strings"
+    // "os"
+    // "fmt"
 )
 
 type meta struct {
@@ -38,6 +40,11 @@ func (m meta) incPatchVersion() int {
 func (m meta) patchVersion() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
+
+    // fmt.Println("Tokens: ")
+    // fmt.Println(tokens)
+    // os.Exit(1)
+
 	return tokens[2]
 }
 
