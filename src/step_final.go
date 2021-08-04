@@ -23,8 +23,23 @@ type pullRequest struct {
 func (s finalStep) Execute(c *context) bool {
 
     // @todo se non va la connessione qui si rompe tutto?
-	resp, _ := http.Get("https://api.github.com/repos/sensorario/ff/pulls")
-	defer resp.Body.Close()
+	resp, err := http.Get("https://api.github.com/repos/sensorario/ff/pulls")
+
+    if err != nil {
+        if !strings.Contains(err.Error(), "dial tcp") && !strings.Contains(err.Error(), "no such host") {
+            // @todo change Info into Warning
+            c.Logger.Info(color.GreenString("Probabilmente il computer non e' connesso alla rete"))
+        } else {
+            // @todo change Info into Warning
+            c.Logger.Info(color.GreenString("Unknown connection error"))
+            c.Logger.Info(color.GreenString(err.Error()))
+        }
+
+        return false
+    } else {
+        defer resp.Body.Close()
+    }
+
 	bodyBytes, _ := ioutil.ReadAll(resp.Body)
 	var pullRequests []pullRequest
 	json.Unmarshal(bodyBytes, &pullRequests)
