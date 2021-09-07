@@ -1,5 +1,5 @@
 default:
-	go test ./...
+	go test ./... -v
 
 build:
 	env GO111MODULE=on go build -o ff ./...
