@@ -16,10 +16,14 @@ github.com/mattn/go-isatty v0.0.14 h1:yVuAays6BHfxijgZPzw+3Zlu5yQgKGP2/hcQbHb7S9
 github.com/mattn/go-isatty v0.0.14/go.mod h1:7GGIvUiUoEMVVmxf/4nioHXj79iQHKdU27kJ6hsGG94=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/sensorario/gol v1.1.0 h1:gO4cjHKtSzkEknKG9cgLSEkkfos1U/nB3M+BU5djXhI=
+github.com/sensorario/gol v1.1.0/go.mod h1:rbX6t4CMaKpw4dw79Dq/g/hq8B1kSjLdjGbURX0hvxU=
 github.com/sensorario/gol v1.1.4 h1:2R0wrSiLXHVBtmpIxDij+Lykfy0i3scVeaAxupu+g8E=
 github.com/sensorario/gol v1.1.4/go.mod h1:rbX6t4CMaKpw4dw79Dq/g/hq8B1kSjLdjGbURX0hvxU=
 github.com/sensorario/gol v1.1.5 h1:VBJpL8Sj19OzIzgXyvtKN/qTgva7hr/2uNNDtTQnaNA=
 github.com/sensorario/gol v1.1.5/go.mod h1:rbX6t4CMaKpw4dw79Dq/g/hq8B1kSjLdjGbURX0hvxU=
+github.com/sensorario/gol v1.1.6 h1:Trwoc1to33zECSI67ZW5MLyMiZo4Kua940uwPQM/Y/w=
+github.com/sensorario/gol v1.1.6/go.mod h1:rbX6t4CMaKpw4dw79Dq/g/hq8B1kSjLdjGbURX0hvxU=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0 h1:TivCn/peBQ7UY8ooIcPgZFpTNSz0Q2U6UrFlUfqbe0Q=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
