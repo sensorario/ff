@@ -27,12 +27,10 @@ func (s finalStep) Execute(c *context) bool {
 
     if err != nil {
         if !strings.Contains(err.Error(), "dial tcp") && !strings.Contains(err.Error(), "no such host") {
-            // @todo change Info into Warning
-            c.Logger.Info(color.GreenString("Probabilmente il computer non e' connesso alla rete"))
+            c.Logger.Warning(color.GreenString("Probabilmente il computer non e' connesso alla rete"))
         } else {
-            // @todo change Info into Warning
-            c.Logger.Info(color.GreenString("Unknown connection error"))
-            c.Logger.Info(color.GreenString(err.Error()))
+            c.Logger.Warning(color.GreenString("Unknown connection error"))
+            c.Logger.Warning(color.GreenString(err.Error()))
         }
 
         return false
