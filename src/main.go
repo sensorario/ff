@@ -24,6 +24,7 @@ func genLog(repositoryRoot string) gol.Logger {
 	)
 }
 
+// Everything starts from here
 func main() {
 	currentFolder, err := os.Getwd()
 
