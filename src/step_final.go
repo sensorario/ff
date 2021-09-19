@@ -20,6 +20,7 @@ type pullRequest struct {
 	} `json:"head"`
 }
 
+// Execute is called whenever final step must be called.
 func (s finalStep) Execute(c *context) bool {
 
     // @todo se non va la connessione qui si rompe tutto?
@@ -97,6 +98,7 @@ func (s finalStep) Execute(c *context) bool {
 	return false
 }
 
+// Stepname contains the name of current step.
 func (s finalStep) Stepname() string {
 	return "final"
 }
