@@ -12,6 +12,7 @@ import (
 	"github.com/sensorario/gol"
 )
 
+// genLog generate log
 func genLog(repositoryRoot string) gol.Logger {
     defaultLogDirectory := "/.git"
 
