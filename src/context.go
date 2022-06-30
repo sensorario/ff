@@ -129,7 +129,9 @@ func (c context) container() map[string]map[string]stepType {
 				completeBranchStep{},
 				"merge current branch into " + c.conf.Branches.Historical.Development,
 			}
-		}
+		} else {
+            c.Logger.Info(`Working directory is not clean`)
+        }
 	}
 
 	return ss
