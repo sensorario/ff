@@ -27,3 +27,7 @@
 ### Complete
 
 Complete works only for english or italian language. The command needs an update.
+
+### Publish
+
+With `pushTagsOnPublish` set to true. All tags will be published.

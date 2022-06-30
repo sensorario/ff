@@ -11,7 +11,3 @@
  * [Commands](docs/commands.md)
  * [Configuration](docs/configuration.md)
  * [Features](docs/features.md)
-
-## ff complete
-
-Any time you complete a feature, another minor will be tagged
