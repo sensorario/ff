@@ -77,7 +77,7 @@ func (s configStep) Execute(c *context) bool {
 		confIndented, _ := json.MarshalIndent(c.conf, "", "  ")
 		ioutil.WriteFile(".git/ff.conf.json", confIndented, 0644)
 	} else {
-		fmt.Println(color.RedString("Comando NON trovato"))
+		fmt.Println(color.RedString("Command not found"))
 	}
 
 	c.CurrentStep = &finalStep{}
