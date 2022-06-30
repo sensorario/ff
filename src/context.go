@@ -60,15 +60,22 @@ func (c context) status() string {
 }
 
 func (c context) currentBranch() string {
-	re := regexp.MustCompile(`On branch [\w\/\#\-\.]{0,}`)
-
 	branchName := ""
-
+	re := regexp.MustCompile(`On branch [\w\/\#\-\.]{0,}`)
 	for _, match := range re.FindAllString(string(c.status()), -1) {
 		branchName = strings.ReplaceAll(match, "On branch ", "")
 	}
 
-	return branchName
+    if branchName != "" {
+        return branchName
+    }
+
+	re = regexp.MustCompile(`Sul branch [\w\/\#\-\.]{0,}`)
+	for _, match := range re.FindAllString(string(c.status()), -1) {
+		branchName = strings.ReplaceAll(match, "Sul branch ", "")
+	}
+
+    return branchName
 }
 
 type stepType struct {
