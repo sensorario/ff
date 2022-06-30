@@ -3,6 +3,7 @@
 ### Instructions
 
 To toggle a configuration type `ff config <variable>`.
+To set a configuration type `ff config <variable> true`. (or false)
 
 ### Available confs
 
