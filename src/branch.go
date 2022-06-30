@@ -22,14 +22,17 @@ func (b branch) isPatch() bool {
 }
 
 func (b branch) isFeature() bool {
+    // @todo add feat/ prefix
 	return strings.HasPrefix(b.name, "feature/")
 }
 
 func (b branch) isHotfix() bool {
+    // @todo add hot prefix
 	return strings.HasPrefix(b.name, "hotfix/")
 }
 
 func (b branch) isBugfix() bool {
+    // @todo add bug prefix
 	return strings.HasPrefix(b.name, "bugfix/")
 }
 

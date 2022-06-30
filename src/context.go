@@ -60,6 +60,7 @@ func (c context) status() string {
 }
 
 func (c context) currentBranch() string {
+    // @todo refactor here is mandatory
 	branchName := ""
 	re := regexp.MustCompile(`On branch [\w\/\#\-\.]{0,}`)
 	for _, match := range re.FindAllString(string(c.status()), -1) {
