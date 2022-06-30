@@ -11,12 +11,19 @@ import (
 type completeBranchStep struct{}
 
 func (s completeBranchStep) Execute(c *context) bool {
+    // @todo refactor here is mandatory
 	re := regexp.MustCompile(`On branch [\w\/\#\-\.]{0,}`)
-
 	branchName := ""
 	for _, match := range re.FindAllString(string(c.status()), -1) {
 		branchName = strings.ReplaceAll(match, "On branch ", "")
 	}
+    if branchName == "" {
+        re := regexp.MustCompile(`Sul branch [\w\/\#\-\.]{0,}`)
+        for _, match := range re.FindAllString(string(c.status()), -1) {
+            branchName = strings.ReplaceAll(match, "Sul branch ", "")
+        }
+    }
+
 
 	fmt.Println(color.RedString("leaving: " + branchName))
 

@@ -60,15 +60,23 @@ func (c context) status() string {
 }
 
 func (c context) currentBranch() string {
-	re := regexp.MustCompile(`On branch [\w\/\#\-\.]{0,}`)
-
+    // @todo refactor here is mandatory
 	branchName := ""
-
+	re := regexp.MustCompile(`On branch [\w\/\#\-\.]{0,}`)
 	for _, match := range re.FindAllString(string(c.status()), -1) {
 		branchName = strings.ReplaceAll(match, "On branch ", "")
 	}
 
-	return branchName
+    if branchName != "" {
+        return branchName
+    }
+
+	re = regexp.MustCompile(`Sul branch [\w\/\#\-\.]{0,}`)
+	for _, match := range re.FindAllString(string(c.status()), -1) {
+		branchName = strings.ReplaceAll(match, "Sul branch ", "")
+	}
+
+    return branchName
 }
 
 type stepType struct {
@@ -121,7 +129,9 @@ func (c context) container() map[string]map[string]stepType {
 				completeBranchStep{},
 				"merge current branch into " + c.conf.Branches.Historical.Development,
 			}
-		}
+		} else {
+            c.Logger.Info(`Working directory is not clean`)
+        }
 	}
 
 	return ss
@@ -129,7 +139,12 @@ func (c context) container() map[string]map[string]stepType {
 
 func (c context) isWorkingDirClean() bool {
 	re := regexp.MustCompile(`(?m)nothing to commit, working tree clean`)
+	for range re.FindAllString(string(c.status()), -1) {
+		c.Logger.Info("working dir clean")
+		return true
+	}
 
+	re = regexp.MustCompile(`non c'è nulla di cui eseguire il commit`)
 	for range re.FindAllString(string(c.status()), -1) {
 		c.Logger.Info("working dir clean")
 		return true
