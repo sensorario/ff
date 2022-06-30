@@ -1,4 +1,6 @@
-## Commands
+# Commands
+
+## List of commands
 
  - authors
  - bugfix
@@ -20,3 +22,8 @@
  - tag
  - undo
 
+## Descriptions
+
+### Complete
+
+Complete works only for english or italian language. The command needs an update.
