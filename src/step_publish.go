@@ -1,5 +1,9 @@
 package main
 
+import (
+    "fmt"
+)
+
 type publishStep struct{}
 
 func (s publishStep) Execute(c *context) bool {
@@ -12,7 +16,10 @@ func (s publishStep) Execute(c *context) bool {
 
 	if c.conf.Features.PushTagsOnPublish == true {
 		args = append(args, "--tags")
-	}
+	} else {
+        // @todo keep sentence from a dictionary
+        fmt.Println("Any tags will be pushed on listed origin")
+    }
 
 	gitPush := &gitCommand{
 		c.Logger,
