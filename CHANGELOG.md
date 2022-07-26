@@ -7,3 +7,4 @@
  - feat: detect git language to get current branch name
  - doc: add few instructions in readme and documentation files
  - doc: add few words about tags publication
+ - add prefix based on branch
