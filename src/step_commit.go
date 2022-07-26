@@ -15,7 +15,6 @@ func (s commitStep) Execute(c *context) bool {
     // @todo prefix with current branch type
 
 	text, _ := reader.ReadString('\n')
-	fmt.Println(text)
 
 	gitAddAll := &gitCommand{
 		c.Logger,
@@ -24,16 +23,21 @@ func (s commitStep) Execute(c *context) bool {
 		c.conf,
 	}
 
-	_ = gitAddAll.Execute()
+	gitAddAll.Execute()
 
+	name := c.currentBranch()
+	sem := branch{name}
+
+    // @todo toggle configuration for prefix
+    result := sem.commitPrefix() + text
 	gitCommit := &gitCommand{
 		c.Logger,
-		[]string{"commit", "-m", text},
-		"Cant add files",
+		[]string{"commit", "-m", result},
+		"Cant add more files",
 		c.conf,
 	}
 
-	_ = gitCommit.Execute()
+	gitCommit.Execute()
 
 	c.CurrentStep = &finalStep{}
 

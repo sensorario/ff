@@ -57,3 +57,10 @@ func TestReleaseBranchStartsWithRelease(t *testing.T) {
 		t.Errorf("branch should be release but is not")
 	}
 }
+
+func TestExtractCommitPrefix(t *testing.T) {
+	br := branch{"feature/foo/bar"}
+	if br.commitPrefix() != "feat: " {
+		t.Errorf("commit prefix should start with 'feat: '")
+	}
+}

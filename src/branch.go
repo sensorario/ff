@@ -43,3 +43,7 @@ func (b branch) isDevelopment(devBranchName string) bool {
 func (b branch) isRelease() bool {
 	return strings.HasPrefix(b.name, "release/")
 }
+
+func (b branch) commitPrefix() string {
+    return "feat: "
+}
