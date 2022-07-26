@@ -45,5 +45,9 @@ func (b branch) isRelease() bool {
 }
 
 func (b branch) commitPrefix() string {
+    if (b.isBugfix() == true) {
+        return "fix: "
+    }
+
     return "feat: "
 }

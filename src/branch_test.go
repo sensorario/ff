@@ -64,3 +64,10 @@ func TestExtractCommitPrefix(t *testing.T) {
 		t.Errorf("commit prefix should start with 'feat: '")
 	}
 }
+
+func TestPrefixMustBeDifferentForFixes(t *testing.T) {
+	br := branch{"bugfix/foo/bar"}
+	if br.commitPrefix() != "fix: " {
+		t.Errorf("commit prefix should start with 'fix: '")
+	}
+}
