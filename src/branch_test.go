@@ -71,3 +71,10 @@ func TestPrefixMustBeDifferentForFixes(t *testing.T) {
 		t.Errorf("commit prefix should start with 'fix: '")
 	}
 }
+
+func TestPrefixMustBeDifferentForHotFixes(t *testing.T) {
+	br := branch{"hotfix/foo/bar"}
+	if br.commitPrefix() != "fix: " {
+		t.Errorf("commit prefix should start with 'fix: '")
+	}
+}
