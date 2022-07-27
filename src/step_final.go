@@ -2,11 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strings"
 	// "os"
-	// "fmt"
 
 	"github.com/fatih/color"
 )
@@ -46,8 +46,16 @@ func (s finalStep) Execute(c *context) bool {
 	c.Logger.Info(color.GreenString("info ... "))
 
 	if c.conf.Features.RemoveRemotelyMerged {
-
 		c.Logger.Info(color.RedString("I will remove remotely merged branches"))
+
+		c.Logger.Info(color.RedString("I will prune local branches without remote ones"))
+		pruneEverything := &gitCommand{
+			c.Logger,
+			[]string{"fetch", "origin", "--prune"},
+			"Cant prune local branches",
+			c.conf,
+		}
+		pruneEverything.Execute()
 
 		gitCheckoutToDev := &gitCommand{
 			c.Logger,
@@ -55,12 +63,8 @@ func (s finalStep) Execute(c *context) bool {
 			"Cant list all local branches ",
 			c.conf,
 		}
-
 		output := gitCheckoutToDev.Execute()
-
-        // all branches
 		lines := strings.Split(output, "\n")
-
 		for _, line := range lines {
 			if strings.Contains(line, "remotes/origin") {
 				branchName := strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)
@@ -78,17 +82,21 @@ func (s finalStep) Execute(c *context) bool {
 						deleteRemoteBranch := &gitCommand{
 							c.Logger,
 							[]string{"push", "origin", ":" + removableBranch},
-							"Cant list all local branches ",
+							strings.Join([]string{"Cant delete branches:", "git","push", "origin", ":" + removableBranch}, " "),
 							c.conf,
 						}
-						deleteRemoteBranch.Execute()
+						outcome := deleteRemoteBranch.Execute()
+
+                        fmt.Println("Result:")
+                        fmt.Println(outcome)
+                        // @todo probabile che non esitano più nel remote
+                        // se non esistono cancellarli anche localemente con prune ...
 					}
 				} else {
                     c.Logger.Info(color.GreenString("branch " + branchName))
                 }
 			}
 		}
-
 	} else {
 		c.Logger.Info(color.GreenString("leave remotely merged branches"))
 	}
