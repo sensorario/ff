@@ -26,22 +26,18 @@ func (gc gitCommand) Arguments() []string {
 }
 
 func (gc *gitCommand) Execute() string {
-    fmt.Println("Execute")
 	var cmdOut []byte
 	var err error
 	cmdName := "git"
 	cmdArgs := gc.Arguments()
-    fmt.Println(cmdArgs)
 
 	cmdOut, err = exec.Command(cmdName, cmdArgs...).Output()
-    fmt.Println(string(cmdOut))
 
 	if gc.conf.Features.EnableGitCommandLog == true {
 		gc.Logger.Info(color.YellowString(strings.Join(cmdArgs, " ")))
 		gc.Logger.Info(color.GreenString("<<< Response\n") + string(cmdOut))
 	}
 
-    gc.Logger.Info("@@")
     gc.Logger.Info(cmdName)
     // fmt.Println("Cant tag")
     // fmt.Println(err)
@@ -59,16 +55,12 @@ func (gc *gitCommand) Execute() string {
 		fmt.Println(color.RedString(gc.ErrorMessage()))
 
 		if err.Error() == "exit status 128" {
-			gc.Logger.Error(color.RedString("Error"))
 			gc.Logger.Error(color.RedString(err.Error()))
 			gc.Logger.Error(color.RedString(gc.ErrorMessage()))
 		}
 
-        fmt.Println("222")
-		os.Exit(22)
-	} else {
-        fmt.Println(cmdName)
-    }
+		os.Exit(1)
+	}
 
 	return string(cmdOut)
 }
