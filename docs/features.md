@@ -26,5 +26,4 @@ Always show current software version.
 
 Always show current remote named origin in help.
 
-### Delete local branches that are already removed in origin
-
+Prune repository before delete remote branches.
