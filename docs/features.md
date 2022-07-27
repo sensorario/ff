@@ -25,3 +25,5 @@ Keep origin clean from merged branches.
 Always show current software version.
 
 Always show current remote named origin in help.
+
+Prune repository before delete remote branches.
