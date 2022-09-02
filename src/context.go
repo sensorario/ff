@@ -3,7 +3,6 @@ package main
 import (
 	"regexp"
 	"strings"
-	"fmt"
 
 	"github.com/sensorario/gol"
 	"github.com/sensorario/tongue"
@@ -97,7 +96,7 @@ func CreateDictionary () tongue.Dict {
     dict.Add("it", "status", "status")
     dict.Add("it", "publish", "metti questo branch nel remote")
     dict.Add("it", "pull", "tira giu questo branch dal remote")
-    dict.Add("it", "list.committers", "elenca tutti quelli che hanno committato")
+    dict.Add("it", "list.committers", "elenca tutti quelli che hanno committatto")
 
     dict.Add("en", "this.help", "this help")
     dict.Add("en", "status", "status")
@@ -110,14 +109,7 @@ func CreateDictionary () tongue.Dict {
 
 func (c context) container() map[string]map[string]stepType {
 
-    fmt.Println("Language", c.conf.Features.Lang)
-
     dict := CreateDictionary()
-
-    fmt.Println("@@")
-    fmt.Println(dict)
-    fmt.Println(dict.Get("it", "this.help"))
-    fmt.Println("@@")
 
 	ss := map[string]map[string]stepType{}
 
