@@ -3,6 +3,7 @@ package main
 import (
 	"regexp"
 	"strings"
+	"fmt"
 
 	"github.com/sensorario/gol"
 	"github.com/sensorario/tongue"
@@ -108,8 +109,10 @@ func CreateDictionary () tongue.Dict {
 }
 
 func (c context) container() map[string]map[string]stepType {
-
     dict := CreateDictionary()
+
+    fmt.Println("language")
+    fmt.Println(c.conf.Features.Lang)
 
 	ss := map[string]map[string]stepType{}
 
