@@ -77,12 +77,22 @@ func (s configStep) Execute(c *context) bool {
 		}
 
 		if feature == "lang" {
-            if len(inputs) == 4 && inputs[3] != "en" && inputs[3] != "it" {
-                fmt.Println(color.RedString(
-                    strings.Join([]string{"Language", inputs[3], "is not available", }, " "),
-                ))
+            if len(inputs) == 4 {
+                if inputs[3] == "en" || inputs[3] == "it" {
+                    c.conf.Features.Lang = inputs[3]
+                }
+
+                if inputs[3] != "en" && inputs[3] != "it" {
+                    fmt.Println(color.RedString(
+                        strings.Join([]string{"Language", inputs[3], "is not available", }, " "),
+                    ))
+                }
             } else {
-                c.conf.Features.Lang = "it"
+                fmt.Println(color.RedString(
+                    strings.Join([]string{
+                        "Wrong parameter count",
+                    }, " "),
+                ))
             }
 		}
 
