@@ -3,8 +3,10 @@ package main
 import (
 	"regexp"
 	"strings"
+	"fmt"
 
 	"github.com/sensorario/gol"
+	"github.com/sensorario/tongue"
 )
 
 type context struct {
@@ -84,22 +86,55 @@ type stepType struct {
 	Description string
 }
 
+type translation struct {
+    t string
+}
+
+func CreateDictionary () tongue.Dict {
+    dict := tongue.LoadDictionary()
+
+    dict.Add("it", "this.help", "questo help")
+    dict.Add("it", "status", "status")
+    dict.Add("it", "publish", "metti questo branch nel remote")
+    dict.Add("it", "pull", "tira giu questo branch dal remote")
+    dict.Add("it", "list.committers", "elenca tutti quelli che hanno committato")
+
+    dict.Add("en", "this.help", "this help")
+    dict.Add("en", "status", "status")
+    dict.Add("en", "publish", "publish current branch on its remote")
+    dict.Add("en", "pull", "get updates from remote")
+    dict.Add("en", "list.committers", "list all committers")
+
+    return dict
+}
+
 func (c context) container() map[string]map[string]stepType {
+
+    fmt.Println("Language", c.conf.Features.Lang)
+
+    dict := CreateDictionary()
+
+    fmt.Println("@@")
+    fmt.Println(dict)
+    fmt.Println(dict.Get("it", "this.help"))
+    fmt.Println("@@")
+
 	ss := map[string]map[string]stepType{}
 
 	ss["exec"] = make(map[string]stepType)
 	ss["start"] = make(map[string]stepType)
 	ss["working"] = make(map[string]stepType)
 
-	ss["exec"]["help"] = stepType{helpStep{}, "this help"}
-	ss["exec"]["status"] = stepType{&statusStep{}, "status"}
-	ss["exec"]["publish"] = stepType{publishStep{}, "push current branch into remote"}
-	ss["exec"]["push"] = stepType{publishStep{}, "push current branch into remote"}
-	ss["exec"]["pull"] = stepType{pullStep{}, "pull current branch from remote"}
-	ss["exec"]["authors"] = stepType{authorsStep{}, "list all committers"}
+	ss["exec"]["help"] = stepType{helpStep{}, dict.Get(c.conf.Features.Lang, "this.help")}
+	ss["exec"]["status"] = stepType{&statusStep{}, dict.Get(c.conf.Features.Lang, "status")}
+	ss["exec"]["publish"] = stepType{publishStep{}, dict.Get(c.conf.Features.Lang, "publish")}
+	ss["exec"]["push"] = stepType{publishStep{}, dict.Get(c.conf.Features.Lang, "publish")}
+	ss["exec"]["pull"] = stepType{pullStep{}, dict.Get(c.conf.Features.Lang, "pull")}
+	ss["exec"]["authors"] = stepType{authorsStep{}, dict.Get(c.conf.Features.Lang, "list.committers")}
 	ss["exec"]["fetch_all"] = stepType{fetchAllStep{}, "fetch all branches"}
 	ss["exec"]["conf"] = stepType{confStep{}, "show configuration"}
 	ss["exec"]["config"] = stepType{configStep{}, "update configuration"}
+	ss["exec"]["lang <language>"] = stepType{configStep{}, "change language"}
 
 	if !c.isWorkingDirClean() {
 		ss["working"]["commit"] = stepType{wokingDirStep{}, "commit everything"}

@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 	"io/ioutil"
 
 	"github.com/fatih/color"
@@ -20,7 +21,8 @@ func (s configStep) Execute(c *context) bool {
 	}
 
 	inputs := c.getInput()
-	feature := inputs[2] // ff config *****
+	feature := inputs[2] // ff config <feature>
+	langSelection := inputs[3] // ff config lang <language>
 	fmt.Println(feature)
 
 	knownConfigs := []string{
@@ -32,13 +34,14 @@ func (s configStep) Execute(c *context) bool {
 		"removeRemotelyMerged",
 		"stopAskingForTags",
 		"tagAfterMerge",
+		"lang",
 	}
 
 	found := false
 	for _, f := range knownConfigs {
 		if f == feature {
 			found = true
-		}
+        }
 	}
 
 	if found {
@@ -72,6 +75,16 @@ func (s configStep) Execute(c *context) bool {
 
 		if feature == "pushTagsOnPublish" {
 			c.conf.Features.PushTagsOnPublish = c.conf.Features.PushTagsOnPublish == false
+		}
+
+		if feature == "lang" {
+            if langSelection != "en" && langSelection != "it" {
+                fmt.Println(color.RedString(
+                    strings.Join([]string{"Language", langSelection, "is not available", }, " "),
+                ))
+            } else {
+                c.conf.Features.Lang = langSelection
+            }
 		}
 
 		confIndented, _ := json.MarshalIndent(c.conf, "", "  ")
