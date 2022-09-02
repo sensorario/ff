@@ -22,7 +22,6 @@ func (s configStep) Execute(c *context) bool {
 
 	inputs := c.getInput()
 	feature := inputs[2] // ff config <feature>
-	langSelection := inputs[3] // ff config lang <language>
 	fmt.Println(feature)
 
 	knownConfigs := []string{
@@ -78,12 +77,12 @@ func (s configStep) Execute(c *context) bool {
 		}
 
 		if feature == "lang" {
-            if langSelection != "en" && langSelection != "it" {
+            if len(inputs) == 4 && inputs[3] != "en" && inputs[3] != "it" {
                 fmt.Println(color.RedString(
-                    strings.Join([]string{"Language", langSelection, "is not available", }, " "),
+                    strings.Join([]string{"Language", inputs[3], "is not available", }, " "),
                 ))
             } else {
-                c.conf.Features.Lang = langSelection
+                c.conf.Features.Lang = "it"
             }
 		}
 
