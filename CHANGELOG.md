@@ -9,3 +9,4 @@
  - doc: add few words about tags publication
  - add prefix based on branch
  - delete local branches that are already removed in origin
+ - feat: add italian and english translations

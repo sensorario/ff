@@ -11,14 +11,15 @@ import (
 
 type jsonConf struct {
 	Features struct {
-		ApplyFirstTag        bool `json:"applyFirstTag"`
-		DisableUndoCommand   bool `json:"disableUndoCommand"`
-		EnableGitCommandLog  bool `json:"enableGitCommandLog"`
-		ForceOnPublish       bool `json:"forceOnPublish"`
-		PushTagsOnPublish    bool `json:"pushTagsOnPublish"`
-		RemoveRemotelyMerged bool `json:"removeRemotelyMerged"`
-		StopAskingForTags    bool `json:"stopAskingForTags"`
-		TagAfterMerge        bool `json:"tagAfterMerge"`
+		ApplyFirstTag        bool   `json:"applyFirstTag"`
+		DisableUndoCommand   bool   `json:"disableUndoCommand"`
+		EnableGitCommandLog  bool   `json:"enableGitCommandLog"`
+		ForceOnPublish       bool   `json:"forceOnPublish"`
+		PushTagsOnPublish    bool   `json:"pushTagsOnPublish"`
+		RemoveRemotelyMerged bool   `json:"removeRemotelyMerged"`
+		StopAskingForTags    bool   `json:"stopAskingForTags"`
+		TagAfterMerge        bool   `json:"tagAfterMerge"`
+		Lang                 string `json:"lang"`
 	} `json:"features"`
 	Branches struct {
 		Historical struct {
@@ -43,6 +44,7 @@ func readConfiguration(repositoryRoot string) (jj jsonConf, err error) {
 	c.Features.RemoveRemotelyMerged = false
 	c.Features.StopAskingForTags = true
 	c.Features.TagAfterMerge = false
+    c.Features.Lang = "it"
 
 	if repositoryRoot == "" {
 		return c, fmt.Errorf("invalid repository folder")
