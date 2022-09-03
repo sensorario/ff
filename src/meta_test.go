@@ -37,6 +37,33 @@ func TestAbs(t *testing.T) {
 	assert.Equal(t, num, 55, "Bad branch detection // "+m.NextMinorTag())
 }
 
+func TestMajorVersionDetection(t *testing.T) {
+    type test struct {
+        m meta
+        major string
+        minor string
+        patch string
+    }
+
+    tests := []test{
+	    {meta{"1.2.3", "master"}, "1", "2", "3"},
+	    {meta{"v1.2.3", "master"}, "1", "2", "3"},
+    }
+
+    for _, tc := range tests {
+        if tc.m.majorVersion() != tc.major {
+            t.Errorf( tc.m.majorVersion(), " should be equal to ", tc.major)
+        }
+        if tc.m.minorVersion() != tc.minor {
+            t.Errorf( tc.m.minorVersion(), " should be equal to ", tc.minor)
+        }
+        if tc.m.patchVersion() != tc.patch {
+            t.Errorf( tc.m.patchVersion(), " should be equal to ", tc.patch)
+        }
+    }
+
+}
+
 func TestMinorTagDetection(t *testing.T) {
 	m := meta{"v1.2.3", "master"}
     expected := "v1.3.0"
