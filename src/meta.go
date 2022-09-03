@@ -20,6 +20,10 @@ func (m meta) majorVersion() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 	tokens = strings.Split(tokens[0], "v")
+    if len(tokens) == 1 {
+        return tokens[0]
+    }
+
 	return tokens[1]
 }
 
