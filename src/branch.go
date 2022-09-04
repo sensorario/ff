@@ -22,8 +22,13 @@ func (b branch) isPatch() bool {
 }
 
 func (b branch) isFeature() bool {
-    // @todo add feat/ prefix
-	return strings.HasPrefix(b.name, "feature/")
+    featureBranches := []string{"feature", "feat"}
+    for _, v := range featureBranches {
+        if strings.HasPrefix(b.name, v) {
+            return true
+        }
+    }
+	return false
 }
 
 func (b branch) isHotfix() bool {
