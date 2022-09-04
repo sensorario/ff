@@ -50,9 +50,15 @@ func (b branch) isRelease() bool {
 }
 
 func (b branch) commitPrefix() string {
+
+    // @todo check if patches can be considered as fixes
+
     if (b.isBugfix() == true || b.isHotfix() == true) {
         return "fix: "
     }
+
+    // @todo consider commit message like
+    // feat(feature_name): commit description
 
     return "feat: "
 }
