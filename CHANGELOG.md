@@ -10,3 +10,4 @@
  - add prefix based on branch
  - delete local branches that are already removed in origin
  - feat: add italian and english translations
+ - allow both feature and feat as prefix of feature branch

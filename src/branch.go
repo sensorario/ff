@@ -22,8 +22,13 @@ func (b branch) isPatch() bool {
 }
 
 func (b branch) isFeature() bool {
-    // @todo add feat/ prefix
-	return strings.HasPrefix(b.name, "feature/")
+    featureBranches := []string{"feature", "feat"}
+    for _, v := range featureBranches {
+        if strings.HasPrefix(b.name, v) {
+            return true
+        }
+    }
+	return false
 }
 
 func (b branch) isHotfix() bool {
@@ -45,9 +50,15 @@ func (b branch) isRelease() bool {
 }
 
 func (b branch) commitPrefix() string {
+
+    // @todo check if patches can be considered as fixes
+
     if (b.isBugfix() == true || b.isHotfix() == true) {
         return "fix: "
     }
+
+    // @todo consider commit message like
+    // feat(feature_name): commit description
 
     return "feat: "
 }

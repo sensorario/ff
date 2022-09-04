@@ -31,7 +31,8 @@ func (s featureStep) Execute(c *context) bool {
 		"Feature: ",
 	)
 
-	featureBranchName := "feature/" + featureName + "/" + developmentBranch
+    featurePrefix := c.conf.Branches.Support.Feature
+	featureBranchName := featurePrefix + "/" + featureName + "/" + developmentBranch
 	fmt.Println(color.YellowString(featureBranchName))
 
 	gitCheckoutNewBranch := &gitCommand{

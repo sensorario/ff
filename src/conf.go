@@ -26,6 +26,9 @@ type jsonConf struct {
 			Development string `json:"development"`
 			//Poduction   string `json:"production"`
 		} `json:"historical"`
+		Support struct {
+			Feature string `json:"feature"`
+		} `json:"support"`
 		//Support struct {
 		//Feature string `json:"feature"`
 		//Release string `json:"release"`
@@ -39,6 +42,8 @@ func readConfiguration(repositoryRoot string) (jj jsonConf, err error) {
 	c := jsonConf{}
 
 	c.Branches.Historical.Development = "master"
+	c.Branches.Support.Feature = "feature"
+
 	c.Features.DisableUndoCommand = false
 	c.Features.EnableGitCommandLog = false
 	c.Features.RemoveRemotelyMerged = false
