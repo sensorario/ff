@@ -23,7 +23,6 @@ type pullRequest struct {
 // Execute is called whenever final step must be called.
 func (s finalStep) Execute(c *context) bool {
 
-    // @todo se non va la connessione qui si rompe tutto?
 	resp, err := http.Get("https://api.github.com/repos/sensorario/ff/pulls")
 
     if err != nil {
@@ -89,8 +88,6 @@ func (s finalStep) Execute(c *context) bool {
 
                         fmt.Println("Result:")
                         fmt.Println(outcome)
-                        // @todo probabile che non esitano più nel remote
-                        // se non esistono cancellarli anche localemente con prune ...
 					}
 				} else {
                     c.Logger.Info(color.GreenString("branch " + branchName))

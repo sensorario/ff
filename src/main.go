@@ -98,8 +98,6 @@ func guidedRepositoryCreation(logger gol.Logger, conf jsonConf) {
 				"repository initialized",
 			))
 
-			// @todo ask what is the development branch
-
 			confIndented, _ := json.MarshalIndent(conf, "", "  ")
 			if _, err := os.Stat(".git/ff.conf.json"); os.IsNotExist(err) {
 				_ = ioutil.WriteFile(".git/ff.conf.json", confIndented, 0644)

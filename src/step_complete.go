@@ -11,7 +11,6 @@ import (
 type completeBranchStep struct{}
 
 func (s completeBranchStep) Execute(c *context) bool {
-    // @todo refactor here is mandatory
 	re := regexp.MustCompile(`On branch [\w\/\#\-\.]{0,}`)
 	branchName := ""
 	for _, match := range re.FindAllString(string(c.status()), -1) {
@@ -48,7 +47,6 @@ func (s completeBranchStep) Execute(c *context) bool {
 
 	_ = gitMergeNoFF.Execute()
 
-	// @todo set CurrentStep as tagMergedBranchStep{}
 	if c.conf.Features.TagAfterMerge == true {
 		gitDescribeTags := &gitCommand{
 			c.Logger,
@@ -65,13 +63,11 @@ func (s completeBranchStep) Execute(c *context) bool {
 
 		mt := meta{string(cmdOut), branchName}
 
-		// @todo check from configuration if tag must be applied or not
 		if br.isHotfix() || br.isPatch() ||  br.isRefactoring() || br.isBugfix() {
 			c.Logger.Info("Is Patch branch")
 			tagName = mt.NextPatchTag()
 		}
 
-		// @todo check from configuration if tag must be applied or not
 		if br.isFeature() {
 			c.Logger.Info("Is Feature branch")
 			tagName = mt.NextMinorTag()
@@ -90,7 +86,6 @@ func (s completeBranchStep) Execute(c *context) bool {
 		fmt.Println(color.RedString("tag skipped"))
 	}
 
-	// @todo set CurrentStep as delete old branch{}
 	gitDeleteOldBranch := &gitCommand{
 		c.Logger,
 		[]string{"branch", "-D", branchName},
@@ -100,7 +95,6 @@ func (s completeBranchStep) Execute(c *context) bool {
 	_ = gitDeleteOldBranch.Execute()
 	fmt.Println(color.GreenString("branch " + branchName + " deleted"))
 
-	// @todo set CurrentStep as mergeIntoDevBranchStep{}
 	if !br.isDevelopment(branchName) {
 		gitCheckoutToDev := &gitCommand{
 			c.Logger,

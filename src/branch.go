@@ -32,12 +32,10 @@ func (b branch) isFeature() bool {
 }
 
 func (b branch) isHotfix() bool {
-    // @todo add hot prefix
 	return strings.HasPrefix(b.name, "hotfix/")
 }
 
 func (b branch) isBugfix() bool {
-    // @todo add bug prefix
 	return strings.HasPrefix(b.name, "bugfix/")
 }
 
@@ -50,15 +48,8 @@ func (b branch) isRelease() bool {
 }
 
 func (b branch) commitPrefix() string {
-
-    // @todo check if patches can be considered as fixes
-
     if (b.isBugfix() == true || b.isHotfix() == true) {
         return "fix: "
     }
-
-    // @todo consider commit message like
-    // feat(feature_name): commit description
-
     return "feat: "
 }

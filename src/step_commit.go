@@ -12,8 +12,6 @@ func (s commitStep) Execute(c *context) bool {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("What is the commit message: ")
 
-    // @todo prefix with current branch type
-
 	text, _ := reader.ReadString('\n')
 
 	gitAddAll := &gitCommand{
@@ -28,7 +26,6 @@ func (s commitStep) Execute(c *context) bool {
 	name := c.currentBranch()
 	sem := branch{name}
 
-    // @todo toggle configuration for prefix
     result := sem.commitPrefix() + text
 	gitCommit := &gitCommand{
 		c.Logger,
