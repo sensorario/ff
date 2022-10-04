@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
-     "os"
+    // "os"
 
 	"github.com/fatih/color"
 )
