@@ -20,6 +20,7 @@ func (m meta) majorVersion() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 	tokens = strings.Split(tokens[0], "v")
+
     if len(tokens) == 1 {
         return tokens[0]
     }
@@ -45,6 +46,10 @@ func (m meta) patchVersion() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 
+    for i, value := range tokens {
+        tokens[i] = strings.TrimSuffix(value, "\n")
+    }
+
     // fmt.Println("Tokens: ")
     // fmt.Println(tokens)
     // os.Exit(1)
@@ -66,7 +71,7 @@ func (m meta) CommitsFromLastTag() string {
 }
 
 func (m meta) NextPatchTag() string {
-	patch := m.patchVersion()
+	patch := strings.TrimSuffix(m.patchVersion(), "\n")
 	minor := m.minorVersion()
 	major := m.majorVersion()
 
@@ -75,6 +80,14 @@ func (m meta) NextPatchTag() string {
 	majorString, _ := strconv.Atoi(major)
 
 	patchString++
+
+    //fmt.Println("patch", patch)
+    //fmt.Println("minor", minor)
+    //fmt.Println("major", major)
+
+    //fmt.Println("patchString", patchString)
+    //fmt.Println("minorString", minorString)
+    //fmt.Println("majorString", majorString)
 
 	foo := []string{
 		strconv.Itoa(majorString),
