@@ -14,10 +14,10 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/sensorario/gol v1.1.9 h1:ga83YvvqZOCHvAWPKAGc3sn7LsnnsxlmJ3Nx7Yxsy7E=
 github.com/sensorario/gol v1.1.9/go.mod h1:CNUhibNMfjW8cN8QfrPMSw++4T0mzDI2bGgo1hwq70U=
-github.com/sensorario/tongue v1.0.2 h1:iUcloDOGvYnhMibigtZCMhVKw9GggLTHyJO82/zstXU=
-github.com/sensorario/tongue v1.0.2/go.mod h1:jLdi2gJCK9DesOxnhmUcKG7+b2frxTHIQCpT9ARxefg=
 github.com/sensorario/tongue v1.0.4 h1:ns4EbdyQ6jCwRXoeFXlxqapoi7tw/aYGu5YntstAcJw=
 github.com/sensorario/tongue v1.0.4/go.mod h1:jLdi2gJCK9DesOxnhmUcKG7+b2frxTHIQCpT9ARxefg=
+github.com/sensorario/tongue v1.0.5 h1:0UD3Ch9gGmYrOSvTOi85nkqyEE6S8F6NM6KDkqLr/oQ=
+github.com/sensorario/tongue v1.0.5/go.mod h1:jLdi2gJCK9DesOxnhmUcKG7+b2frxTHIQCpT9ARxefg=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.4.0/go.mod h1:YvHI0jy2hoMjB+UWwv71VJQ9isScKT/TqJzVSSt89Yw=
 github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
@@ -27,8 +27,8 @@ golang.org/x/sys v0.0.0-20200116001909-b77594299b42/go.mod h1:h1NjWce9XRLGQEsW7w
 golang.org/x/sys v0.0.0-20200223170610-d5e6a3e2c0ae/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
-golang.org/x/sys v0.0.0-20220829200755-d48e67d00261 h1:v6hYoSR9T5oet+pMXwUWkbiVqx/63mlHjefrHmxwfeY=
-golang.org/x/sys v0.0.0-20220829200755-d48e67d00261/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+golang.org/x/sys v0.0.0-20220928140112-f11e5e49a4ec h1:BkDtF2Ih9xZ7le9ndzTA7KJow28VbQW3odyk/8drmuI=
+golang.org/x/sys v0.0.0-20220928140112-f11e5e49a4ec/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
