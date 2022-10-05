@@ -16,6 +16,20 @@ func TestAnalyze(t *testing.T) {
 	}
 }
 
+func TestDetectIfBranchIsPatchOrNot(t *testing.T) {
+	br := branch{"patch/branch-semantico/master"}
+	if br.isPatch() == false {
+		t.Errorf("branch should be recognyzed as patch")
+	}
+}
+
+func TestDetectIfBranchIsNotAFeature(t *testing.T) {
+	br := branch{"patch/branch-semantico/master"}
+	if br.isFeature() == true {
+		t.Errorf("branch should not be recognyzed as feature")
+	}
+}
+
 func TestExtractCurrentBranch(t *testing.T) {
 	br := branch{"1.0"}
 	if br.name != "1.0" {
