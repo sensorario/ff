@@ -5,7 +5,7 @@ update_mod:
 	GO111MODULE=on go mod tidy
 
 install:
-	env GO111MODULE=on go build -o ff ./src/*
+	env GO111MODULE=on go build -o ff ./cmd/ff/*
 	sudo mv ff /usr/local/bin/ff
 
 update:
