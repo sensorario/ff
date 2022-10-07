@@ -28,8 +28,8 @@ func genLog(repositoryRoot string) gol.Logger {
 // Everything starts from here
 func main() {
 
-    lang := os.Getenv("LANG")
-    fmt.Println("Lang:", lang)
+    // lang := os.Getenv("LANG")
+    // fmt.Println("Lang:", lang)
     // known languages: en_US.UTF-8
 
 	currentFolder, err := os.Getwd()
