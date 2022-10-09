@@ -5,7 +5,7 @@ go 1.17
 require (
 	github.com/fatih/color v1.13.0
 	github.com/sensorario/gol v1.1.9
-	github.com/sensorario/slugify v1.0.2
+	github.com/sensorario/slugify v1.0.3
 	github.com/sensorario/tongue v1.0.5
 	github.com/stretchr/testify v1.8.0
 )
