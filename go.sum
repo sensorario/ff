@@ -12,12 +12,8 @@ github.com/mattn/go-isatty v0.0.16 h1:bq3VjFmv/sOjHtdEhmkEV4x1AJtvUvOJ2PFAZ5+peK
 github.com/mattn/go-isatty v0.0.16/go.mod h1:kYGgaQfpe5nmfYZH+SKPsOc2e4SrIfOl2e/yFXSvRLM=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
-github.com/sensorario/gol v1.1.10 h1:IJixob6NiVVwYEzYEERybBuJbUTGNmPd3ObaA32YiOQ=
-github.com/sensorario/gol v1.1.10/go.mod h1:CNUhibNMfjW8cN8QfrPMSw++4T0mzDI2bGgo1hwq70U=
-github.com/sensorario/gol v1.1.11-0.20221009011707-0ed21fefbf00 h1:K/zZI/A/IZVEoXDAtBjErRL50Pd8pPfMD4EWyXcIOPQ=
-github.com/sensorario/gol v1.1.11-0.20221009011707-0ed21fefbf00/go.mod h1:j1ZFqlGwG7HximBcibIDOkc9+V0YPc55p1cTBagBi/Q=
-github.com/sensorario/gol/v2 v2.0.2 h1:fS6pPllFci62+NGANv6Ar+iWiERGZUD9Sqb23zUf/UQ=
-github.com/sensorario/gol/v2 v2.0.2/go.mod h1:VhN5j8W32jw0UPrsgdYosYUyt+fFIyAUD7jGYEsHAwA=
+github.com/sensorario/gol/v2 v2.0.3 h1:GWb2L02caGw0uoQfc/7AU7XjosccuZEpJIuYRD3hJnw=
+github.com/sensorario/gol/v2 v2.0.3/go.mod h1:VhN5j8W32jw0UPrsgdYosYUyt+fFIyAUD7jGYEsHAwA=
 github.com/sensorario/slugify v1.0.3 h1:d1tJodyVPYrITREEdlW49RJTXoSWiODorL6swcfq0Gc=
 github.com/sensorario/slugify v1.0.3/go.mod h1:ufgS+BevjvRXPUhNxKobde2pxfLzEB36M/Agr+mWdpw=
 github.com/sensorario/tongue v1.0.5 h1:0UD3Ch9gGmYrOSvTOi85nkqyEE6S8F6NM6KDkqLr/oQ=
@@ -25,6 +21,7 @@ github.com/sensorario/tongue v1.0.5/go.mod h1:jLdi2gJCK9DesOxnhmUcKG7+b2frxTHIQC
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.4.0/go.mod h1:YvHI0jy2hoMjB+UWwv71VJQ9isScKT/TqJzVSSt89Yw=
 github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
+github.com/stretchr/testify v1.7.2/go.mod h1:R6va5+xMeoiuVRoj+gSkQ7d3FALtqAAGI1FQKckRals=
 github.com/stretchr/testify v1.8.0 h1:pSgiaMZlXftHpm5L7V1+rVB+AZJydKsMxsQBIJw4PKk=
 github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
 golang.org/x/sys v0.0.0-20200116001909-b77594299b42/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=

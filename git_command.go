@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
-	"github.com/sensorario/gol"
+	"github.com/sensorario/gol/v2"
 )
 
 type GitCommand struct {

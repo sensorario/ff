@@ -5,7 +5,7 @@ import (
 	"strings"
 //	"fmt"
 
-	"github.com/sensorario/gol"
+	"github.com/sensorario/gol/v2"
 	"github.com/sensorario/tongue"
 )
 
