@@ -26,7 +26,7 @@ func (s commitStep) Execute(c *Context) bool {
 	name := c.currentBranch()
 	sem := branch{name}
 
-    result := sem.commitPrefix() + text
+	result := sem.commitPrefix() + text
 	gitCommit := &GitCommand{
 		c.Logger,
 		[]string{"commit", "-m", result},

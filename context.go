@@ -3,7 +3,7 @@ package ff
 import (
 	"regexp"
 	"strings"
-//	"fmt"
+	//	"fmt"
 
 	"github.com/sensorario/gol/v2"
 	"github.com/sensorario/tongue"
@@ -68,16 +68,16 @@ func (c Context) currentBranch() string {
 		branchName = strings.ReplaceAll(match, "On branch ", "")
 	}
 
-    if branchName != "" {
-        return branchName
-    }
+	if branchName != "" {
+		return branchName
+	}
 
 	re = regexp.MustCompile(`Sul branch [\w\/\#\-\.]{0,}`)
 	for _, match := range re.FindAllString(string(c.status()), -1) {
 		branchName = strings.ReplaceAll(match, "Sul branch ", "")
 	}
 
-    return branchName
+	return branchName
 }
 
 type stepType struct {
@@ -86,32 +86,32 @@ type stepType struct {
 }
 
 type translation struct {
-    t string
+	t string
 }
 
-func CreateDictionary () tongue.Dict {
-    dict := tongue.LoadDictionary()
+func CreateDictionary() tongue.Dict {
+	dict := tongue.LoadDictionary()
 
-    dict.Add("it", "this.help", "questo help")
-    dict.Add("it", "status", "status")
-    dict.Add("it", "publish", "metti questo branch nel remote")
-    dict.Add("it", "pull", "tira giu questo branch dal remote")
-    dict.Add("it", "list.committers", "elenca tutti quelli che hanno committatto")
+	dict.Add("it", "this.help", "questo help")
+	dict.Add("it", "status", "status")
+	dict.Add("it", "publish", "metti questo branch nel remote")
+	dict.Add("it", "pull", "tira giu questo branch dal remote")
+	dict.Add("it", "list.committers", "elenca tutti quelli che hanno committatto")
 
-    dict.Add("en", "this.help", "this help")
-    dict.Add("en", "status", "status")
-    dict.Add("en", "publish", "publish current branch on its remote")
-    dict.Add("en", "pull", "get updates from remote")
-    dict.Add("en", "list.committers", "list all committers")
+	dict.Add("en", "this.help", "this help")
+	dict.Add("en", "status", "status")
+	dict.Add("en", "publish", "publish current branch on its remote")
+	dict.Add("en", "pull", "get updates from remote")
+	dict.Add("en", "list.committers", "list all committers")
 
-    return dict
+	return dict
 }
 
 func (c Context) container() map[string]map[string]stepType {
-    dict := CreateDictionary()
+	dict := CreateDictionary()
 
-   // fmt.Println("language")
-    //fmt.Println(c.Conf.Features.Lang)
+	// fmt.Println("language")
+	//fmt.Println(c.Conf.Features.Lang)
 
 	ss := map[string]map[string]stepType{}
 
@@ -159,8 +159,8 @@ func (c Context) container() map[string]map[string]stepType {
 				"merge current branch into " + c.Conf.Branches.Historical.Development,
 			}
 		} else {
-            c.Logger.Info(`Working directory is not clean`)
-        }
+			c.Logger.Info(`Working directory is not clean`)
+		}
 	}
 
 	return ss

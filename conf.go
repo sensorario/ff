@@ -49,7 +49,7 @@ func ReadConfiguration(repositoryRoot string) (jj JsonConf, err error) {
 	c.Features.RemoveRemotelyMerged = false
 	c.Features.StopAskingForTags = true
 	c.Features.TagAfterMerge = false
-    c.Features.Lang = "it"
+	c.Features.Lang = "it"
 
 	if repositoryRoot == "" {
 		return c, fmt.Errorf("invalid repository folder")

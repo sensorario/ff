@@ -32,7 +32,7 @@ func (s featureStep) Execute(c *Context) bool {
 		"Feature: ",
 	)
 
-    featurePrefix := c.Conf.Branches.Support.Feature
+	featurePrefix := c.Conf.Branches.Support.Feature
 	featureBranchName := featurePrefix + "/" + featureName + "/" + developmentBranch
 	fmt.Println(color.YellowString(featureBranchName))
 

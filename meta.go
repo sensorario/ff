@@ -1,10 +1,10 @@
 package ff
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
-	"fmt"
-    // "os"
+	// "os"
 )
 
 type meta struct {
@@ -21,9 +21,9 @@ func (m meta) majorVersion() string {
 	tokens = strings.Split(tokens[0], ".")
 	tokens = strings.Split(tokens[0], "v")
 
-    if len(tokens) == 1 {
-        return tokens[0]
-    }
+	if len(tokens) == 1 {
+		return tokens[0]
+	}
 
 	return tokens[1]
 }
@@ -46,13 +46,13 @@ func (m meta) patchVersion() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 
-    for i, value := range tokens {
-        tokens[i] = strings.TrimSuffix(value, "\n")
-    }
+	for i, value := range tokens {
+		tokens[i] = strings.TrimSuffix(value, "\n")
+	}
 
-    // fmt.Println("Tokens: ")
-    // fmt.Println(tokens)
-    // os.Exit(1)
+	// fmt.Println("Tokens: ")
+	// fmt.Println(tokens)
+	// os.Exit(1)
 
 	return tokens[2]
 }
@@ -81,13 +81,13 @@ func (m meta) NextPatchTag() string {
 
 	patchString++
 
-    //fmt.Println("patch", patch)
-    //fmt.Println("minor", minor)
-    //fmt.Println("major", major)
+	//fmt.Println("patch", patch)
+	//fmt.Println("minor", minor)
+	//fmt.Println("major", major)
 
-    //fmt.Println("patchString", patchString)
-    //fmt.Println("minorString", minorString)
-    //fmt.Println("majorString", majorString)
+	//fmt.Println("patchString", patchString)
+	//fmt.Println("minorString", minorString)
+	//fmt.Println("majorString", majorString)
 
 	foo := []string{
 		strconv.Itoa(majorString),

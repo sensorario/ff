@@ -3,8 +3,8 @@ package ff
 import (
 	"encoding/json"
 	"fmt"
-	"strings"
 	"io/ioutil"
+	"strings"
 
 	"github.com/fatih/color"
 )
@@ -40,7 +40,7 @@ func (s configStep) Execute(c *Context) bool {
 	for _, f := range knownConfigs {
 		if f == feature {
 			found = true
-        }
+		}
 	}
 
 	if found {
@@ -77,23 +77,23 @@ func (s configStep) Execute(c *Context) bool {
 		}
 
 		if feature == "lang" {
-            if len(inputs) == 4 {
-                if inputs[3] == "en" || inputs[3] == "it" {
-                    c.Conf.Features.Lang = inputs[3]
-                }
+			if len(inputs) == 4 {
+				if inputs[3] == "en" || inputs[3] == "it" {
+					c.Conf.Features.Lang = inputs[3]
+				}
 
-                if inputs[3] != "en" && inputs[3] != "it" {
-                    fmt.Println(color.RedString(
-                        strings.Join([]string{"Language", inputs[3], "is not available", }, " "),
-                    ))
-                }
-            } else {
-                fmt.Println(color.RedString(
-                    strings.Join([]string{
-                        "Wrong parameter count",
-                    }, " "),
-                ))
-            }
+				if inputs[3] != "en" && inputs[3] != "it" {
+					fmt.Println(color.RedString(
+						strings.Join([]string{"Language", inputs[3], "is not available"}, " "),
+					))
+				}
+			} else {
+				fmt.Println(color.RedString(
+					strings.Join([]string{
+						"Wrong parameter count",
+					}, " "),
+				))
+			}
 		}
 
 		confIndented, _ := json.MarshalIndent(c.Conf, "", "  ")

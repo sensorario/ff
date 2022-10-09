@@ -16,13 +16,12 @@ func (s completeBranchStep) Execute(c *Context) bool {
 	for _, match := range re.FindAllString(string(c.status()), -1) {
 		branchName = strings.ReplaceAll(match, "On branch ", "")
 	}
-    if branchName == "" {
-        re := regexp.MustCompile(`Sul branch [\w\/\#\-\.]{0,}`)
-        for _, match := range re.FindAllString(string(c.status()), -1) {
-            branchName = strings.ReplaceAll(match, "Sul branch ", "")
-        }
-    }
-
+	if branchName == "" {
+		re := regexp.MustCompile(`Sul branch [\w\/\#\-\.]{0,}`)
+		for _, match := range re.FindAllString(string(c.status()), -1) {
+			branchName = strings.ReplaceAll(match, "Sul branch ", "")
+		}
+	}
 
 	fmt.Println(color.RedString("leaving: " + branchName))
 
@@ -63,7 +62,7 @@ func (s completeBranchStep) Execute(c *Context) bool {
 
 		mt := meta{string(cmdOut), branchName}
 
-		if br.isHotfix() || br.isPatch() ||  br.isRefactoring() || br.isBugfix() {
+		if br.isHotfix() || br.isPatch() || br.isRefactoring() || br.isBugfix() {
 			c.Logger.Info("Is Patch branch")
 			tagName = mt.NextPatchTag()
 		}

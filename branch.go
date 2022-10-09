@@ -22,12 +22,12 @@ func (b branch) isPatch() bool {
 }
 
 func (b branch) isFeature() bool {
-    featureBranches := []string{"feature", "feat"}
-    for _, v := range featureBranches {
-        if strings.HasPrefix(b.name, v) {
-            return true
-        }
-    }
+	featureBranches := []string{"feature", "feat"}
+	for _, v := range featureBranches {
+		if strings.HasPrefix(b.name, v) {
+			return true
+		}
+	}
 	return false
 }
 
@@ -48,8 +48,8 @@ func (b branch) isRelease() bool {
 }
 
 func (b branch) commitPrefix() string {
-    if (b.isBugfix() == true || b.isHotfix() == true) {
-        return "fix: "
-    }
-    return "feat: "
+	if b.isBugfix() == true || b.isHotfix() == true {
+		return "fix: "
+	}
+	return "feat: "
 }

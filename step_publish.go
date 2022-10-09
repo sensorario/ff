@@ -1,7 +1,7 @@
 package ff
 
 import (
-    "fmt"
+	"fmt"
 )
 
 type publishStep struct{}
@@ -17,8 +17,8 @@ func (s publishStep) Execute(c *Context) bool {
 	if c.Conf.Features.PushTagsOnPublish == true {
 		args = append(args, "--tags")
 	} else {
-        fmt.Println("Any tags will be pushed on listed origin")
-    }
+		fmt.Println("Any tags will be pushed on listed origin")
+	}
 
 	gitPush := &GitCommand{
 		c.Logger,

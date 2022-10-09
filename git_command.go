@@ -38,16 +38,16 @@ func (gc *GitCommand) Execute() string {
 		gc.Logger.Info(color.GreenString("<<< Response\n") + string(cmdOut))
 	}
 
-    gc.Logger.Info(cmdName)
-    // fmt.Println("Cant tag")
-    // fmt.Println(err)
-    // fmt.Println(string(cmdOut))
-    // fmt.Println(cmdName)
-    // fmt.Println(gc.Arguments())
-    // sembra dare errore quando viene eseguito git statu
-    // e non ci sono files aggiunti nella staging area?
-    // da capire
-    // os.Exit(1)
+	gc.Logger.Info(cmdName)
+	// fmt.Println("Cant tag")
+	// fmt.Println(err)
+	// fmt.Println(string(cmdOut))
+	// fmt.Println(cmdName)
+	// fmt.Println(gc.Arguments())
+	// sembra dare errore quando viene eseguito git statu
+	// e non ci sono files aggiunti nella staging area?
+	// da capire
+	// os.Exit(1)
 
 	if err != nil {
 
