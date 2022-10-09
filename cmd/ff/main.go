@@ -10,6 +10,7 @@ import (
 
 	"github.com/fatih/color"
 	"github.com/sensorario/gol"
+	"github.com/sensorario/ff"
 )
 
 // genLog generate log
@@ -38,7 +39,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	repositoryRoot, err := findRepository(currentFolder)
+	repositoryRoot, err := ff.FindRepository(currentFolder)
 
 	if err == nil {
 		if err := os.Chdir(repositoryRoot); err != nil {
@@ -51,7 +52,7 @@ func main() {
 		fmt.Println(color.RedString("No repository found"))
 	}
 
-	conf, _ := readConfiguration(repositoryRoot)
+	conf, _ := ff.ReadConfiguration(repositoryRoot)
 
 	logger := genLog(repositoryRoot)
 
@@ -64,24 +65,24 @@ func main() {
 		}
 	}
 
-	devBranchName := conf.Branches.Historical.Development
+	DevBranchName := conf.Branches.Historical.Development
 
-	cntxt := context{
+	cntxt := ff.Context{
 		RepositoryRoot: repositoryRoot,
-		CurrentStep:    &checkTagStep{},
+		CurrentStep:    &ff.CheckTagStep{},
 		Logger:         logger,
-		devBranchName:  devBranchName,
-		conf:           conf,
+		DevBranchName:  DevBranchName,
+		Conf:           conf,
 	}
 
-	cntxt.enterStep()
+	cntxt.EnterStep()
 
 	for cntxt.CurrentStep.Execute(&cntxt) {
-		cntxt.enterStep()
+		cntxt.EnterStep()
 	}
 }
 
-func guidedRepositoryCreation(logger gol.Logger, conf jsonConf) {
+func guidedRepositoryCreation(logger gol.Logger, conf ff.JsonConf) {
 	for {
 		fmt.Println(color.YellowString("Want you create new git repository here? (yes/no)"))
 
@@ -89,9 +90,9 @@ func guidedRepositoryCreation(logger gol.Logger, conf jsonConf) {
 		response, _ := reader.ReadString('\n')
 
 		if string(response) == "yes\n" {
-			gitInit := &gitCommand{
-				args:    []string{"init"},
-				message: "Cant create new branch",
+			gitInit := &ff.GitCommand{
+				Args:    []string{"init"},
+				Message: "Cant create new branch",
 			}
 			_ = gitInit.Execute()
 			fmt.Println(color.YellowString(
@@ -111,20 +112,20 @@ func guidedRepositoryCreation(logger gol.Logger, conf jsonConf) {
 				fmt.Println(color.YellowString("readme file preserved"))
 			}
 
-			gitInit = &gitCommand{
+			gitInit = &ff.GitCommand{
 				Logger:  logger,
-				args:    []string{"add", "."},
-				message: "Cant stage everything",
+				Args:    []string{"add", "."},
+				Message: "Cant stage everything",
 			}
 			_ = gitInit.Execute()
 			fmt.Println(color.YellowString(
 				"readme file staged",
 			))
 
-			gitInit = &gitCommand{
+			gitInit = &ff.GitCommand{
 				Logger:  logger,
-				args:    []string{"commit", "-m", "start"},
-				message: "Cant commit",
+				Args:    []string{"commit", "-m", "start"},
+				Message: "Cant commit",
 			}
 			_ = gitInit.Execute()
 			fmt.Println(color.YellowString(
@@ -135,10 +136,10 @@ func guidedRepositoryCreation(logger gol.Logger, conf jsonConf) {
 			reader := bufio.NewReader(os.Stdin)
 			response, _ := reader.ReadString('\n')
 			if string(response) == "yes\n" {
-				gitInit = &gitCommand{
+				gitInit = &ff.GitCommand{
 					Logger:  logger,
-					args:    []string{"tag", "v0.0.0"},
-					message: "Cant apply first tag",
+					Args:    []string{"tag", "v0.0.0"},
+					Message: "Cant apply first tag",
 				}
 				_ = gitInit.Execute()
 				fmt.Println(color.YellowString(

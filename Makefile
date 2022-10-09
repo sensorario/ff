@@ -9,7 +9,7 @@ install:
 	sudo mv ff /usr/local/bin/ff
 
 update:
-	go get -u ./...
+	go get -u all
 
 GO=go
 GOCOVER=$(GO) tool cover
