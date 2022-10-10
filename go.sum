@@ -14,6 +14,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/sensorario/branch v1.0.7 h1:DCyM0CFEtx9hNnHvusKB9Ji01VuI6wruw1iFI2whWfo=
 github.com/sensorario/branch v1.0.7/go.mod h1:RQwryb1VlgFxWexAKYUCoJoJDf7m62jAWnNogf6+Ufg=
+github.com/sensorario/branch v1.0.8 h1:yxrdC3U73ObxvCGlC4EaFQ0F1tNLAtDtyPNbO2l4/nQ=
+github.com/sensorario/branch v1.0.8/go.mod h1:RQwryb1VlgFxWexAKYUCoJoJDf7m62jAWnNogf6+Ufg=
 github.com/sensorario/gol/v2 v2.0.3 h1:GWb2L02caGw0uoQfc/7AU7XjosccuZEpJIuYRD3hJnw=
 github.com/sensorario/gol/v2 v2.0.3/go.mod h1:VhN5j8W32jw0UPrsgdYosYUyt+fFIyAUD7jGYEsHAwA=
 github.com/sensorario/slugify v1.0.3 h1:d1tJodyVPYrITREEdlW49RJTXoSWiODorL6swcfq0Gc=
@@ -22,6 +24,8 @@ github.com/sensorario/slugify v1.0.4 h1:vwP1vDBthMomsG0eXIkCfAgC1R3S8oyqBoG6bhk+
 github.com/sensorario/slugify v1.0.4/go.mod h1:ufgS+BevjvRXPUhNxKobde2pxfLzEB36M/Agr+mWdpw=
 github.com/sensorario/slugify v1.0.5 h1:3vsWoeoVFNwApZEIwxDm9FDMmI+8KCmGy5k8dr/Wx1M=
 github.com/sensorario/slugify v1.0.5/go.mod h1:ufgS+BevjvRXPUhNxKobde2pxfLzEB36M/Agr+mWdpw=
+github.com/sensorario/slugify v1.0.6 h1:aTpuPGF1S7If3DvXrJirFfQDYdDZGSBnC1OK31TuDNs=
+github.com/sensorario/slugify v1.0.6/go.mod h1:ufgS+BevjvRXPUhNxKobde2pxfLzEB36M/Agr+mWdpw=
 github.com/sensorario/tongue v1.0.5 h1:0UD3Ch9gGmYrOSvTOi85nkqyEE6S8F6NM6KDkqLr/oQ=
 github.com/sensorario/tongue v1.0.5/go.mod h1:jLdi2gJCK9DesOxnhmUcKG7+b2frxTHIQCpT9ARxefg=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
@@ -36,6 +40,8 @@ golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c/go.mod h1:oPkhp1MJrh7nUepCBc
 golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.0.0-20221006211917-84dc82d7e875 h1:AzgQNqF+FKwyQ5LbVrVqOcuuFB67N47F9+htZYH0wFM=
 golang.org/x/sys v0.0.0-20221006211917-84dc82d7e875/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+golang.org/x/sys v0.0.0-20221010170243-090e33056c14 h1:k5II8e6QD8mITdi+okbbmR/cIyEbeXLBhy5Ha4nevyc=
+golang.org/x/sys v0.0.0-20221010170243-090e33056c14/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
