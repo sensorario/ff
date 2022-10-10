@@ -20,6 +20,8 @@ github.com/sensorario/slugify v1.0.3 h1:d1tJodyVPYrITREEdlW49RJTXoSWiODorL6swcfq
 github.com/sensorario/slugify v1.0.3/go.mod h1:ufgS+BevjvRXPUhNxKobde2pxfLzEB36M/Agr+mWdpw=
 github.com/sensorario/slugify v1.0.4 h1:vwP1vDBthMomsG0eXIkCfAgC1R3S8oyqBoG6bhk+TUk=
 github.com/sensorario/slugify v1.0.4/go.mod h1:ufgS+BevjvRXPUhNxKobde2pxfLzEB36M/Agr+mWdpw=
+github.com/sensorario/slugify v1.0.5 h1:3vsWoeoVFNwApZEIwxDm9FDMmI+8KCmGy5k8dr/Wx1M=
+github.com/sensorario/slugify v1.0.5/go.mod h1:ufgS+BevjvRXPUhNxKobde2pxfLzEB36M/Agr+mWdpw=
 github.com/sensorario/tongue v1.0.5 h1:0UD3Ch9gGmYrOSvTOi85nkqyEE6S8F6NM6KDkqLr/oQ=
 github.com/sensorario/tongue v1.0.5/go.mod h1:jLdi2gJCK9DesOxnhmUcKG7+b2frxTHIQCpT9ARxefg=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
