@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
+	"github.com/sensorario/branch"
 )
 
 type completeBranchStep struct{}
@@ -25,12 +26,12 @@ func (s completeBranchStep) Execute(c *Context) bool {
 
 	fmt.Println(color.RedString("leaving: " + branchName))
 
-	br := branch{branchName}
-	fmt.Println(color.RedString("destination: " + br.destination()))
+	br := branch.Branch{branchName}
+	fmt.Println(color.RedString("destination: " + br.Destination()))
 
 	gitCheckoutToDev := &GitCommand{
 		c.Logger,
-		[]string{"checkout", br.destination()},
+		[]string{"checkout", br.Destination()},
 		"Cant checkout destination branch",
 		c.Conf,
 	}
@@ -62,12 +63,12 @@ func (s completeBranchStep) Execute(c *Context) bool {
 
 		mt := meta{string(cmdOut), branchName}
 
-		if br.isHotfix() || br.isPatch() || br.isRefactoring() || br.isBugfix() {
+		if br.IsHotfix() || br.IsPatch() || br.IsRefactoring() || br.IsBugfix() {
 			c.Logger.Info("Is Patch branch")
 			tagName = mt.NextPatchTag()
 		}
 
-		if br.isFeature() {
+		if br.IsFeature() {
 			c.Logger.Info("Is Feature branch")
 			tagName = mt.NextMinorTag()
 		}
@@ -94,7 +95,7 @@ func (s completeBranchStep) Execute(c *Context) bool {
 	_ = gitDeleteOldBranch.Execute()
 	fmt.Println(color.GreenString("branch " + branchName + " deleted"))
 
-	if !br.isDevelopment(branchName) {
+	if !br.IsDevelopment(branchName) {
 		gitCheckoutToDev := &GitCommand{
 			c.Logger,
 			[]string{"checkout", c.Conf.Branches.Historical.Development},
@@ -105,8 +106,8 @@ func (s completeBranchStep) Execute(c *Context) bool {
 
 		gitMergeNoFastForward := &GitCommand{
 			c.Logger,
-			[]string{"merge", "--no-ff", br.destination()},
-			"cant move to " + br.destination() + " updates",
+			[]string{"merge", "--no-ff", br.Destination()},
+			"cant move to " + br.Destination() + " updates",
 			c.Conf,
 		}
 		_ = gitMergeNoFastForward.Execute()

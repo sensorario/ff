@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+
+    "github.com/sensorario/branch"
 )
 
 type commitStep struct{}
@@ -24,9 +26,9 @@ func (s commitStep) Execute(c *Context) bool {
 	gitAddAll.Execute()
 
 	name := c.currentBranch()
-	sem := branch{name}
+	sem := branch.Branch{name}
 
-	result := sem.commitPrefix() + text
+	result := sem.CommitPrefix() + text
 	gitCommit := &GitCommand{
 		c.Logger,
 		[]string{"commit", "-m", result},

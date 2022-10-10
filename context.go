@@ -7,6 +7,7 @@ import (
 
 	"github.com/sensorario/gol/v2"
 	"github.com/sensorario/tongue"
+	"github.com/sensorario/branch"
 )
 
 type Context struct {
@@ -140,9 +141,9 @@ func (c Context) container() map[string]map[string]stepType {
 	}
 
 	name := c.currentBranch()
-	sem := branch{name}
+	sem := branch.Branch{name}
 
-	if sem.isDevelopment(c.DevBranchName) {
+	if sem.IsDevelopment(c.DevBranchName) {
 		ss["start"]["bugfix"] = stepType{bugfixStep{}, "create new bugfix branch"}
 		ss["start"]["feature"] = stepType{featureStep{}, "create new feature branch"}
 		ss["start"]["refactor"] = stepType{refactoringStep{}, "create new refactor branch"}
@@ -152,7 +153,7 @@ func (c Context) container() map[string]map[string]stepType {
 		ss["start"]["hotfix"] = stepType{hotfixStep{}, "create new hotfix branch"}
 	}
 
-	if sem.isRefactoring() || sem.isPatch() || sem.isFeature() || sem.isHotfix() || sem.isBugfix() {
+	if sem.IsRefactoring() || sem.IsPatch() || sem.IsFeature() || sem.IsHotfix() || sem.IsBugfix() {
 		if c.isWorkingDirClean() {
 			ss["start"]["complete"] = stepType{
 				completeBranchStep{},
