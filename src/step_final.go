@@ -23,21 +23,21 @@ type pullRequest struct {
 // Execute is called whenever final step must be called.
 func (s finalStep) Execute(c *context) bool {
 
-    // @todo se non va la connessione qui si rompe tutto?
+	// @todo se non va la connessione qui si rompe tutto?
 	resp, err := http.Get("https://api.github.com/repos/sensorario/ff/pulls")
 
-    if err != nil {
-        if !strings.Contains(err.Error(), "dial tcp") && !strings.Contains(err.Error(), "no such host") {
-            c.Logger.Warning(color.GreenString("Probabilmente il computer non e' connesso alla rete"))
-        } else {
-            c.Logger.Warning(color.GreenString("Unknown connection error"))
-            c.Logger.Warning(color.GreenString(err.Error()))
-        }
+	if err != nil {
+		if !strings.Contains(err.Error(), "dial tcp") && !strings.Contains(err.Error(), "no such host") {
+			c.Logger.Warning(color.GreenString("Probabilmente il computer non e' connesso alla rete"))
+		} else {
+			c.Logger.Warning(color.GreenString("Unknown connection error"))
+			c.Logger.Warning(color.GreenString(err.Error()))
+		}
 
-        return false
-    } else {
-        defer resp.Body.Close()
-    }
+		return false
+	} else {
+		defer resp.Body.Close()
+	}
 
 	bodyBytes, _ := ioutil.ReadAll(resp.Body)
 	var pullRequests []pullRequest
@@ -58,16 +58,16 @@ func (s finalStep) Execute(c *context) bool {
 
 		output := gitCheckoutToDev.Execute()
 
-        // all branches
+		// all branches
 		lines := strings.Split(output, "\n")
 
 		for _, line := range lines {
 			if strings.Contains(line, "remotes/origin") {
 				branchName := strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)
-                c.Logger.Info(color.GreenString("branch found "+branchName))
+				c.Logger.Info(color.GreenString("branch found " + branchName))
 				if branchName != c.conf.Branches.Historical.Development && !strings.Contains(branchName, "HEAD") {
 					removableBranch := strings.Replace(strings.Trim(line, " "), "remotes/origin/", "", 1)
-                    c.Logger.Info(color.GreenString("removable branch found "+removableBranch))
+					c.Logger.Info(color.GreenString("removable branch found " + removableBranch))
 					isDifferentFromAllPR := true
 					for _, v := range pullRequests {
 						if v.Head.Ref == removableBranch {
@@ -84,8 +84,8 @@ func (s finalStep) Execute(c *context) bool {
 						deleteRemoteBranch.Execute()
 					}
 				} else {
-                    c.Logger.Info(color.GreenString("branch " + branchName))
-                }
+					c.Logger.Info(color.GreenString("branch " + branchName))
+				}
 			}
 		}
 

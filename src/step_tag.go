@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
-    // "os"
+	// "os"
 
 	"github.com/fatih/color"
 )
@@ -34,16 +34,16 @@ func (s tagStep) Execute(c *context) bool {
 		branchName = strings.ReplaceAll(match, "On branch ", "")
 	}
 
-    // meta struct {describe, branch}
+	// meta struct {describe, branch}
 	mt := meta{string(cmdOut), branchName}
 
-    // fmt.Println(mt)
-    // fmt.Println("!!!");
-    // os.Exit(1);
+	// fmt.Println(mt)
+	// fmt.Println("!!!");
+	// os.Exit(1);
 
-    // qui bisogna assicurarsi che meta sia nel formato corretto
-    // perche' NextPatchTag da per scontato che il formato sia
-    // di un certo tipo
+	// qui bisogna assicurarsi che meta sia nel formato corretto
+	// perche' NextPatchTag da per scontato che il formato sia
+	// di un certo tipo
 
 	tagName := ""
 	tagName = mt.NextPatchTag()

@@ -3,8 +3,8 @@ package main
 import (
 	"strconv"
 	"strings"
-    // "os"
-    // "fmt"
+	// "os"
+	"fmt"
 )
 
 type meta struct {
@@ -41,9 +41,9 @@ func (m meta) patchVersion() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 
-    // fmt.Println("Tokens: ")
-    // fmt.Println(tokens)
-    // os.Exit(1)
+	// fmt.Println("Tokens: ")
+	// fmt.Println(tokens)
+	// os.Exit(1)
 
 	return tokens[2]
 }
@@ -52,7 +52,7 @@ func (m meta) patchVersionInt() string {
 	tokens := strings.Split(m.describe, "-")
 	tokens = strings.Split(tokens[0], ".")
 	number, _ := strconv.Atoi(tokens[1])
-	return string(number)
+	return fmt.Sprint(number)
 }
 
 func (m meta) CommitsFromLastTag() string {

@@ -39,13 +39,13 @@ func TestAbs(t *testing.T) {
 
 func TestMinorTagDetection(t *testing.T) {
 	m := meta{"v1.2.3", "master"}
-    expected := "v1.3.0"
+	expected := "v1.3.0"
 
 	if m.NextMinorTag() != expected {
-        t.Errorf(
-            m.NextMinorTag(),
-            " instead of ",
-            expected,
-        )
-    }
+		t.Errorf(
+			m.NextMinorTag(),
+			" instead of ",
+			expected,
+		)
+	}
 }

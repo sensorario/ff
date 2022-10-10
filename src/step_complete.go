@@ -59,7 +59,7 @@ func (s completeBranchStep) Execute(c *context) bool {
 		mt := meta{string(cmdOut), branchName}
 
 		// @todo check from configuration if tag must be applied or not
-		if br.isHotfix() || br.isPatch() ||  br.isRefactoring() || br.isBugfix() {
+		if br.isHotfix() || br.isPatch() || br.isRefactoring() || br.isBugfix() {
 			c.Logger.Info("Is Patch branch")
 			tagName = mt.NextPatchTag()
 		}
