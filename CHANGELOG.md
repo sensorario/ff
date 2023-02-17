@@ -11,3 +11,4 @@
  - feat: delete local branches that are already removed in origin
  - feat: add italian and english translations
  - feat: allow both feature and feat as prefix of feature branch
+ - feat: create gitignore file whenever git repo is created
