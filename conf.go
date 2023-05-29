@@ -41,7 +41,7 @@ type JsonConf struct {
 func ReadConfiguration(repositoryRoot string) (jj JsonConf, err error) {
 	c := JsonConf{}
 
-	c.Branches.Historical.Development = "master"
+	c.Branches.Historical.Development = "main"
 	c.Branches.Support.Feature = "feature"
 
 	c.Features.DisableUndoCommand = false
