@@ -34,8 +34,8 @@ To set a language type `ff config lang "it"`. (only it and en are available)
   },
   "branches": {
     "historical": {
-      "development": "master"
-    }
+      "development": "main"
+    },
     "support": {
       "feature": "feat"
     }

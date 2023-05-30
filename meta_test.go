@@ -7,9 +7,9 @@ import (
 )
 
 func TestAbs(t *testing.T) {
-	m := meta{"v21.2.54-42-b67b5vr", "master"}
+	m := meta{"v21.2.54-42-b67b5vr", "main"}
 
-	if m.Branch() != "master" {
+	if m.Branch() != "main" {
 		t.Errorf("bad branch detection")
 	}
 
@@ -46,8 +46,8 @@ func TestMajorVersionDetection(t *testing.T) {
 	}
 
 	tests := []test{
-		{meta{"1.2.3", "master"}, "1", "2", "3"},
-		{meta{"v1.2.3", "master"}, "1", "2", "3"},
+		{meta{"1.2.3", "main"}, "1", "2", "3"},
+		{meta{"v1.2.3", "main"}, "1", "2", "3"},
 	}
 
 	for _, tc := range tests {
@@ -65,7 +65,7 @@ func TestMajorVersionDetection(t *testing.T) {
 }
 
 func TestMinorTagDetection(t *testing.T) {
-	m := meta{"v1.2.3", "master"}
+	m := meta{"v1.2.3", "main"}
 	expected := "v1.3.0"
 
 	if m.NextMinorTag() != expected {
