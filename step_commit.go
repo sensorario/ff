@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-    "github.com/sensorario/branch"
+	"github.com/sensorario/branch"
 )
 
 type commitStep struct{}

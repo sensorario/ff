@@ -9,13 +9,13 @@ import (
 	"os"
 
 	"github.com/fatih/color"
-	"github.com/sensorario/gol/v2"
 	"github.com/sensorario/ff"
+	"github.com/sensorario/gol/v2"
 )
 
 // genLog generate log
 func genLog(repositoryRoot string) gol.Logger {
-    defaultLogDirectory := "/.git"
+	defaultLogDirectory := "/.git"
 
 	if envLogPath := os.Getenv("FF_LOG_PATH"); envLogPath != "" {
 		return gol.NewCustomLogger(envLogPath)
@@ -29,9 +29,9 @@ func genLog(repositoryRoot string) gol.Logger {
 // Everything starts from here
 func main() {
 
-    // lang := os.Getenv("LANG")
-    // fmt.Println("Lang:", lang)
-    // known languages: en_US.UTF-8
+	// lang := os.Getenv("LANG")
+	// fmt.Println("Lang:", lang)
+	// known languages: en_US.UTF-8
 
 	currentFolder, err := os.Getwd()
 

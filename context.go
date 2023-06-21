@@ -5,9 +5,9 @@ import (
 	"strings"
 	//	"fmt"
 
+	"github.com/sensorario/branch"
 	"github.com/sensorario/gol/v2"
 	"github.com/sensorario/tongue"
-	"github.com/sensorario/branch"
 )
 
 type Context struct {
