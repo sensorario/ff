@@ -67,6 +67,12 @@ func main() {
 
 	DevBranchName := conf.Branches.Historical.Development
 
+if DevBranchName == "master" {
+
+		fmt.Println("")
+		fmt.Println(color.RedString("It could be better to change 'master' branch in 'main'"))
+}
+
 	cntxt := ff.Context{
 		RepositoryRoot: repositoryRoot,
 		CurrentStep:    &ff.CheckTagStep{},

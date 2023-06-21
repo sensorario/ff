@@ -13,6 +13,7 @@
  - feat: detect git language to get current branch name
  - feat: update travis configuration with go1.17.2
  - feat: also patch branch has fix prefix
+ - feat: add message to help master to main conversion
 
 ### fixed
 
